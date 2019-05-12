@@ -8,6 +8,7 @@ Dialer::Dialer(Adafruit_SSD1608 *display, Keypad *keypad)
 : display(display)
 , keypad(keypad)
 , lastKey('\0')
+, number({'\0'})
 , cur(0)
 {
 }
