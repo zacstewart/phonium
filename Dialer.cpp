@@ -44,8 +44,7 @@ void Dialer::update() {
     case 'D':
       break;
     default:
-      number[cur] = key;
-      cur++;
+      number[cur++] = key;
       display->clearBuffer();
       display->setCursor(0, 0);
       display->setTextColor(COLOR_BLACK);
@@ -55,8 +54,7 @@ void Dialer::update() {
 }
 
 void Dialer::backspace() {
-    cur--;
-    number[cur] = '\0';
+    number[--cur] = '\0';
     int left = cur * (CHAR_WIDTH + FONT_SIZE);
     display->fillRect(left, 0, CHAR_WIDTH, CHAR_HEIGHT, EPD_INVERSE);
     display->display();
