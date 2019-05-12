@@ -1,9 +1,9 @@
 #ifndef COMMON
+#define COMMON
 
 #define COLOR_WHITE EPD_WHITE
 #define COLOR_BLACK EPD_BLACK
 #define COLOR_GRAY EPD_RED
 #define NUMBER_LENGTH 30
 
-#define COMMON 0
 #endif
