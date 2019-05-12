@@ -13,6 +13,7 @@ class Dialer {
     Dialer(Adafruit_SSD1608 *, Keypad *);
     void begin();
     void update();
+
   private:
     void backspace();
     void callNumber();
