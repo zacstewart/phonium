@@ -4,8 +4,10 @@
 #include "Adafruit_EPD.h"
 #include <Keypad.h>
 
-class Dialer {
 #include "Common.h"
+#include "Controller.h"
+
+class Dialer : public Controller {
   Adafruit_SSD1608 *display;
   Keypad *keypad;
   char lastKey;

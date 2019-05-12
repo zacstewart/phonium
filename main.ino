@@ -2,6 +2,7 @@
 #include "Adafruit_EPD.h"
 
 #include "Common.h"
+#include "Controller.h"
 #include "Dialer.h"
 
 #define EPD_CS     10
