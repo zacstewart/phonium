@@ -4,8 +4,9 @@
 #define CHAR_WIDTH 5 * FONT_SIZE
 #define CHAR_HEIGHT 8 * FONT_SIZE
 
-Dialer::Dialer(Adafruit_SSD1608 *display, Keypad *keypad)
-: display(display)
+Dialer::Dialer(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad)
+: navigator(navigator)
+, display(display)
 , keypad(keypad)
 , lastKey('\0')
 , number({'\0'})

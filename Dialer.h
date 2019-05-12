@@ -5,9 +5,11 @@
 #include <Keypad.h>
 
 #include "Common.h"
+#include "Navigator.h"
 #include "Controller.h"
 
 class Dialer : public Controller {
+  Navigator *navigator;
   Adafruit_SSD1608 *display;
   Keypad *keypad;
   char lastKey;
@@ -15,7 +17,7 @@ class Dialer : public Controller {
   size_t cur;
   
   public:
-    Dialer(Adafruit_SSD1608 *, Keypad *);
+    Dialer(Navigator *, Adafruit_SSD1608 *, Keypad *);
     void begin();
     void update();
 

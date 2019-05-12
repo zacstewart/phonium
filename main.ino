@@ -2,6 +2,7 @@
 #include "Adafruit_EPD.h"
 
 #include "Common.h"
+#include "Navigator.h"
 #include "Controller.h"
 #include "Dialer.h"
 
@@ -28,16 +29,22 @@ Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_C
 
 Adafruit_SSD1608 display(200, 200, EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY);
 
-Dialer dialer = Dialer(&display, &keypad);
+Navigator navigator = Navigator();
+
+Dialer dialer = Dialer(&navigator, &display, &keypad);
 
 void setup() {
   Serial.begin(115200);
   Serial.println("Phonium starting");
   display.begin();
   display.setRotation(DISPLAY_ROTATION);
+  
+  navigator.setController(DIALER, &dialer);
+  navigator.replaceController(DIALER);
+  
   dialer.begin();
 }
 
 void loop() {
-  dialer.update();
+  navigator.currentController()->update();
 }
