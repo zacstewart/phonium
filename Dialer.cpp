@@ -14,6 +14,8 @@ Dialer::Dialer(Adafruit_SSD1608 *display, Keypad *keypad)
 }
 
 void Dialer::begin() {
+  number[0] = '\0';
+  cur = 0;
   display->clearBuffer();
   display->setCursor(0, 0);
   display->setTextColor(COLOR_BLACK);
