@@ -4,8 +4,8 @@
 class Dialer {
   Adafruit_SSD1608 *display;
   Keypad *keypad;
-  char last_key;
   char number[30];
+  char lastKey;
   size_t cur;
   
   public:

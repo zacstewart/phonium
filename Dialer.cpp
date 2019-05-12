@@ -10,7 +10,7 @@
 Dialer::Dialer(Adafruit_SSD1608 *display, Keypad *keypad)
 : display(display)
 , keypad(keypad)
-, last_key('\0')
+, lastKey('\0')
 , cur(0)
 {
 }
@@ -26,10 +26,10 @@ void Dialer::begin() {
 
 void Dialer::update() {
   char key = keypad->getKey();
-  if (key == last_key) {
+  if (key == lastKey) {
     return;
   }
-  last_key = key;
+  lastKey = key;
 
   Serial.print("Pressed ");
   Serial.println(key);
