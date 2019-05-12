@@ -57,7 +57,7 @@ void Dialer::update() {
 void Dialer::backspace() {
     cur--;
     number[cur] = '\0';
-    int left = cur * (CHAR_WIDTH + 3);
+    int left = cur * (CHAR_WIDTH + FONT_SIZE);
     display->fillRect(left, 0, CHAR_WIDTH, CHAR_HEIGHT, EPD_INVERSE);
     display->display();
 }
