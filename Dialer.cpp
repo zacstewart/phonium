@@ -38,8 +38,8 @@ void Dialer::update() {
       backspace();
       break;
     case 'B':
-    case 'C':
       callNumber();
+    case 'C':
     case 'D':
       break;
     default:
