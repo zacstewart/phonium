@@ -1,3 +1,6 @@
+#ifndef DIALER
+#define DIALER 0
+
 #include "Adafruit_EPD.h"
 #include <Keypad.h>
 
@@ -18,3 +21,5 @@ class Dialer {
     void backspace();
     void callNumber();
 };
+
+#endif
