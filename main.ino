@@ -1,4 +1,5 @@
 #include <Keypad.h>
+#include "Common.h"
 #include "Adafruit_EPD.h"
 #include "Dialer.h"
 

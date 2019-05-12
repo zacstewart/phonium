@@ -2,10 +2,11 @@
 #include <Keypad.h>
 
 class Dialer {
+#include "Common.h"
   Adafruit_SSD1608 *display;
   Keypad *keypad;
-  char number[30];
   char lastKey;
+  char number[NUMBER_LENGTH];
   size_t cur;
   
   public:

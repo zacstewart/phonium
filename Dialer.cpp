@@ -1,8 +1,5 @@
 #include "Dialer.h"
 
-#define COLOR_WHITE EPD_WHITE
-#define COLOR_BLACK EPD_BLACK
-#define COLOR_GRAY EPD_RED
 #define FONT_SIZE 3
 #define CHAR_WIDTH 5 * FONT_SIZE
 #define CHAR_HEIGHT 8 * FONT_SIZE
