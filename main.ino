@@ -1,6 +1,7 @@
 #include <Keypad.h>
-#include "Common.h"
 #include "Adafruit_EPD.h"
+
+#include "Common.h"
 #include "Dialer.h"
 
 #define EPD_CS     10
