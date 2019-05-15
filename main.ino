@@ -12,8 +12,6 @@
 #define EPD_RESET  4
 #define EPD_BUSY   A0 // can set to -1 to not use a pin (will wait a fixed delay)
 #define DISPLAY_ROTATION 2 // Headers to the left
-#define COLOR_BLACK EPD_BLACK
-#define COLOR_GRAY EPD_RED
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4
 
