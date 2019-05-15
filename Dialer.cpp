@@ -1,4 +1,5 @@
 #include "Dialer.h"
+#include "Call.h"
 
 #define FONT_SIZE 3
 #define CHAR_WIDTH 5 * FONT_SIZE
@@ -15,14 +16,12 @@ Dialer::Dialer(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad)
 }
 
 void Dialer::begin() {
-  number[0] = '\0';
-  cur = 0;
   display->clearBuffer();
   display->setCursor(0, 0);
   display->setTextColor(COLOR_BLACK);
   display->setTextWrap(true);
   display->setTextSize(3);
-  display->clearDisplay();
+  display->display();
 }
 
 void Dialer::update() {
@@ -67,4 +66,10 @@ void Dialer::callNumber() {
   Serial.print("Caling ");
   Serial.print(number);
   Serial.println("...");
+  Call *call = (Call *) navigator->getController(CALL);
+  call->setNumber(number)->initiateCall();
+  navigator->pushController(CALL);
+
+  number[0] = '\0';
+  cur = 0;
 }

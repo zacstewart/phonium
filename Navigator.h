@@ -16,6 +16,8 @@ class Navigator {
     void setController(size_t, Controller *);
     Controller *getController(size_t);
     Controller *currentController();
+    void popController();
+    void pushController(size_t);
     void replaceController(size_t);
 };
 
