@@ -70,6 +70,6 @@ void Dialer::callNumber() {
   call->setNumber(number)->initiateCall();
   navigator->pushController(CALL);
 
-  number[0] = '\0';
+  memset(number, '\0', sizeof(number));
   cur = 0;
 }
