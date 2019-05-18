@@ -1,7 +1,7 @@
 #ifndef NAVIGATOR
 #define NAVIGATOR
 
-#include <stddef.h>
+#include <stdint.h>
 
 #include "Controller.h"
 
@@ -9,16 +9,16 @@ class Navigator {
   //TODO: use an abstract interface instead of Controller *
   Controller *controllers[2];
   Controller *controllerStack[4];
-  size_t controllerPtr;
+  uint8_t controllerPtr;
 
   public:
     Navigator();
-    void setController(size_t, Controller *);
-    Controller *getController(size_t);
+    void setController(uint8_t, Controller *);
+    Controller *getController(uint8_t);
     Controller *currentController();
     void popController();
-    void pushController(size_t);
-    void replaceController(size_t);
+    void pushController(uint8_t);
+    void replaceController(uint8_t);
 };
 
 #endif

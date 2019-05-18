@@ -5,11 +5,11 @@ Navigator::Navigator()
 {
 }
 
-void Navigator::setController(size_t symbol, Controller *controller) {
+void Navigator::setController(uint8_t symbol, Controller *controller) {
   controllers[symbol] = controller;
 }
 
-Controller *Navigator::getController(size_t symbol) {
+Controller *Navigator::getController(uint8_t symbol) {
   return controllers[symbol];
 }
 
@@ -22,13 +22,13 @@ void Navigator::popController() {
   controller->begin();
 }
 
-void Navigator::pushController(size_t symbol) {
+void Navigator::pushController(uint8_t symbol) {
   Controller *controller = controllers[symbol];
   controller->begin();
   controllerStack[++controllerPtr] = controller;
 }
 
-void Navigator::replaceController(size_t symbol) {
+void Navigator::replaceController(uint8_t symbol) {
   Controller *controller = controllers[symbol];
   controller->begin();
   controllerStack[controllerPtr] = controller;
