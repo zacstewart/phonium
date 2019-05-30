@@ -8,6 +8,7 @@
 #include "Controller.h"
 #include "Call.h"
 #include "Dialer.h"
+#include "IncomingCall.h"
 
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4
@@ -47,6 +48,7 @@ Navigator navigator = Navigator();
 
 Dialer dialer = Dialer(&navigator, &display, &keypad);
 Call call = Call(&navigator, &display, &keypad, &fona);
+IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
 
 void setup() {
   Serial.begin(115200);
@@ -65,11 +67,15 @@ void setup() {
   
   navigator.setController(DIALER, &dialer);
   navigator.setController(CALL, &call);
+  navigator.setController(INCOMING_CALL, &incomingCall);
   navigator.replaceController(DIALER);
   
   dialer.begin();
 }
 
 void loop() {
+  if (fona.incomingCallNumber(incomingCall.number)) {
+    navigator.pushController(INCOMING_CALL);
+  }
   navigator.currentController()->update();
 }

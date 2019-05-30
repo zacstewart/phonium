@@ -27,6 +27,7 @@ class Call : public Controller {
     void update();
 
     Call *setNumber(char *);
+    Call *answerCall();
     Call *initiateCall();
     void hangUp();
 

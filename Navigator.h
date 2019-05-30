@@ -7,7 +7,7 @@
 
 class Navigator {
   //TODO: use an abstract interface instead of Controller *
-  Controller *controllers[2];
+  Controller *controllers[4];
   Controller *controllerStack[4];
   uint8_t controllerPtr;
 

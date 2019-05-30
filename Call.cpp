@@ -54,6 +54,14 @@ Call *Call::setNumber(char *num) {
   return this;
 }
 
+Call *Call::answerCall() {
+  callStart = millis();
+  Serial.print(F("Answreing call from "));
+  Serial.println(number);
+  fona->pickUp();
+  return this;
+}
+
 Call *Call::initiateCall() {
   callStart = millis();
   Serial.print("Initiating call to ");
