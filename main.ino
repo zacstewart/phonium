@@ -52,7 +52,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println("Phonium starting");
   fonaSerial->begin(4800);
-  if (! fona.begin(*fonaSerial)) {
+  if (!fona.begin(*fonaSerial)) {
     Serial.println(F("Couldn't find FONA"));
     while (1);
   }
