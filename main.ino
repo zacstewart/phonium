@@ -69,8 +69,6 @@ void setup() {
   navigator.setController(CALL, &call);
   navigator.setController(INCOMING_CALL, &incomingCall);
   navigator.replaceController(DIALER);
-  
-  dialer.begin();
 }
 
 void loop() {
