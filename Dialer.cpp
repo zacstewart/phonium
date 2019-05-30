@@ -31,7 +31,7 @@ void Dialer::update() {
   }
   lastKey = key;
 
-  Serial.print("Pressed ");
+  Serial.print(F("Pressed "));
   Serial.println(key);
 
   switch (key) {
@@ -63,9 +63,9 @@ void Dialer::backspace() {
 }
 
 void Dialer::callNumber() {
-  Serial.print("Caling ");
+  Serial.print(F("Caling "));
   Serial.print(number);
-  Serial.println("...");
+  Serial.println(F("..."));
   Call *call = (Call *) navigator->getController(CALL);
   call->setNumber(number)->initiateCall();
   navigator->pushController(CALL);

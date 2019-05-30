@@ -52,7 +52,7 @@ IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Phonium starting");
+  Serial.println(F("Phonium starting"));
   fonaSerial->begin(4800);
   if (!fona.begin(*fonaSerial)) {
     Serial.println(F("Couldn't find FONA"));
@@ -60,10 +60,10 @@ void setup() {
   }
   fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
 
-  Serial.println("Starting display");
+  Serial.println(F("Starting display"));
   display.begin();
   display.setRotation(DISPLAY_ROTATION);
-  Serial.println("Display started");
+  Serial.println(F("Display started"));
   
   navigator.setController(DIALER, &dialer);
   navigator.setController(CALL, &call);

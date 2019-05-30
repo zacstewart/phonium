@@ -19,7 +19,7 @@ void IncomingCall::begin() {
   
   display->setCursor(0, 0);
   display->setTextSize(1);
-  display->println("Incoming call...");
+  display->println(F("Incoming call..."));
   display->setTextSize(3);
   display->print(number);
   display->display();

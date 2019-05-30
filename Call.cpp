@@ -71,7 +71,7 @@ Call *Call::initiateCall() {
 }
 
 void Call::hangUp() {
-  Serial.println("Hanging up");
+  Serial.println(F("Hanging up"));
   fona->hangUp();
   callEnded(); // TODO: this would actually happen as a result of callStatus
 }
@@ -85,7 +85,7 @@ void Call::callEnded() {
   display->clearBuffer();
   display->setCursor(0, 0);
   display->setTextSize(1);
-  display->println("Call ended");
+  display->println(F("Call ended"));
   display->setTextSize(3);
   display->print(duration);
   display->display();
