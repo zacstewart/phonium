@@ -9,17 +9,20 @@
 #include "Call.h"
 #include "Dialer.h"
 
+#define KEYPAD_ROWS 4
+#define KEYPAD_COLS 4
+
 #define EPD_CS     10
 #define EPD_DC     9
 #define SRAM_CS    8
-#define EPD_RESET  4
-#define EPD_BUSY   A0 // can set to -1 to not use a pin (will wait a fixed delay)
+#define EPD_RESET  7
+#define EPD_BUSY   4
 #define DISPLAY_ROTATION 2 // Headers to the left
-#define KEYPAD_ROWS 4
-#define KEYPAD_COLS 4
-#define FONA_RX 2
-#define FONA_TX 3
-#define FONA_RST 4
+
+#define FONA_RX 5
+#define FONA_TX 6
+#define FONA_RI 3
+#define FONA_RST 7
 
 byte keys[KEYPAD_ROWS][KEYPAD_COLS] = {
   {'1', '2', '3', 'A'},
@@ -27,8 +30,8 @@ byte keys[KEYPAD_ROWS][KEYPAD_COLS] = {
   {'7', '8', '9', 'C'},
   {'*', '0', '#', 'D'}
 };
-byte rowPins[KEYPAD_ROWS] = {A2, A3, A4, A5};
-byte colPins[KEYPAD_COLS] = {A1, 5, 6, 7};
+byte rowPins[KEYPAD_ROWS] = {A4, A5, 2, 0};
+byte colPins[KEYPAD_COLS] = {A3, A2, A1, A0};
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
 Adafruit_SSD1608 display(200, 200, EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY);
@@ -53,6 +56,7 @@ void setup() {
     Serial.println(F("Couldn't find FONA"));
     while (1);
   }
+  fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
 
   Serial.println("Starting display");
   display.begin();
