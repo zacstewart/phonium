@@ -51,6 +51,8 @@ Call call = Call(&navigator, &display, &keypad, &fona);
 IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
 
 void setup() {
+  while (!Serial);
+
   Serial.begin(115200);
   Serial.println(F("Phonium starting"));
   fonaSerial->begin(4800);
