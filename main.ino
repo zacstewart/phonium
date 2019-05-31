@@ -55,17 +55,17 @@ void setup() {
 
   Serial.begin(115200);
   Serial.println(F("Phonium starting"));
-  fonaSerial->begin(4800);
-  if (!fona.begin(*fonaSerial)) {
-    Serial.println(F("Couldn't find FONA"));
-    while (1);
-  }
-  fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
 
   Serial.println(F("Starting display"));
   display.begin();
   display.setRotation(DISPLAY_ROTATION);
-  Serial.println(F("Display started"));
+
+  Serial.println(F("Starting cellular"));
+  fonaSerial->begin(FONA_BAUD_RATE);
+  if (!fona.begin(*fonaSerial)) {
+    Serial.println(F("Couldn't find FONA"));
+  }
+  fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
   
   navigator.setController(DIALER, &dialer);
   navigator.setController(CALL, &call);
