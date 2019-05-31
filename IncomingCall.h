@@ -20,8 +20,8 @@ class IncomingCall : public Controller {
     IncomingCall(Navigator *, Adafruit_SSD1608 *, Keypad *, Adafruit_FONA *);
     void begin();
     void update();
-    void IncomingCall::answerCall();
-    void IncomingCall::hangUp();
+    void answerCall();
+    void hangUp();
 };
 
 #endif
