@@ -70,6 +70,8 @@ void setup() {
   navigator.setController(DIALER, &dialer);
   navigator.setController(CALL, &call);
   navigator.setController(INCOMING_CALL, &incomingCall);
+
+  Serial.println(F("Phonium ready"));
   navigator.replaceController(DIALER);
 }
 
