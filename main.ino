@@ -1,7 +1,6 @@
 #include <Keypad.h>
 #include "Adafruit_EPD.h"
 #include <Adafruit_FONA.h>
-#include <SoftwareSerial.h>
 
 #include "Common.h"
 #include "Navigator.h"
@@ -13,17 +12,16 @@
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4
 
-#define EPD_CS     10
-#define EPD_DC     9
-#define SRAM_CS    8
-#define EPD_RESET  7
-#define EPD_BUSY   4
+#define EPD_CS     4
+#define EPD_DC     5
+#define SRAM_CS    6
+#define EPD_RESET  2
+#define EPD_BUSY   8
 #define DISPLAY_ROTATION 2 // Headers to the left
 
-#define FONA_RX 5
-#define FONA_TX 6
-#define FONA_RI 3
-#define FONA_RST 7
+#define FONA_RI  3
+#define FONA_RST 2
+#define FONA_BAUD_RATE 4800
 
 byte keys[KEYPAD_ROWS][KEYPAD_COLS] = {
   {'1', '2', '3', 'A'},
@@ -31,14 +29,13 @@ byte keys[KEYPAD_ROWS][KEYPAD_COLS] = {
   {'7', '8', '9', 'C'},
   {'*', '0', '#', 'D'}
 };
-byte rowPins[KEYPAD_ROWS] = {A4, A5, 2, 0};
-byte colPins[KEYPAD_COLS] = {A3, A2, A1, A0};
+byte rowPins[KEYPAD_ROWS] = {18, 19, 20, 21};
+byte colPins[KEYPAD_COLS] = {17, 16, 15, 14};
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
 Adafruit_SSD1608 display(200, 200, EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY);
 
-SoftwareSerial fonaSS = SoftwareSerial(FONA_TX, FONA_RX);
-SoftwareSerial *fonaSerial = &fonaSS;
+HardwareSerial *fonaSerial = &Serial1;
 Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
 
 /**
