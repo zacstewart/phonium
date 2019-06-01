@@ -1,6 +1,7 @@
 #include <Keypad.h>
-#include "Adafruit_EPD.h"
+#include <Adafruit_EPD.h>
 #include <Adafruit_FONA.h>
+#include <HardwareSerial.h>
 
 #include "Common.h"
 #include "Navigator.h"
@@ -47,6 +48,16 @@ Dialer dialer = Dialer(&navigator, &display, &keypad);
 Call call = Call(&navigator, &display, &keypad, &fona);
 IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
 
+#ifdef USING_MAKEFILE
+extern "C" int main(void) {
+    setup();
+    while (1) {
+        loop();
+        yield();
+    }
+}
+#endif
+
 void setup() {
   while (!Serial);
 
@@ -63,7 +74,7 @@ void setup() {
     Serial.println(F("Couldn't find FONA"));
   }
   fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
-  
+
   navigator.setController(DIALER, &dialer);
   navigator.setController(CALL, &call);
   navigator.setController(INCOMING_CALL, &incomingCall);
