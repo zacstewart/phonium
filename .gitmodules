@@ -1,0 +1,12 @@
+[submodule "libraries/Keypad"]
+	path = libraries/Keypad
+	url = git@github.com:Chris--A/Keypad.git
+[submodule "libraries/Adafruit_EPD"]
+	path = libraries/Adafruit_EPD
+	url = git@github.com:adafruit/Adafruit_EPD.git
+[submodule "libraries/Adafruit_FONA"]
+	path = libraries/Adafruit_FONA
+	url = git@github.com:adafruit/Adafruit_FONA.git
+[submodule "libraries/Adafruit-GFX-Library"]
+	path = libraries/Adafruit-GFX-Library
+	url = git@github.com:adafruit/Adafruit-GFX-Library.git
