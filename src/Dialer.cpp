@@ -68,8 +68,14 @@ void Dialer::callNumber() {
   Serial.println(F("..."));
   Call *call = (Call *) navigator->getController(CALL);
   call->setNumber(number)->initiateCall();
+  // TOOD: replace once there's a HOME
   navigator->pushController(CALL);
 
+  reset();
+}
+
+void Dialer::reset() {
   memset(number, '\0', sizeof(number));
   cur = 0;
+  lastKey = NO_KEY;
 }
