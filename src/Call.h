@@ -2,8 +2,8 @@
 #define CALL 1
 
 #include "Adafruit_EPD.h"
-#include <Keypad.h>
 #include <Adafruit_FONA.h>
+#include <Keypad.h>
 
 #include "Common.h"
 #include "Controller.h"
