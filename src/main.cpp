@@ -7,6 +7,7 @@
 #include "Navigator.h"
 #include "Controller.h"
 #include "Call.h"
+#include "ComposeMessage.h"
 #include "Dialer.h"
 #include "IncomingCall.h"
 
@@ -47,6 +48,7 @@ Navigator navigator = Navigator();
 Dialer dialer = Dialer(&navigator, &display, &keypad);
 Call call = Call(&navigator, &display, &keypad, &fona);
 IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
+ComposeMessage composeMessage = ComposeMessage(&navigator, &display, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {
@@ -75,8 +77,9 @@ void setup() {
   }
   fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
 
-  navigator.setController(DIALER, &dialer);
   navigator.setController(CALL, &call);
+  navigator.setController(COMPOSE_MESSAGE, &composeMessage);
+  navigator.setController(DIALER, &dialer);
   navigator.setController(INCOMING_CALL, &incomingCall);
 
   Serial.println(F("Phonium ready"));

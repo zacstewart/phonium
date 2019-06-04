@@ -7,6 +7,7 @@
 #define COLOR_BLACK EPD_BLACK
 #define COLOR_GRAY EPD_RED
 #define NUMBER_LENGTH 30
+#define MESSAGE_LENGTH 160
 
 /**
  * Formats a time duration in milliseconds to HH:MM[:SS]

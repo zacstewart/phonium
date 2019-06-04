@@ -1,5 +1,6 @@
 #include "Dialer.h"
 #include "Call.h"
+#include "ComposeMessage.h"
 
 #define FONT_SIZE 3
 #define CHAR_WIDTH 5 * FONT_SIZE
@@ -43,7 +44,9 @@ void Dialer::update() {
     case 'B':
       callNumber();
     case 'C':
+      break;
     case 'D':
+      textNumber();
       break;
     default:
       number[cur++] = key;
@@ -78,4 +81,13 @@ void Dialer::reset() {
   memset(number, '\0', sizeof(number));
   cur = 0;
   lastKey = NO_KEY;
+}
+
+void Dialer::textNumber() {
+  ComposeMessage *compose = (ComposeMessage *) navigator->getController(COMPOSE_MESSAGE);
+  compose->setNumber(number);
+  // TOOD: replace once there's a HOME
+  navigator->pushController(COMPOSE_MESSAGE);
+
+  reset();
 }

@@ -25,6 +25,7 @@ class Dialer : public Controller {
     void backspace();
     void callNumber();
     void reset();
+    void textNumber();
 };
 
 #endif
