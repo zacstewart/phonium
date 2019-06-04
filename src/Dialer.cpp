@@ -9,8 +9,8 @@ Dialer::Dialer(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad)
 : navigator(navigator)
 , display(display)
 , keypad(keypad)
-, lastKey('\0')
-, number({'\0'})
+, lastKey(NO_KEY)
+, number("")
 , cur(0)
 {
 }

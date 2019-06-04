@@ -8,7 +8,7 @@ IncomingCall::IncomingCall(Navigator *navigator, Adafruit_SSD1608 *display, Keyp
 , display(display)
 , keypad(keypad)
 , fona(fona)
-, number({'\0'})
+, number("")
 {
 }
 

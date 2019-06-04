@@ -7,8 +7,8 @@ Call::Call(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad, Adaf
 , display(display)
 , keypad(keypad)
 , fona(fona)
-, lastKey('\0')
-, number({'\0'})
+, lastKey(NO_KEY)
+, number("")
 , callStart(0)
 {
 }
