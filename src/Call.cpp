@@ -17,7 +17,7 @@ void Call::begin() {
   display->clearBuffer();
   display->setTextWrap(true);
   display->setTextColor(COLOR_BLACK);
-  
+
   display->setCursor(0, 0);
   display->setTextSize(1);
   display->println("Ongoing call...");
@@ -89,8 +89,8 @@ void Call::callEnded() {
   display->setTextSize(3);
   display->print(duration);
   display->display();
-  
+
   delay(1000);
-  
+
   navigator->popController();
 }

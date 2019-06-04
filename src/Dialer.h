@@ -15,7 +15,7 @@ class Dialer : public Controller {
   char lastKey;
   char number[NUMBER_LENGTH];
   uint8_t cur;
-  
+
   public:
     Dialer(Navigator *, Adafruit_SSD1608 *, Keypad *);
     void begin();

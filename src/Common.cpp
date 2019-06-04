@@ -8,7 +8,7 @@ char * formatTime(unsigned long t, bool includeSec = true) {
   t = t % 3600;
   int m = t / 60;
   int s = t % 60;
-  
+
   sprintf(str, "%02d:%02d:%02d", h, m, s);
   return str;
 }

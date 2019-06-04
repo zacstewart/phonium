@@ -16,7 +16,7 @@ void IncomingCall::begin() {
   display->clearBuffer();
   display->setTextWrap(true);
   display->setTextColor(COLOR_BLACK);
-  
+
   display->setCursor(0, 0);
   display->setTextSize(1);
   display->println(F("Incoming call..."));
@@ -36,7 +36,7 @@ void IncomingCall::update() {
     default:
       break;
   }
-  
+
   switch (fona->getCallStatus()) {
     case FONA_CALL_READY: // Stopped ringing
       navigator->popController();

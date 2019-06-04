@@ -20,7 +20,7 @@ class Call : public Controller {
   char lastKey;
   char number[NUMBER_LENGTH];
   unsigned long callStart;
-  
+
   public:
     Call(Navigator *, Adafruit_SSD1608 *, Keypad *, Adafruit_FONA *);
     void begin();
