@@ -163,3 +163,8 @@ clean:
 	echo Cleaning...
 	rm -rf "$(BUILDDIR)"
 	rm -f "$(TARGET).elf" "$(TARGET).hex"
+
+syntastic:
+	@rm -f .syntastic_cpp_config
+	@echo "-I${COREPATH}" >> .syntastic_cpp_config
+	@$(foreach stmt,$(L_INC), echo $(stmt) >> .syntastic_cpp_config;)
