@@ -22,3 +22,10 @@
 # Phonium
 
 A minimalist, homebrew phone.
+
+# Software Design Principals
+
+Each screen is broken out into a view controller object.
+
+Each controller should reset itself before segueing away, not reset on segueing
+into it.
