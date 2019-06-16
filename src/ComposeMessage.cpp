@@ -142,6 +142,13 @@ void ComposeMessage::receiveInput(uint8_t charSetIdx) {
   draw();
 }
 
+void ComposeMessage::reset() {
+  memset(number, '\0', sizeof(number));
+  memset(number, '\0', sizeof(number));
+  curChar = 1;
+  cur = 0;
+}
+
 void ComposeMessage::sendMessage() {
   display->clearBuffer();
   display->setCursor(0, 0);
@@ -152,6 +159,7 @@ void ComposeMessage::sendMessage() {
     display->print("Message sent.");
     display->display();
     delay(1000);
+    reset();
     navigator->popController();
   } else {
     display->print("Couldn't send.\nTry again");

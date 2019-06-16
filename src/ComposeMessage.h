@@ -33,6 +33,7 @@ class ComposeMessage : public Controller {
     void backspace();
     void draw();
     void receiveInput(uint8_t);
+    void reset();
     void sendMessage();
 };
 
