@@ -36,7 +36,7 @@ else
 endif
 
 # path location for Teensy 3 core
-COREPATH = teensy3
+COREPATH = cores/teensy3
 
 # path location for Arduino libraries
 LIBRARYPATH = libraries
@@ -107,8 +107,9 @@ SIZE = $(abspath $(COMPILERPATH))/arm-none-eabi-size
 # automatically create lists of the sources and objects
 LC_FILES := $(wildcard $(LIBRARYPATH)/*/*.c)
 LCPP_FILES := $(wildcard $(LIBRARYPATH)/*/*.cpp)
-TC_FILES := $(wildcard $(COREPATH)/*.c)
-TCPP_FILES := $(wildcard $(COREPATH)/*.cpp)
+CORE_MAINS := $(wildcard $(COREPATH)/main.*)
+TC_FILES := $(filter-out $(CORE_MAINS), $(wildcard $(COREPATH)/*.c))
+TCPP_FILES := $(filter-out $(CORE_MAINS), $(wildcard $(COREPATH)/*.cpp))
 C_FILES := $(wildcard src/*.c)
 CPP_FILES := $(wildcard src/*.cpp)
 INO_FILES := $(wildcard src/*.ino)

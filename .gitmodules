@@ -10,3 +10,6 @@
 [submodule "libraries/Adafruit-GFX-Library"]
 	path = libraries/Adafruit-GFX-Library
 	url = git@github.com:adafruit/Adafruit-GFX-Library.git
+[submodule "cores"]
+	path = cores
+	url = git@github.com:PaulStoffregen/cores.git
