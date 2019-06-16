@@ -17,12 +17,7 @@ Dialer::Dialer(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad)
 }
 
 void Dialer::begin() {
-  display->clearBuffer();
-  display->setCursor(0, 0);
-  display->setTextColor(COLOR_BLACK);
-  display->setTextWrap(true);
-  display->setTextSize(3);
-  display->display();
+  draw();
 }
 
 void Dialer::update() {
@@ -50,12 +45,14 @@ void Dialer::update() {
       break;
     default:
       number[cur++] = key;
-      display->clearBuffer();
-      display->setCursor(0, 0);
-      display->setTextColor(COLOR_BLACK);
-      display->print(number);
-      display->display();
+      draw();
   }
+}
+
+void Dialer::setNumber(char *num) {
+  memset(number, '\0', sizeof(number));
+  memcpy(number, num, sizeof(num));
+  cur = strlen(num);
 }
 
 void Dialer::backspace() {
@@ -71,10 +68,18 @@ void Dialer::callNumber() {
   Serial.println(F("..."));
   Call *call = (Call *) navigator->getController(CALL);
   call->setNumber(number)->initiateCall();
-  // TOOD: replace once there's a HOME
-  navigator->pushController(CALL);
+  navigator->replaceController(CALL);
 
   reset();
+}
+
+void Dialer::draw() {
+  display->clearBuffer();
+  display->setCursor(0, 0);
+  display->setTextColor(COLOR_BLACK);
+  display->setTextSize(3);
+  display->print(number);
+  display->display();
 }
 
 void Dialer::reset() {
@@ -86,8 +91,7 @@ void Dialer::reset() {
 void Dialer::textNumber() {
   ComposeMessage *compose = (ComposeMessage *) navigator->getController(COMPOSE_MESSAGE);
   compose->setNumber(number);
-  // TOOD: replace once there's a HOME
-  navigator->pushController(COMPOSE_MESSAGE);
+  navigator->replaceController(COMPOSE_MESSAGE);
 
   reset();
 }

@@ -1,5 +1,5 @@
 #ifndef COMPOSE_MESSAGE
-#define COMPOSE_MESSAGE 3
+#define COMPOSE_MESSAGE 4
 
 #include "Adafruit_EPD.h"
 #include <Adafruit_FONA.h>

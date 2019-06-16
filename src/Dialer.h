@@ -1,5 +1,5 @@
 #ifndef DIALER
-#define DIALER 0
+#define DIALER 1
 
 #include "Adafruit_EPD.h"
 #include <Keypad.h>
@@ -21,9 +21,12 @@ class Dialer : public Controller {
     void begin();
     void update();
 
+    void setNumber(char *);
+
   private:
     void backspace();
     void callNumber();
+    void draw();
     void reset();
     void textNumber();
 };

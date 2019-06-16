@@ -6,10 +6,12 @@
 #include "Common.h"
 #include "Navigator.h"
 #include "Controller.h"
+
 #include "Call.h"
 #include "ComposeMessage.h"
 #include "Dialer.h"
 #include "IncomingCall.h"
+#include "Home.h"
 
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4
@@ -45,6 +47,7 @@ Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
  */
 Navigator navigator = Navigator();
 
+Home home = Home(&navigator, &display, &keypad);
 Dialer dialer = Dialer(&navigator, &display, &keypad);
 Call call = Call(&navigator, &display, &keypad, &fona);
 IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
@@ -81,9 +84,10 @@ void setup() {
   navigator.setController(COMPOSE_MESSAGE, &composeMessage);
   navigator.setController(DIALER, &dialer);
   navigator.setController(INCOMING_CALL, &incomingCall);
+  navigator.setController(HOME, &home);
 
   Serial.println(F("Phonium ready"));
-  navigator.replaceController(DIALER);
+  navigator.replaceController(HOME);
 }
 
 void loop() {

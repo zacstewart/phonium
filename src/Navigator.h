@@ -6,9 +6,22 @@
 #include "Controller.h"
 
 class Navigator {
-  //TODO: use an abstract interface instead of Controller *
-  Controller *controllers[4];
+  /**
+   * A collection of all controller singleton instances indexed by
+   * their magic number constant
+   */
+  Controller *controllers[5];
+  /**
+   * A stack of controllers that have been pushController-ed.
+   * Should be as small as possible but still account for the max
+   * navigational depth.
+   *
+   * TODO: static-analyze max controller depth
+   */
   Controller *controllerStack[4];
+  /**
+   * A pointer to index into controllers for the top of th stack.
+   */
   uint8_t controllerPtr;
 
   public:

@@ -1,5 +1,5 @@
 #ifndef INCOMING_CALL
-#define INCOMING_CALL 2
+#define INCOMING_CALL 3
 
 #include "Adafruit_EPD.h"
 #include <Keypad.h>

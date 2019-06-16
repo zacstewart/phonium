@@ -1,5 +1,5 @@
 #ifndef CALL
-#define CALL 1
+#define CALL 2
 
 #include "Adafruit_EPD.h"
 #include <Adafruit_FONA.h>
