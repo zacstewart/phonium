@@ -10,7 +10,7 @@ class Navigator {
    * A collection of all controller singleton instances indexed by
    * their magic number constant
    */
-  Controller *controllers[5];
+  Controller *controllers[6];
   /**
    * A stack of controllers that have been pushController-ed.
    * Should be as small as possible but still account for the max

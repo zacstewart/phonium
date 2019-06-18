@@ -12,6 +12,7 @@
 #include "Dialer.h"
 #include "IncomingCall.h"
 #include "Home.h"
+#include "Messages.h"
 
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4
@@ -47,11 +48,12 @@ Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
  */
 Navigator navigator = Navigator();
 
-Home home = Home(&navigator, &display, &keypad);
+Home home = Home(&navigator, &display, &keypad, &fona);
 Dialer dialer = Dialer(&navigator, &display, &keypad);
 Call call = Call(&navigator, &display, &keypad, &fona);
 IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
 ComposeMessage composeMessage = ComposeMessage(&navigator, &display, &keypad, &fona);
+Messages messages = Messages(&navigator, &display, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {
@@ -85,6 +87,7 @@ void setup() {
   navigator.setController(DIALER, &dialer);
   navigator.setController(INCOMING_CALL, &incomingCall);
   navigator.setController(HOME, &home);
+  navigator.setController(MESSAGES, &messages);
 
   Serial.println(F("Phonium ready"));
   navigator.replaceController(HOME);

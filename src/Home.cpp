@@ -1,5 +1,6 @@
 #include "Home.h"
 #include "Dialer.h"
+#include "Messages.h"
 
 Home::Home(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad, Adafruit_FONA *fona)
 : navigator(navigator)
@@ -30,7 +31,10 @@ void Home::update() {
 
   switch (key) {
     case NO_KEY:
+      break;
     case 'A':
+      navigator->pushController(MESSAGES);
+      break;
     case 'B':
     case 'C':
     case 'D':
