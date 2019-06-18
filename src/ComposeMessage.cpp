@@ -103,6 +103,7 @@ void ComposeMessage::setNumber(char *num) {
 }
 
 void ComposeMessage::backspace() {
+  lastCharSet = NO_CHAR_SET;
   curChar = 1;
   if (message[cur] == '\0') {
     --cur;
