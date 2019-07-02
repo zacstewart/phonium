@@ -1,8 +1,8 @@
 #ifndef CALL
 #define CALL 2
 
-#include "Adafruit_EPD.h"
 #include <Adafruit_FONA.h>
+#include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 
 #include "Common.h"
@@ -14,7 +14,7 @@
  */
 class Call : public Controller {
   Navigator *navigator;
-  Adafruit_SSD1608 *display;
+  Adafruit_SharpMem *display;
   Keypad *keypad;
   Adafruit_FONA *fona;
   char lastKey;
@@ -22,7 +22,7 @@ class Call : public Controller {
   unsigned long callStart;
 
   public:
-    Call(Navigator *, Adafruit_SSD1608 *, Keypad *, Adafruit_FONA *);
+    Call(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
     void update();
 

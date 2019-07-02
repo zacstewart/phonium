@@ -1,7 +1,8 @@
-#include <Keypad.h>
-#include <Adafruit_EPD.h>
 #include <Adafruit_FONA.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SharpMem.h>
 #include <HardwareSerial.h>
+#include <Keypad.h>
 
 #include "Common.h"
 #include "Navigator.h"
@@ -17,12 +18,10 @@
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4
 
-#define EPD_CS     4
-#define EPD_DC     5
-#define SRAM_CS    6
-#define EPD_RESET  2
-#define EPD_BUSY   8
-#define DISPLAY_ROTATION 2 // Headers to the left
+#define SHARP_SCK  13
+#define SHARP_MOSI 11
+#define SHARP_SS   4
+#define DISPLAY_ROTATION 3 // Headers to the left
 
 #define FONA_RI  3
 #define FONA_RST 2
@@ -38,7 +37,7 @@ byte rowPins[KEYPAD_ROWS] = {18, 19, 20, 21};
 byte colPins[KEYPAD_COLS] = {17, 16, 15, 14};
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-Adafruit_SSD1608 display(200, 200, EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY);
+Adafruit_SharpMem display(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_HEIGHT, DISPLAY_WIDTH);
 
 HardwareSerial *fonaSerial = &Serial1;
 Adafruit_FONA fona = Adafruit_FONA(FONA_RST);

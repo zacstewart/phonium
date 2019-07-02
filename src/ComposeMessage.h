@@ -1,8 +1,8 @@
 #ifndef COMPOSE_MESSAGE
 #define COMPOSE_MESSAGE 4
 
-#include "Adafruit_EPD.h"
 #include <Adafruit_FONA.h>
+#include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 
 #include "Common.h"
@@ -11,7 +11,7 @@
 
 class ComposeMessage : public Controller {
   Navigator *navigator;
-  Adafruit_SSD1608 *display;
+  Adafruit_SharpMem *display;
   Keypad *keypad;
   Adafruit_FONA *fona;
   char lastKey;
@@ -23,7 +23,7 @@ class ComposeMessage : public Controller {
   uint8_t cur;
 
   public:
-    ComposeMessage(Navigator *, Adafruit_SSD1608 *, Keypad *, Adafruit_FONA *);
+    ComposeMessage(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
     void update();
 

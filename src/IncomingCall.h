@@ -1,7 +1,7 @@
 #ifndef INCOMING_CALL
 #define INCOMING_CALL 3
 
-#include "Adafruit_EPD.h"
+#include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 #include <Adafruit_FONA.h>
 
@@ -11,13 +11,13 @@
 
 class IncomingCall : public Controller {
   Navigator *navigator;
-  Adafruit_SSD1608 *display;
+  Adafruit_SharpMem *display;
   Keypad *keypad;
   Adafruit_FONA *fona;
 
   public:
     char number[NUMBER_LENGTH];
-    IncomingCall(Navigator *, Adafruit_SSD1608 *, Keypad *, Adafruit_FONA *);
+    IncomingCall(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
     void update();
     void answerCall();

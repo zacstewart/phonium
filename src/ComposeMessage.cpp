@@ -26,7 +26,7 @@ const CharSet KEY_TO_CHARS[12] = {
   {1, "#", "#"}
 };
 
-ComposeMessage::ComposeMessage(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad, Adafruit_FONA *fona)
+ComposeMessage::ComposeMessage(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
 : navigator(navigator)
 , display(display)
 , keypad(keypad)
@@ -113,12 +113,12 @@ void ComposeMessage::backspace() {
 }
 
 void ComposeMessage::draw() {
-  display->clearBuffer();
+  display->clearDisplay();
   display->setCursor(0, 0);
   display->setTextColor(COLOR_BLACK);
   display->setTextSize(2);
   display->print(message);
-  display->display();
+  display->refresh();
 }
 
 void ComposeMessage::receiveInput(uint8_t charSetIdx) {
@@ -151,20 +151,20 @@ void ComposeMessage::reset() {
 }
 
 void ComposeMessage::sendMessage() {
-  display->clearBuffer();
   display->setCursor(0, 0);
-  display->setTextColor(COLOR_BLACK);
   display->setTextSize(3);
 
   if (fona->sendSMS(number, message)) {
+    display->clearDisplay();
     display->print("Message sent.");
-    display->display();
+    display->refresh();
     delay(1000);
     reset();
     navigator->popController();
   } else {
+    display->clearDisplay();
     display->print("Couldn't send.\nTry again");
-    display->display();
+    display->refresh();
     delay(1000);
     draw();
   }

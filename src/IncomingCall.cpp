@@ -3,7 +3,7 @@
 #include "Call.h"
 #include "IncomingCall.h"
 
-IncomingCall::IncomingCall(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad, Adafruit_FONA *fona)
+IncomingCall::IncomingCall(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
 : navigator(navigator)
 , display(display)
 , keypad(keypad)
@@ -13,7 +13,7 @@ IncomingCall::IncomingCall(Navigator *navigator, Adafruit_SSD1608 *display, Keyp
 }
 
 void IncomingCall::begin() {
-  display->clearBuffer();
+  display->clearDisplay();
   display->setTextWrap(true);
   display->setTextColor(COLOR_BLACK);
 
@@ -22,7 +22,7 @@ void IncomingCall::begin() {
   display->println(F("Incoming call..."));
   display->setTextSize(3);
   display->print(number);
-  display->display();
+  display->refresh();
 }
 
 void IncomingCall::update() {

@@ -2,7 +2,7 @@
 
 #include "Call.h"
 
-Call::Call(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad, Adafruit_FONA *fona)
+Call::Call(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
 : navigator(navigator)
 , display(display)
 , keypad(keypad)
@@ -14,7 +14,7 @@ Call::Call(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad, Adaf
 }
 
 void Call::begin() {
-  display->clearBuffer();
+  display->clearDisplay();
   display->setTextWrap(true);
   display->setTextColor(COLOR_BLACK);
 
@@ -23,7 +23,7 @@ void Call::begin() {
   display->println("Ongoing call...");
   display->setTextSize(3);
   display->print(number);
-  display->display();
+  display->refresh();
 }
 
 void Call::update() {
@@ -82,13 +82,13 @@ void Call::callEnded() {
   Serial.print("Call lasted ");
   Serial.println(duration);
 
-  display->clearBuffer();
+  display->clearDisplay();
   display->setCursor(0, 0);
   display->setTextSize(1);
   display->println(F("Call ended"));
   display->setTextSize(3);
   display->print(duration);
-  display->display();
+  display->refresh();
 
   delay(1000);
 

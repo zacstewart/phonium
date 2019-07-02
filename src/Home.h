@@ -1,8 +1,8 @@
 #ifndef HOME
 #define HOME 0
 
-#include <Adafruit_EPD.h>
 #include <Adafruit_FONA.h>
+#include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 
 #include "Common.h"
@@ -11,12 +11,12 @@
 
 class Home : public Controller {
   Navigator *navigator;
-  Adafruit_SSD1608 *display;
+  Adafruit_SharpMem *display;
   Keypad *keypad;
   Adafruit_FONA *fona;
 
   public:
-    Home(Navigator *, Adafruit_SSD1608 *, Keypad *, Adafruit_FONA *);
+    Home(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
     void update();
 

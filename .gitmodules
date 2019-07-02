@@ -13,3 +13,6 @@
 [submodule "cores"]
 	path = cores
 	url = git@github.com:PaulStoffregen/cores.git
+[submodule "libraries/Adafruit_SHARP_Memory_Display"]
+	path = libraries/Adafruit_SHARP_Memory_Display
+	url = git@github.com:zacstewart/Adafruit_SHARP_Memory_Display.git

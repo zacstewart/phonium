@@ -1,6 +1,6 @@
 #include "Messages.h"
 
-Messages::Messages(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad, Adafruit_FONA *fona)
+Messages::Messages(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
 : navigator(navigator)
 , display(display)
 , keypad(keypad)
@@ -16,12 +16,12 @@ void Messages::begin()
   fona->readSMS(1, messageBuf, MESSAGE_LENGTH, &messageLen);
   Serial.println(messageBuf);
 
-  display->clearBuffer();
+  display->clearDisplay();
   display->setCursor(0, 0);
   display->setTextColor(COLOR_BLACK);
   display->setTextSize(1);
   display->print(messageBuf);
-  display->display();
+  display->refresh();
 }
 
 void Messages::update()

@@ -6,7 +6,7 @@
 #define CHAR_WIDTH 5 * FONT_SIZE
 #define CHAR_HEIGHT 8 * FONT_SIZE
 
-Dialer::Dialer(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad)
+Dialer::Dialer(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad)
 : navigator(navigator)
 , display(display)
 , keypad(keypad)
@@ -17,6 +17,8 @@ Dialer::Dialer(Navigator *navigator, Adafruit_SSD1608 *display, Keypad *keypad)
 }
 
 void Dialer::begin() {
+  display->setTextColor(COLOR_BLACK);
+  display->setTextSize(3);
   draw();
 }
 
@@ -59,11 +61,9 @@ void Dialer::setNumber(char *num) {
   cur = strlen(num);
 }
 
-void Dialer::backspace() {
-    number[--cur] = '\0';
-    int left = cur * (CHAR_WIDTH + FONT_SIZE);
-    display->fillRect(left, 0, CHAR_WIDTH, CHAR_HEIGHT, EPD_INVERSE);
-    display->display();
+inline void Dialer::backspace() {
+  number[--cur] = '\0';
+  draw();
 }
 
 void Dialer::callNumber() {
@@ -78,12 +78,10 @@ void Dialer::callNumber() {
 }
 
 void Dialer::draw() {
-  display->clearBuffer();
+  display->clearDisplay();
   display->setCursor(0, 0);
-  display->setTextColor(COLOR_BLACK);
-  display->setTextSize(3);
   display->print(number);
-  display->display();
+  display->refresh();
 }
 
 void Dialer::reset() {
