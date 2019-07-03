@@ -90,7 +90,7 @@ void Call::callEnded() {
   display->print(duration);
   display->refresh();
 
-  delay(1000);
+  delay(2500);
 
   navigator->popController();
 }
