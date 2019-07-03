@@ -146,6 +146,7 @@ void ComposeMessage::receiveInput(uint8_t charSetIdx) {
 
 void ComposeMessage::reset() {
   memset(number, '\0', sizeof(number));
+  memset(message, '\0', sizeof(message));
   curChar = 1;
   cur = 0;
 }
