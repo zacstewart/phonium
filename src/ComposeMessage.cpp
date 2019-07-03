@@ -96,7 +96,7 @@ void ComposeMessage::update() {
     default:
       break;
   }
-  Serial.print("Message: '"); Serial.print(message); Serial.println("'");
+  Serial.print(F("Message: '")); Serial.print(message); Serial.println(F("'"));
 }
 
 void ComposeMessage::setNumber(char *num) {
