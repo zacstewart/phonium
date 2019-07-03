@@ -153,8 +153,12 @@ void ComposeMessage::reset() {
 void ComposeMessage::sendMessage() {
   display->setCursor(0, 0);
   display->setTextSize(3);
+  display->clearDisplay();
+  display->print("Sending...");
+  display->refresh();
 
   if (fona->sendSMS(number, message)) {
+    display->setCursor(0, 0);
     display->clearDisplay();
     display->print("Message sent.");
     display->refresh();
@@ -162,6 +166,7 @@ void ComposeMessage::sendMessage() {
     reset();
     navigator->popController();
   } else {
+    display->setCursor(0, 0);
     display->clearDisplay();
     display->print("Couldn't send.\nTry again");
     display->refresh();
