@@ -162,7 +162,7 @@ void ComposeMessage::sendMessage() {
     display->clearDisplay();
     display->print("Message sent.");
     display->refresh();
-    delay(1000);
+    delay(2500);
     reset();
     navigator->popController();
   } else {
@@ -170,7 +170,7 @@ void ComposeMessage::sendMessage() {
     display->clearDisplay();
     display->print("Couldn't send.\nTry again");
     display->refresh();
-    delay(1000);
+    delay(2500);
     draw();
   }
 }
