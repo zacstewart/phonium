@@ -2,7 +2,7 @@
 
 #include "ComposeMessage.h"
 
-#define INPUT_CYCLE_TIMEOUT 3000
+#define INPUT_CYCLE_TIMEOUT 1000
 #define NO_CHAR_SET -1
 
 typedef struct CharSet {
