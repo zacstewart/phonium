@@ -73,6 +73,12 @@ void setup() {
   Serial.println(F("Starting display"));
   display.begin();
   display.setRotation(DISPLAY_ROTATION);
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.setTextColor(COLOR_BLACK);
+  display.setTextSize(2);
+  display.print("Starting");
+  display.refresh();
 
   Serial.println(F("Starting cellular"));
   fonaSerial->begin(FONA_BAUD_RATE);
