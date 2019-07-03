@@ -107,6 +107,15 @@ void ComposeMessage::setNumber(char *num) {
   memcpy(number, num, sizeof(number));
 }
 
+/**
+ * Deletes the char under cursor if timeout has not occurred,
+ * otherwise, moves the cursor one place to the left and deletes
+ * that char. Resets the char set and current char of that set.
+ *
+ * Will blindly recede the cursor to negative indexes, so you must
+ * ensure that cur is > 0 before calling backspace.  Guarding that
+ * cur is > 0 here would potentially waste an extra CPU cycle.
+ */
 void ComposeMessage::backspace() {
   lastCharSet = NO_CHAR_SET;
   curChar = 1;
