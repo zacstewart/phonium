@@ -67,7 +67,11 @@ void ComposeMessage::update() {
     case NO_KEY:
       break;
     case 'A':
-      backspace();
+      if (cur > 0) {
+        backspace();
+      } else {
+        navigator->popController();
+      }
       break;
     case 'B':
     case 'C':
