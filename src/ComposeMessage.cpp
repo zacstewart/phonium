@@ -42,6 +42,7 @@ ComposeMessage::ComposeMessage(Navigator *navigator, Adafruit_SharpMem *display,
 }
 
 void ComposeMessage::begin() {
+  display->clearDisplay();
 }
 
 void ComposeMessage::update() {
