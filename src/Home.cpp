@@ -29,6 +29,10 @@ void Home::begin() {
 void Home::update() {
   char key = keypad->getKey();
 
+  if (!keypad->keyStateChanged()) {
+    return;
+  }
+
   switch (key) {
     case NO_KEY:
       break;
