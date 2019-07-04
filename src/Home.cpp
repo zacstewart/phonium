@@ -34,13 +34,14 @@ void Home::update() {
       break;
     case 'A':
       navigator->pushController(MESSAGES);
-      break;
+      return;
     case 'B':
     case 'C':
     case 'D':
       break;
     default:
       startDialing(key);
+      return;
   }
 }
 
