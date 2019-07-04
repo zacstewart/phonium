@@ -54,7 +54,6 @@ void Messages::loadMessages() {
   curMessage = numMessages - 1;
 
   if (previews != NULL) {
-    Serial.println("freeing previous previews");
     for (int8_t i = 0; i < numMessages; i++) {
       free(previews[i]);
     }
