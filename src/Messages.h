@@ -23,6 +23,8 @@ class Messages : public Controller {
     void begin();
     void update();
 
+    void loadMessages();
+
   private:
     void draw();
     void cursorDown();

@@ -37,6 +37,8 @@ void Home::update() {
     case NO_KEY:
       break;
     case 'A':
+      ((Messages *) navigator->getController(MESSAGES))
+        ->loadMessages();
       navigator->pushController(MESSAGES);
       return;
     case 'B':

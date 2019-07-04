@@ -14,30 +14,6 @@ Messages::Messages(Navigator *navigator, Adafruit_SharpMem *display, Keypad *key
 }
 
 void Messages::begin() {
-  numMessages = fona->getNumSMS();
-  if (numMessages < 1) {
-    return;
-  }
-  curMessage = numMessages - 1;
-
-  if (previews != NULL) {
-    Serial.println("freeing previous previews");
-    for (int8_t i = 0; i < numMessages; i++) {
-      free(previews[i]);
-    }
-    free(previews);
-  }
-  Serial.println("malloc");
-  previews = malloc(numMessages * MESSAGE_PREVIEW_LENGTH);
-
-  uint16_t messageLen;
-  for (int8_t i = 0; i < numMessages; i++) {
-    // +1 for null byte
-    previews[i] = malloc(MESSAGE_PREVIEW_LENGTH + 1);
-    // messages are 1-indexed
-    fona->readSMS(i + 1, previews[i], MESSAGE_PREVIEW_LENGTH, &messageLen);
-  }
-
   draw();
 }
 
@@ -68,6 +44,31 @@ void Messages::update() {
   }
 
   draw();
+}
+
+void Messages::loadMessages() {
+  numMessages = fona->getNumSMS();
+  if (numMessages < 1) {
+    return;
+  }
+  curMessage = numMessages - 1;
+
+  if (previews != NULL) {
+    Serial.println("freeing previous previews");
+    for (int8_t i = 0; i < numMessages; i++) {
+      free(previews[i]);
+    }
+    free(previews);
+  }
+  previews = (char **) malloc(numMessages);
+
+  uint16_t messageLen;
+  for (int8_t i = 0; i < numMessages; i++) {
+    // +1 for null terminator
+    previews[i] = (char *) malloc(MESSAGE_PREVIEW_LENGTH + 1);
+    // messages are 1-indexed
+    fona->readSMS(i + 1, previews[i], MESSAGE_PREVIEW_LENGTH, &messageLen);
+  }
 }
 
 void Messages::draw() {
