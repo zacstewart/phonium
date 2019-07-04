@@ -14,11 +14,19 @@ class Messages : public Controller {
   Adafruit_SharpMem *display;
   Keypad *keypad;
   Adafruit_FONA *fona;
+  int8_t numMessages;
+  char **previews;
+  uint8_t curMessage;
 
   public:
     Messages(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
     void update();
+
+  private:
+    void draw();
+    void cursorDown();
+    void cursorUp();
 };
 
 #endif
