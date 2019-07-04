@@ -13,6 +13,7 @@
 #include "Dialer.h"
 #include "Home.h"
 #include "IncomingCall.h"
+#include "Message.h"
 #include "Messages.h"
 
 #define KEYPAD_ROWS 4
@@ -52,6 +53,7 @@ ComposeMessage composeMessage = ComposeMessage(&navigator, &display, &keypad, &f
 Dialer dialer = Dialer(&navigator, &display, &keypad);
 Home home = Home(&navigator, &display, &keypad, &fona);
 IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
+Message message = Message(&navigator, &display, &keypad, &fona);
 Messages messages = Messages(&navigator, &display, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
@@ -93,6 +95,7 @@ void setup() {
   navigator.setController(INCOMING_CALL, &incomingCall);
   navigator.setController(HOME, &home);
   navigator.setController(MESSAGES, &messages);
+  navigator.setController(MESSAGE, &message);
 
   Serial.println(F("Phonium ready"));
   navigator.replaceController(HOME);

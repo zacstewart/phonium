@@ -1,4 +1,5 @@
 #include "Messages.h"
+#include "Message.h"
 
 #define MESSAGE_PREVIEW_LENGTH 12
 
@@ -31,8 +32,13 @@ void Messages::update() {
       return;
     case 'B':
     case 'C':
-    case 'D':
       break;
+    case 'D':
+      // messages are 1-indexed
+      ((Message *) navigator->getController(MESSAGE))
+        ->setMessage(curMessage + 1);
+      navigator->pushController(MESSAGE);
+      return;
     case '2':
       cursorUp();
       break;
