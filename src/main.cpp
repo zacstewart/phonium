@@ -11,8 +11,8 @@
 #include "Call.h"
 #include "ComposeMessage.h"
 #include "Dialer.h"
-#include "IncomingCall.h"
 #include "Home.h"
+#include "IncomingCall.h"
 #include "Messages.h"
 
 #define KEYPAD_ROWS 4
@@ -47,11 +47,11 @@ Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
  */
 Navigator navigator = Navigator();
 
-Home home = Home(&navigator, &display, &keypad, &fona);
-Dialer dialer = Dialer(&navigator, &display, &keypad);
 Call call = Call(&navigator, &display, &keypad, &fona);
-IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
 ComposeMessage composeMessage = ComposeMessage(&navigator, &display, &keypad, &fona);
+Dialer dialer = Dialer(&navigator, &display, &keypad);
+Home home = Home(&navigator, &display, &keypad, &fona);
+IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
 Messages messages = Messages(&navigator, &display, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
