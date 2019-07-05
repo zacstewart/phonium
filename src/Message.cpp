@@ -1,3 +1,4 @@
+#include "ComposeMessage.h"
 #include "Message.h"
 
 Message::Message(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
@@ -36,6 +37,9 @@ void Message::update() {
     case 'C':
       break;
     case 'D':
+      ((ComposeMessage *) navigator->getController(COMPOSE_MESSAGE))
+        ->setNumber(message.sender);
+      navigator->pushController(COMPOSE_MESSAGE);
       return;
     default:
       break;
