@@ -26,7 +26,7 @@
 
 #define FONA_RI  3
 #define FONA_RST 2
-#define FONA_BAUD_RATE 4800
+#define FONA_BAUD_RATE 115200
 
 byte keys[KEYPAD_ROWS][KEYPAD_COLS] = {
   {'1', '2', '3', 'A'},
