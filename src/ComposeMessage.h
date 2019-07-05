@@ -18,8 +18,8 @@ class ComposeMessage : public Controller {
   uint8_t lastCharSet;
   unsigned long lastInputAt;
   uint8_t curChar;
-  char number[NUMBER_LENGTH];
-  char message[MESSAGE_LENGTH];
+  char number[NUMBER_LENGTH + 1];
+  char message[MESSAGE_LENGTH + 1];
   uint8_t cur;
 
   public:

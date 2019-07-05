@@ -13,7 +13,7 @@ class Dialer : public Controller {
   Adafruit_SharpMem *display;
   Keypad *keypad;
   char lastKey;
-  char number[NUMBER_LENGTH];
+  char number[NUMBER_LENGTH + 1];
   uint8_t cur;
 
   public:

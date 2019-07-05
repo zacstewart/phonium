@@ -18,7 +18,7 @@ class Call : public Controller {
   Keypad *keypad;
   Adafruit_FONA *fona;
   char lastKey;
-  char number[NUMBER_LENGTH];
+  char number[NUMBER_LENGTH + 1];
   unsigned long callStart;
 
   public:

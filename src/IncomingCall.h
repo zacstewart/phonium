@@ -16,7 +16,7 @@ class IncomingCall : public Controller {
   Adafruit_FONA *fona;
 
   public:
-    char number[NUMBER_LENGTH];
+    char number[NUMBER_LENGTH + 1];
     IncomingCall(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
     void update();

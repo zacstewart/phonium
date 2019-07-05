@@ -11,7 +11,7 @@
 
 typedef struct SmsMessage {
   uint8_t index;
-  char message[MESSAGE_LENGTH];
+  char message[MESSAGE_LENGTH + 1];
   // +1 for null terminator
   char sender[NUMBER_LENGTH + 1];
 } SmsMessage;
