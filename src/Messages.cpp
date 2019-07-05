@@ -59,14 +59,15 @@ void Messages::loadMessages() {
   }
   curMessage = numMessages - 1;
 
+  // Free previously allocated previews
   if (previews != NULL) {
     for (int8_t i = 0; i < numMessages; i++) {
       free(previews[i]);
     }
     free(previews);
   }
-  previews = (char **) malloc(numMessages);
 
+  previews = (char **) malloc(sizeof(char *) * numMessages);
   uint16_t messageLen;
   for (int8_t i = 0; i < numMessages; i++) {
     // +1 for null terminator
