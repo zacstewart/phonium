@@ -58,11 +58,11 @@ Messages messages = Messages(&navigator, &display, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {
-    setup();
-    while (1) {
-        loop();
-        yield();
-    }
+  setup();
+  while (1) {
+    loop();
+    yield();
+  }
 }
 #endif
 
