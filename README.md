@@ -28,4 +28,4 @@ A minimalist, homebrew phone.
 Each screen is broken out into a view controller object.
 
 Each controller should reset itself before segueing away, not reset on segueing
-into it.
+into it (`begin`).
