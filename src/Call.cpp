@@ -50,7 +50,6 @@ void Call::handleKeyInput(KeyState state, KeypadEvent key) {
 }
 
 void Call::update() {
-  keypad->getKeys();
 }
 
 Call *Call::setNumber(char *num) {

@@ -96,8 +96,6 @@ void ComposeMessage::handleKeyInput(KeyState state, KeypadEvent key) {
 }
 
 void ComposeMessage::update() {
-  // TODO: put this in main once all controllers handle key events
-  keypad->getKeys();
 }
 
 void ComposeMessage::setNumber(char *num) {

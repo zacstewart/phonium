@@ -46,7 +46,6 @@ void Message::handleKeyInput(KeyState state, KeypadEvent key) {
 }
 
 void Message::update() {
-  keypad->getKeys();
 }
 
 void Message::setMessage(uint8_t index) {

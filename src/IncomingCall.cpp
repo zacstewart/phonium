@@ -45,8 +45,6 @@ void IncomingCall::handleKeyInput(KeyState state, KeypadEvent key) {
 }
 
 void IncomingCall::update() {
-  keypad->getKeys();
-
   switch (fona->getCallStatus()) {
     case FONA_CALL_READY: // Stopped ringing
       navigator->popController();

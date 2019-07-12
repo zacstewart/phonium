@@ -111,5 +111,6 @@ void loop() {
   if (fona.incomingCallNumber(incomingCall.number)) {
     navigator.pushController(INCOMING_CALL);
   }
+  keypad.getKeys();
   navigator.currentController()->update();
 }

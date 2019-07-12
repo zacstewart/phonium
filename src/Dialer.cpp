@@ -53,7 +53,6 @@ void Dialer::handleKeyInput(KeyState state, KeypadEvent key) {
 }
 
 void Dialer::update() {
-  keypad->getKeys();
 }
 
 void Dialer::setNumber(char *num) {

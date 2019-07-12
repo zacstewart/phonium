@@ -52,7 +52,6 @@ void Messages::handleKeyInput(KeyState state, KeypadEvent key) {
 }
 
 void Messages::update() {
-  keypad->getKeys();
 }
 
 void Messages::loadMessages() {

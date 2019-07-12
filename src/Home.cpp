@@ -50,7 +50,6 @@ void Home::handleKeyInput(KeyState state, KeypadEvent key) {
 }
 
 void Home::update() {
-  keypad->getKeys();
 }
 
 void Home::startDialing(char key) {
