@@ -56,10 +56,10 @@ void ComposeMessage::handleKeyInput(KeyState state, KeypadEvent key) {
         case NO_KEY:
           break;
         case 'A':
-          if (cur > 0) {
-            backspace();
-          } else {
+          if (cur == 0 && message[cur] == '\0') {
             navigator->popController();
+          } else {
+            backspace();
           }
           break;
         case 'B':
