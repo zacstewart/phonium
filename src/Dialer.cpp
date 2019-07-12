@@ -23,40 +23,37 @@ void Dialer::begin() {
 }
 
 void Dialer::handleKeyInput(KeyState state, KeypadEvent key) {
-  // noop
+  switch (state) {
+    case PRESSED:
+      switch (key) {
+        case NO_KEY:
+          break;
+        case 'A':
+          if (cur > 0) {
+            backspace();
+          } else {
+            navigator->popController();
+          }
+          break;
+        case 'B':
+          callNumber();
+        case 'C':
+          break;
+        case 'D':
+          textNumber();
+          break;
+        default:
+          number[cur++] = key;
+          draw();
+      }
+      break;
+    default:
+      break;
+  }
 }
 
 void Dialer::update() {
-  char key = keypad->getKey();
-  if (key == lastKey) {
-    return;
-  }
-  lastKey = key;
-
-  Serial.print(F("Pressed "));
-  Serial.println(key);
-
-  switch (key) {
-    case NO_KEY:
-      break;
-    case 'A':
-      if (cur > 0) {
-        backspace();
-      } else {
-        navigator->popController();
-      }
-      break;
-    case 'B':
-      callNumber();
-    case 'C':
-      break;
-    case 'D':
-      textNumber();
-      break;
-    default:
-      number[cur++] = key;
-      draw();
-  }
+  keypad->getKeys();
 }
 
 void Dialer::setNumber(char *num) {
