@@ -27,30 +27,30 @@ void Call::begin() {
 }
 
 void Call::handleKeyInput(KeyState state, KeypadEvent key) {
-  // noop
-}
-
-void Call::update() {
-  char key = keypad->getKey();
-  if (key == lastKey) {
-    return;
-  }
-  lastKey = key;
-
-  switch (key) {
-    case NO_KEY:
-      break;
-    case 'A':
-    case 'B':
-      break;
-    case 'C':
-      hangUp();
-      break;
-    case 'D':
+  switch (state) {
+    case PRESSED:
+      switch (key) {
+        case NO_KEY:
+          break;
+        case 'A':
+        case 'B':
+          break;
+        case 'C':
+          hangUp();
+          break;
+        case 'D':
+          break;
+        default:
+          break;
+      }
       break;
     default:
       break;
   }
+}
+
+void Call::update() {
+  keypad->getKeys();
 }
 
 Call *Call::setNumber(char *num) {
