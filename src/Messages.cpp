@@ -19,41 +19,40 @@ void Messages::begin() {
 }
 
 void Messages::handleKeyInput(KeyState state, KeypadEvent key) {
-  // noop
-}
+  switch (state) {
+    case PRESSED:
+      switch (key) {
+        case 'A':
+          navigator->popController();
+          return;
+        case 'B':
+        case 'C':
+          break;
+        case 'D':
+          // messages are 1-indexed
+          ((Message *) navigator->getController(MESSAGE))
+            ->setMessage(curMessage + 1);
+          navigator->pushController(MESSAGE);
+          return;
+        case '2':
+          cursorUp();
+          break;
+        case '8':
+          cursorDown();
+          break;
+        default:
+          break;
+      }
 
-void Messages::update() {
-  char key = keypad->getKey();
-
-  // Key is being held
-  if (!keypad->keyStateChanged()) {
-    return;
-  }
-
-  switch (key) {
-    case 'A':
-      navigator->popController();
-      return;
-    case 'B':
-    case 'C':
-      break;
-    case 'D':
-      // messages are 1-indexed
-      ((Message *) navigator->getController(MESSAGE))
-        ->setMessage(curMessage + 1);
-      navigator->pushController(MESSAGE);
-      return;
-    case '2':
-      cursorUp();
-      break;
-    case '8':
-      cursorDown();
+      draw();
       break;
     default:
       break;
   }
+}
 
-  draw();
+void Messages::update() {
+  keypad->getKeys();
 }
 
 void Messages::loadMessages() {
