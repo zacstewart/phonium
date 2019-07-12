@@ -26,6 +26,10 @@ void Call::begin() {
   display->refresh();
 }
 
+void Call::handleKeyInput(KeyState state, KeypadEvent key) {
+  // noop
+}
+
 void Call::update() {
   char key = keypad->getKey();
   if (key == lastKey) {

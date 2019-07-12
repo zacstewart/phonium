@@ -18,6 +18,7 @@ class Home : public Controller {
   public:
     Home(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
+    void handleKeyInput(KeyState state, KeypadEvent key);
     void update();
 
   private:

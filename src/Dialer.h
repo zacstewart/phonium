@@ -19,6 +19,7 @@ class Dialer : public Controller {
   public:
     Dialer(Navigator *, Adafruit_SharpMem *, Keypad *);
     void begin();
+    void handleKeyInput(KeyState state, KeypadEvent key);
     void update();
 
     void setNumber(char *);

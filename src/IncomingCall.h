@@ -19,7 +19,9 @@ class IncomingCall : public Controller {
     char number[NUMBER_LENGTH + 1];
     IncomingCall(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
+    void handleKeyInput(KeyState state, KeypadEvent key);
     void update();
+
     void answerCall();
     void hangUp();
 };

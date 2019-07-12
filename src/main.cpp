@@ -66,11 +66,17 @@ extern "C" int main(void) {
 }
 #endif
 
+void handleKeyInput(KeypadEvent key) {
+  navigator.currentController()->handleKeyInput(keypad.getState(), key);
+}
+
 void setup() {
   while (!Serial);
 
   Serial.begin(115200);
   Serial.println(F("Phonium starting"));
+
+  keypad.addEventListener(handleKeyInput);
 
   Serial.println(F("Starting display"));
   display.begin();

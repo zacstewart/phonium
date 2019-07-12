@@ -26,6 +26,10 @@ void Home::begin() {
   display->refresh();
 }
 
+void Home::handleKeyInput(KeyState state, KeypadEvent key) {
+  // noop
+}
+
 void Home::update() {
   char key = keypad->getKey();
 

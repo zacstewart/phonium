@@ -22,6 +22,10 @@ void Dialer::begin() {
   draw();
 }
 
+void Dialer::handleKeyInput(KeyState state, KeypadEvent key) {
+  // noop
+}
+
 void Dialer::update() {
   char key = keypad->getKey();
   if (key == lastKey) {

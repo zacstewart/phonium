@@ -25,6 +25,10 @@ void IncomingCall::begin() {
   display->refresh();
 }
 
+void IncomingCall::handleKeyInput(KeyState state, KeypadEvent key) {
+  // noop
+}
+
 void IncomingCall::update() {
   switch (keypad->getKey()) {
     case 'B':

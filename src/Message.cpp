@@ -21,6 +21,10 @@ void Message::begin() {
   display->refresh();
 }
 
+void Message::handleKeyInput(KeyState state, KeypadEvent key) {
+  // noop
+}
+
 void Message::update() {
   char key = keypad->getKey();
 

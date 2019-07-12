@@ -18,6 +18,10 @@ void Messages::begin() {
   draw();
 }
 
+void Messages::handleKeyInput(KeyState state, KeypadEvent key) {
+  // noop
+}
+
 void Messages::update() {
   char key = keypad->getKey();
 

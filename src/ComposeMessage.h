@@ -25,6 +25,7 @@ class ComposeMessage : public Controller {
   public:
     ComposeMessage(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
+    void handleKeyInput(KeyState state, KeypadEvent key);
     void update();
 
     void setNumber(char *);
@@ -32,7 +33,7 @@ class ComposeMessage : public Controller {
   private:
     void backspace();
     void draw();
-    void receiveInput(uint8_t);
+    void handleTextEntry(uint8_t);
     void reset();
     void sendMessage();
 };

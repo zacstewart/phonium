@@ -26,6 +26,7 @@ class Message : public Controller {
   public:
     Message(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
     void begin();
+    void handleKeyInput(KeyState state, KeypadEvent key);
     void update();
 
     void setMessage(uint8_t);
