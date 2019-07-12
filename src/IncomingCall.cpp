@@ -26,20 +26,26 @@ void IncomingCall::begin() {
 }
 
 void IncomingCall::handleKeyInput(KeyState state, KeypadEvent key) {
-  // noop
-}
-
-void IncomingCall::update() {
-  switch (keypad->getKey()) {
-    case 'B':
-      answerCall();
-      break;
-    case 'C':
-      hangUp();
+  switch (state) {
+    case PRESSED:
+      switch (key) {
+        case 'B':
+          answerCall();
+          break;
+        case 'C':
+          hangUp();
+          break;
+        default:
+          break;
+      }
       break;
     default:
       break;
   }
+}
+
+void IncomingCall::update() {
+  keypad->getKeys();
 
   switch (fona->getCallStatus()) {
     case FONA_CALL_READY: // Stopped ringing
