@@ -61,7 +61,7 @@ void Dialer::update() {
 
 void Dialer::setNumber(char *num) {
   memset(number, '\0', sizeof(number));
-  memcpy(number, num, sizeof(num));
+  strcpy(number, num);
   cur = strlen(num);
 }
 

@@ -54,7 +54,8 @@ void Call::update() {
 }
 
 Call *Call::setNumber(char *num) {
-  memcpy(number, num, sizeof(number));
+  memset(number, '\0', sizeof(number));
+  strcpy(number, num);
   return this;
 }
 
