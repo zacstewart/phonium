@@ -22,32 +22,31 @@ void Message::begin() {
 }
 
 void Message::handleKeyInput(KeyState state, KeypadEvent key) {
-  // noop
-}
-
-void Message::update() {
-  char key = keypad->getKey();
-
-  // Key is being held
-  if (!keypad->keyStateChanged()) {
-    return;
-  }
-
-  switch (key) {
-    case 'A':
-      navigator->popController();
-      return;
-    case 'B':
-    case 'C':
+  switch (state) {
+    case PRESSED:
+      switch (key) {
+        case 'A':
+          navigator->popController();
+          return;
+        case 'B':
+        case 'C':
+          break;
+        case 'D':
+          ((ComposeMessage *) navigator->getController(COMPOSE_MESSAGE))
+            ->setNumber(message.sender);
+          navigator->pushController(COMPOSE_MESSAGE);
+          return;
+        default:
+          break;
+      }
       break;
-    case 'D':
-      ((ComposeMessage *) navigator->getController(COMPOSE_MESSAGE))
-        ->setNumber(message.sender);
-      navigator->pushController(COMPOSE_MESSAGE);
-      return;
     default:
       break;
   }
+}
+
+void Message::update() {
+  keypad->getKeys();
 }
 
 void Message::setMessage(uint8_t index) {
