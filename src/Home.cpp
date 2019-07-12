@@ -27,32 +27,30 @@ void Home::begin() {
 }
 
 void Home::handleKeyInput(KeyState state, KeypadEvent key) {
-  // noop
+  switch (state) {
+    case PRESSED:
+      switch (key) {
+        case 'A':
+          ((Messages *) navigator->getController(MESSAGES))
+            ->loadMessages();
+          navigator->pushController(MESSAGES);
+          return;
+        case 'B':
+        case 'C':
+        case 'D':
+          break;
+        default:
+          startDialing(key);
+          return;
+      }
+      break;
+    default:
+      break;
+  }
 }
 
 void Home::update() {
-  char key = keypad->getKey();
-
-  if (!keypad->keyStateChanged()) {
-    return;
-  }
-
-  switch (key) {
-    case NO_KEY:
-      break;
-    case 'A':
-      ((Messages *) navigator->getController(MESSAGES))
-        ->loadMessages();
-      navigator->pushController(MESSAGES);
-      return;
-    case 'B':
-    case 'C':
-    case 'D':
-      break;
-    default:
-      startDialing(key);
-      return;
-  }
+  keypad->getKeys();
 }
 
 void Home::startDialing(char key) {
