@@ -57,6 +57,7 @@ void Home::update() {
 
 void Home::startDialing(char key) {
   Serial.print(F("Dialing ")); Serial.println(key);
-  ((Dialer *) navigator->getController(DIALER))->setNumber(&key);
+  char number[2] = {key, '\0'};
+  ((Dialer *) navigator->getController(DIALER))->setNumber(number);
   navigator->pushController(DIALER);
 }
