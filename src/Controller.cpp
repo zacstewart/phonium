@@ -7,3 +7,18 @@ Controller::Controller(Navigator *navigator, Adafruit_SharpMem *display, Keypad 
 , fona(fona)
 {
 }
+
+void Controller::setLeftNavigationLabel(char *label) {
+  display->setTextSize(1);
+  display->setCursor(1, DISPLAY_HEIGHT - 9);
+  display->print(label);
+}
+
+void Controller::setRightNavigationLabel(char *label) {
+  display->setTextSize(1);
+  display->setCursor(
+      DISPLAY_WIDTH - (6 * strlen(label)) - 1,
+      DISPLAY_HEIGHT - 9
+  );
+  display->print(label);
+}

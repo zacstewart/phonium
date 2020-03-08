@@ -126,6 +126,14 @@ void ComposeMessage::draw() {
   display->setTextColor(COLOR_BLACK);
   display->setTextSize(2);
   display->print(message);
+
+  if (cur == 0 && message[cur] == '\0') {
+      setLeftNavigationLabel("Back");
+  } else {
+      setLeftNavigationLabel("Delete");
+  }
+  setRightNavigationLabel("Send");
+
   display->refresh();
 }
 

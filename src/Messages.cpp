@@ -89,6 +89,10 @@ void Messages::draw() {
     }
     display->println(previews[i]);
   }
+
+  setLeftNavigationLabel("Back");
+  setRightNavigationLabel("Read");
+
   display->refresh();
 }
 

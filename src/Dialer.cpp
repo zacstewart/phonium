@@ -15,8 +15,6 @@ Dialer::Dialer(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad,
 }
 
 void Dialer::begin() {
-  display->setTextColor(COLOR_BLACK);
-  display->setTextSize(3);
   draw();
 }
 
@@ -79,8 +77,14 @@ void Dialer::callNumber() {
 
 void Dialer::draw() {
   display->clearDisplay();
+  display->setTextColor(COLOR_BLACK);
+  display->setTextSize(3);
   display->setCursor(0, 0);
   display->print(number);
+
+  setLeftNavigationLabel("Delete");
+  setRightNavigationLabel("Message");
+
   display->refresh();
 }
 

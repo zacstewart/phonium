@@ -15,6 +15,10 @@ void Message::begin() {
   display->println(message.sender);
   display->setTextSize(1);
   display->println(message.message);
+
+  setLeftNavigationLabel("Back");
+  setRightNavigationLabel("Reply");
+
   display->refresh();
 }
 

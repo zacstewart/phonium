@@ -15,6 +15,9 @@ void Home::begin() {
   display->println(numSms);
   display->setTextSize(1);
   display->print("unread messages");
+
+  setLeftNavigationLabel("Messages");
+
   display->refresh();
 }
 

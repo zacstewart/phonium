@@ -5,6 +5,8 @@
 #include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 
+#include "Common.h"
+
 // Forward declaration
 class Navigator;
 
@@ -14,6 +16,9 @@ class Controller {
       Adafruit_SharpMem *display;
       Keypad *keypad;
       Adafruit_FONA *fona;
+
+      void setLeftNavigationLabel(char *);
+      void setRightNavigationLabel(char *);
 
   public:
     Controller(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
