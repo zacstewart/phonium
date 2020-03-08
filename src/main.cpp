@@ -94,6 +94,7 @@ void setup() {
     Serial.println(F("Couldn't find FONA"));
   }
   fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
+  fona.setAudio(FONA_EXTAUDIO);
 
   navigator.setController(CALL, &call);
   navigator.setController(COMPOSE_MESSAGE, &composeMessage);
