@@ -13,10 +13,8 @@
  * This controller is for ongoing calls, incoming or outgoing.
  */
 class Call : public Controller {
-  Navigator *navigator;
-  Adafruit_SharpMem *display;
-  Keypad *keypad;
-  Adafruit_FONA *fona;
+  using Controller::Controller;
+
   char lastKey;
   char number[NUMBER_LENGTH + 1];
   unsigned long callStart;

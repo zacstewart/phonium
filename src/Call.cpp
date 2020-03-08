@@ -3,10 +3,7 @@
 #include "Call.h"
 
 Call::Call(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
-: navigator(navigator)
-, display(display)
-, keypad(keypad)
-, fona(fona)
+: Controller(navigator, display, keypad, fona)
 , lastKey(NO_KEY)
 , number("")
 , callStart(0)

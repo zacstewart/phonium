@@ -4,10 +4,7 @@
 #include "IncomingCall.h"
 
 IncomingCall::IncomingCall(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
-: navigator(navigator)
-, display(display)
-, keypad(keypad)
-, fona(fona)
+: Controller(navigator, display, keypad, fona)
 , number("")
 {
 }

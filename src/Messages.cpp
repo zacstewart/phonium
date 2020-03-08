@@ -4,10 +4,7 @@
 #define MESSAGE_PREVIEW_LENGTH 12
 
 Messages::Messages(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
-: navigator(navigator)
-, display(display)
-, keypad(keypad)
-, fona(fona)
+: Controller(navigator, display, keypad, fona)
 , numMessages(0)
 , previews(NULL)
 , curMessage(0)

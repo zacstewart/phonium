@@ -10,10 +10,7 @@
 #include "Controller.h"
 
 class IncomingCall : public Controller {
-  Navigator *navigator;
-  Adafruit_SharpMem *display;
-  Keypad *keypad;
-  Adafruit_FONA *fona;
+  using Controller::Controller;
 
   public:
     char number[NUMBER_LENGTH + 1];

@@ -10,10 +10,8 @@
 #include "Controller.h"
 
 class ComposeMessage : public Controller {
-  Navigator *navigator;
-  Adafruit_SharpMem *display;
-  Keypad *keypad;
-  Adafruit_FONA *fona;
+  using Controller::Controller;
+
   char lastKey;
   uint8_t lastCharSet;
   unsigned long lastInputAt;

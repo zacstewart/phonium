@@ -17,10 +17,8 @@ typedef struct SmsMessage {
 } SmsMessage;
 
 class Message : public Controller {
-  Navigator *navigator;
-  Adafruit_SharpMem *display;
-  Keypad *keypad;
-  Adafruit_FONA *fona;
+  using Controller::Controller;
+
   SmsMessage message;
 
   public:

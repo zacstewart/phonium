@@ -2,14 +2,6 @@
 #include "Dialer.h"
 #include "Messages.h"
 
-Home::Home(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
-: navigator(navigator)
-, display(display)
-, keypad(keypad)
-, fona(fona)
-{
-}
-
 void Home::begin() {
   int8_t numSms = fona->getNumSMS();
 

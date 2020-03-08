@@ -50,7 +50,7 @@ Navigator navigator = Navigator();
 
 Call call = Call(&navigator, &display, &keypad, &fona);
 ComposeMessage composeMessage = ComposeMessage(&navigator, &display, &keypad, &fona);
-Dialer dialer = Dialer(&navigator, &display, &keypad);
+Dialer dialer = Dialer(&navigator, &display, &keypad, &fona);
 Home home = Home(&navigator, &display, &keypad, &fona);
 IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
 Message message = Message(&navigator, &display, &keypad, &fona);

@@ -2,10 +2,7 @@
 #include "Message.h"
 
 Message::Message(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
-: navigator(navigator)
-, display(display)
-, keypad(keypad)
-, fona(fona)
+: Controller(navigator, display, keypad, fona)
 , message(SmsMessage { 0 })
 {
 }

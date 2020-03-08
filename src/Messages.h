@@ -10,10 +10,8 @@
 #include "Controller.h"
 
 class Messages : public Controller {
-  Navigator *navigator;
-  Adafruit_SharpMem *display;
-  Keypad *keypad;
-  Adafruit_FONA *fona;
+  using Controller::Controller;
+
   int8_t numMessages;
   char **previews;
   uint8_t curMessage;
