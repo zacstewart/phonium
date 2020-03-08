@@ -29,7 +29,9 @@ void Dialer::handleKeyInput(KeyState state, KeypadEvent key) {
         case 'A':
           if (cur > 0) {
             backspace();
-          } else {
+          }
+
+          if (cur == 0) {
             navigator->popController();
           }
           break;
