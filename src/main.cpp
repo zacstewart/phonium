@@ -71,7 +71,9 @@ void handleKeyInput(KeypadEvent key) {
 }
 
 void setup() {
+#ifdef DEBUG
   while (!Serial);
+#endif
 
   Serial.begin(115200);
   Serial.println(F("Phonium starting"));

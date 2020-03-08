@@ -123,6 +123,9 @@ all: hex
 
 build: $(TARGET).elf
 
+debug: CPPFLAGS += -DDEBUG
+debug: build
+
 hex: $(TARGET).hex
 
 post_compile: $(TARGET).hex
