@@ -15,6 +15,7 @@
 #include "IncomingCall.h"
 #include "Message.h"
 #include "Messages.h"
+#include "Menu.h"
 
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4
@@ -55,6 +56,7 @@ Home home = Home(&navigator, &display, &keypad, &fona);
 IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
 Message message = Message(&navigator, &display, &keypad, &fona);
 Messages messages = Messages(&navigator, &display, &keypad, &fona);
+Menu menu = Menu(&navigator, &display, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {
@@ -106,6 +108,7 @@ void setup() {
   navigator.setController(HOME, &home);
   navigator.setController(MESSAGES, &messages);
   navigator.setController(MESSAGE, &message);
+  navigator.setController(MENU, &menu);
 
   Serial.println(F("Phonium ready"));
   navigator.replaceController(HOME);

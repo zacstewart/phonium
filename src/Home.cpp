@@ -1,5 +1,6 @@
-#include "Home.h"
 #include "Dialer.h"
+#include "Home.h"
+#include "Menu.h"
 #include "Messages.h"
 
 void Home::begin() {
@@ -17,6 +18,7 @@ void Home::begin() {
   display->print("unread messages");
 
   setLeftNavigationLabel("Messages");
+  setRightNavigationLabel("Menu");
 
   display->refresh();
 }
@@ -32,8 +34,10 @@ void Home::handleKeyInput(KeyState state, KeypadEvent key) {
           return;
         case 'B':
         case 'C':
-        case 'D':
           break;
+        case 'D':
+          navigator->pushController(MENU);
+          return;
         default:
           startDialing(key);
           return;
