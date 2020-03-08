@@ -95,6 +95,7 @@ void setup() {
   }
   fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
   fona.setAudio(FONA_EXTAUDIO);
+  fona.setMicVolume(FONA_EXTAUDIO, 10);
 
   navigator.setController(CALL, &call);
   navigator.setController(COMPOSE_MESSAGE, &composeMessage);
