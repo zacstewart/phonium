@@ -31,7 +31,7 @@ ifeq ($(OS),Windows_NT)
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Darwin)
-        TOOLSPATH = /Applications/Arduino.app/Contents/Java/hardware/tools/
+        TOOLSPATH = /Applications/Teensyduino.app/Contents/Java/hardware/tools/
     endif
 endif
 
@@ -58,7 +58,7 @@ CXXFLAGS = -std=gnu++0x -felide-constructors -fno-exceptions -fno-rtti
 CFLAGS =
 
 # linker options
-LDFLAGS = -Os --specs=nano.specs -Wl,--gc-sections,--relax -mthumb -fsingle-precision-constant
+LDFLAGS = -Os --specs=nano.specs -Wl,--gc-sections,--relax,--defsym=__rtc_localtime=0 -mthumb -fsingle-precision-constant
 
 # additional libraries to link
 LIBS = -lm
