@@ -78,6 +78,12 @@ void setup() {
 #endif
 
   Serial.begin(115200);
+
+#ifdef DEBUG
+  Serial.print("Build date: ");
+  Serial.println(BUILD_DATE);
+#endif
+
   Serial.println(F("Phonium starting"));
 
   keypad.addEventListener(handleKeyInput);

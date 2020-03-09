@@ -123,7 +123,7 @@ all: hex
 
 build: $(TARGET).elf
 
-debug: CPPFLAGS += -DDEBUG
+debug: CPPFLAGS += -DDEBUG -DBUILD_DATE="\"$(shell date)\""
 debug: build
 
 hex: $(TARGET).hex
