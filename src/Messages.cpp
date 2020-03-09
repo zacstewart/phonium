@@ -52,12 +52,6 @@ void Messages::update() {
 }
 
 void Messages::loadMessages() {
-  numMessages = fona->getNumSMS();
-  if (numMessages < 1) {
-    return;
-  }
-  curMessage = numMessages - 1;
-
   // Free previously allocated previews
   if (previews != NULL) {
     for (int8_t i = 0; i < numMessages; i++) {
@@ -65,6 +59,12 @@ void Messages::loadMessages() {
     }
     free(previews);
   }
+
+  numMessages = fona->getNumSMS();
+  if (numMessages < 1) {
+    return;
+  }
+  curMessage = numMessages - 1;
 
   previews = (char **) malloc(sizeof(char *) * numMessages);
   uint16_t messageLen;
