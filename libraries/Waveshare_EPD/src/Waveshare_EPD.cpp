@@ -1,0 +1,150 @@
+#include <Arduino.h>
+#include <SPI.h>
+
+#include "Waveshare_EPD.h"
+
+Waveshare_EPD::Waveshare_EPD() {
+}
+
+Waveshare_EPD::~Waveshare_EPD() {
+}
+
+bool Waveshare_EPD::begin() {
+    // Set up hardware interface
+    pinMode(CS_PIN, OUTPUT);
+    pinMode(RST_PIN, OUTPUT);
+    pinMode(DC_PIN, OUTPUT);
+    pinMode(BUSY_PIN, INPUT); 
+
+    SPI.begin();
+    SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+
+    // Initialize EPD
+    reset();
+    waitUntilIdle();
+
+    // S/W reset
+    sendCommand(CMD_SW_RESET);
+    waitUntilIdle();
+
+    // Driver output control
+    sendCommand(CMD_DRIVER_OUTPUT_CONTROL);
+    sendData(0xC7);
+    sendData(0x00);
+    sendData(0x00);
+
+    // Data entry mode
+    sendCommand(CMD_DATA_ENTRY_MODE);
+    sendData(0b11); // Y increment, X increment
+
+    // Set RAM-X address start/end position
+    sendCommand(CMD_SET_RAM_X_POSITIONS);
+    sendData(0x00);
+    sendData(0x18);
+
+    // Set RAM-Y address start/end position
+    sendCommand(CMD_SET_RAM_Y_POSITIONS);
+    sendData(0xC7);
+    sendData(0x00);
+    sendData(0x00);
+    sendData(0x00);
+
+    // Border waveform?
+    sendCommand(0x3C);
+    sendData(0x01);
+
+    sendCommand(0x18);
+    sendData(0x80);
+
+    // Load temperature and waveform setting?
+    sendCommand(CMD_DISPLAY_UPDATE_CTRL_2);
+    // 0xB1
+    // - Load temperature value
+    // - Load LUT with DISPLAY Mode 1
+    // - Disable clock signa
+    sendData(0xB1);
+
+    sendCommand(CMD_MASTER_ACTIVATION);
+
+    sendCommand(CMD_SET_RAM_X_ADDRESS_COUNTER);
+    sendData(0x00);
+
+    sendCommand(CMD_SET_RAM_Y_ADDRESS_COUNTER);
+    sendData(0xC7);
+    sendData(0x00);
+
+    waitUntilIdle();
+
+    return true;
+}
+
+void Waveshare_EPD::clear() {
+    // TODO define these dims
+    int w = 200 / 8;
+    int h = 200;
+    sendCommand(CMD_WRITE_BW_RAM);
+    for (int y = 0; y < h; y++) {
+        for (int x = 0; x < w; x++) {
+            sendData(0xff);
+        }
+    }
+
+    sendCommand(CMD_DISPLAY_UPDATE_CTRL_2);
+    // 0xF7
+    // - Enable Analog
+    // - Load temperature value
+    // - DISPLAY with DISPLAY Mode 1
+    // - Disable Analog
+    // - Disable OSC
+    sendData(0xF7);
+    sendCommand(CMD_MASTER_ACTIVATION);
+    waitUntilIdle();
+}
+
+void Waveshare_EPD::reset() {
+    digitalWrite(RST_PIN, LOW);
+    delay(10);
+    digitalWrite(RST_PIN, HIGH);
+    delay(10);
+}
+
+void Waveshare_EPD::sleep() {
+    sendCommand(CMD_DEEP_SLEEP_MODE);
+    sendData(0x01); // Enable
+    delay(200);
+    digitalWrite(RST_PIN, LOW);
+}
+
+
+/**
+ * HIGH = busy
+ * LOW = idle
+ */
+void Waveshare_EPD::waitUntilIdle() {
+    while (digitalRead(BUSY_PIN) == HIGH) {
+        delay(100);
+    }
+    delay(200);
+}
+
+/**
+ * DC pin LOW for command
+ */
+void Waveshare_EPD::sendCommand(unsigned char command) {
+    digitalWrite(DC_PIN, LOW);
+    spiTransfer(command);
+}
+
+/**
+ * DC pin HIGH for data
+ */
+void Waveshare_EPD::sendData(unsigned char command) {
+    digitalWrite(DC_PIN, HIGH);
+    spiTransfer(command);
+}
+
+void Waveshare_EPD::spiTransfer(unsigned char data) {
+    digitalWrite(CS_PIN, LOW);
+    SPI.transfer(data);
+    digitalWrite(CS_PIN, HIGH);
+}
