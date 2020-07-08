@@ -24,11 +24,12 @@ class Waveshare_EPD  {
     public:
         Waveshare_EPD(void);
         ~Waveshare_EPD(void);
-        bool begin(void);
+        void begin(void);
         void clear(void);
         void reset(void);
         void sleep(void);
         void waitUntilIdle(void);
+        void wake(void);
 
     private:
         void sendCommand(unsigned char);

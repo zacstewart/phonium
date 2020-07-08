@@ -9,16 +9,20 @@ Waveshare_EPD::Waveshare_EPD() {
 Waveshare_EPD::~Waveshare_EPD() {
 }
 
-bool Waveshare_EPD::begin() {
+void Waveshare_EPD::begin() {
     // Set up hardware interface
     pinMode(CS_PIN, OUTPUT);
     pinMode(RST_PIN, OUTPUT);
     pinMode(DC_PIN, OUTPUT);
-    pinMode(BUSY_PIN, INPUT); 
+    pinMode(BUSY_PIN, INPUT);
 
     SPI.begin();
     SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
 
+    wake();
+}
+
+void Waveshare_EPD::wake() {
     // Initialize EPD
     reset();
     waitUntilIdle();
@@ -74,8 +78,6 @@ bool Waveshare_EPD::begin() {
     sendData(0x00);
 
     waitUntilIdle();
-
-    return true;
 }
 
 void Waveshare_EPD::clear() {

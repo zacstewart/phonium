@@ -16,9 +16,20 @@ extern "C" int main(void) {
     Serial.print("Build date: ");
     Serial.println(BUILD_DATE);
 #endif
-
+    Serial.println("Initializing");
     epd.begin();
+
+    Serial.println("Clearing");
     epd.clear();
+
+    Serial.println("Sleeping");
+    epd.sleep();
+
+    Serial.println("Trying to clear after waking");
+    epd.wake();
+    epd.clear();
+
+    Serial.println("Sleeping");
     epd.sleep();
 
     Serial.println("Done.");
