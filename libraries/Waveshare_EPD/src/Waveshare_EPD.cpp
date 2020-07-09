@@ -3,7 +3,14 @@
 
 #include "Waveshare_EPD.h"
 
-Waveshare_EPD::Waveshare_EPD() {
+Waveshare_EPD::Waveshare_EPD(int16_t width, int16_t height)
+    : Adafruit_GFX(width, height)
+    , width(width)
+    , height(height)
+{
+    this->image = (unsigned char *) malloc(200 * 200 / 8 * sizeof(unsigned char));
+    // Start out with a pure white image
+    memset(this->image, 0xFF, 200 * 200 / 8);
 }
 
 Waveshare_EPD::~Waveshare_EPD() {
@@ -41,42 +48,24 @@ void Waveshare_EPD::wake() {
     sendCommand(CMD_DATA_ENTRY_MODE);
     sendData(0b11); // Y increment, X increment
 
-    // Set RAM-X address start/end position
-    sendCommand(CMD_SET_RAM_X_POSITIONS);
-    sendData(0x00);
-    sendData(0x18);
-
-    // Set RAM-Y address start/end position
-    sendCommand(CMD_SET_RAM_Y_POSITIONS);
-    sendData(0xC7);
-    sendData(0x00);
-    sendData(0x00);
-    sendData(0x00);
-
     // Border waveform?
     sendCommand(0x3C);
     sendData(0x01);
 
+    // I don't even know
     sendCommand(0x18);
     sendData(0x80);
 
     // Load temperature and waveform setting?
     sendCommand(CMD_DISPLAY_UPDATE_CTRL_2);
     // 0xB1
+    // - Enable clock signal
     // - Load temperature value
     // - Load LUT with DISPLAY Mode 1
-    // - Disable clock signa
+    // - Disable clock signal
     sendData(0xB1);
 
     sendCommand(CMD_MASTER_ACTIVATION);
-
-    sendCommand(CMD_SET_RAM_X_ADDRESS_COUNTER);
-    sendData(0x00);
-
-    sendCommand(CMD_SET_RAM_Y_ADDRESS_COUNTER);
-    sendData(0xC7);
-    sendData(0x00);
-
     waitUntilIdle();
 }
 
@@ -84,23 +73,18 @@ void Waveshare_EPD::clear() {
     // TODO define these dims
     int w = 200 / 8;
     int h = 200;
+
+    setMemoryArea(0, 0, 200, 200);
+    setMemoryPointer(0, 0);
+
     sendCommand(CMD_WRITE_BW_RAM);
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
-            sendData(0xff);
+            sendData(0xFF);
         }
     }
 
-    sendCommand(CMD_DISPLAY_UPDATE_CTRL_2);
-    // 0xF7
-    // - Enable Analog
-    // - Load temperature value
-    // - DISPLAY with DISPLAY Mode 1
-    // - Disable Analog
-    // - Disable OSC
-    sendData(0xF7);
-    sendCommand(CMD_MASTER_ACTIVATION);
-    waitUntilIdle();
+    display();
 }
 
 void Waveshare_EPD::reset() {
@@ -149,4 +133,66 @@ void Waveshare_EPD::spiTransfer(unsigned char data) {
     digitalWrite(CS_PIN, LOW);
     SPI.transfer(data);
     digitalWrite(CS_PIN, HIGH);
+}
+
+
+void Waveshare_EPD::drawPixel(int16_t x, int16_t y, uint16_t color) {
+    if (x < 0 || x >= this->width || y < 0 || y >= this->height) {
+        return;
+    }
+    if (color) {
+        image[(x + y * this->width) / 8] |= 0x80 >> (x % 8);
+    } else {
+        image[(x + y * this->width) / 8] &= ~(0x80 >> (x % 8));
+    }
+}
+
+void Waveshare_EPD::setMemoryArea(int xStart, int yStart, int xEnd, int yEnd) {
+    // Set RAM-X address start/end position
+    sendCommand(CMD_SET_RAM_X_POSITIONS);
+    sendData((xStart >> 3) & 0xFF);
+    sendData((xEnd >> 3) & 0xFF);
+
+    // Set RAM-Y address start/end position
+    sendCommand(CMD_SET_RAM_Y_POSITIONS);
+    sendData(yStart & 0xFF);
+    sendData((yStart >> 8) & 0xFF);
+    sendData(yEnd & 0xFF);
+    sendData((yEnd >> 8) & 0xFF);
+}
+
+void Waveshare_EPD::setMemoryPointer(int x, int y) {
+    sendCommand(CMD_SET_RAM_X_ADDRESS_COUNTER);
+    sendData((x >> 3) & 0xFF);
+
+    sendCommand(CMD_SET_RAM_Y_ADDRESS_COUNTER);
+    sendData(y & 0xFF);
+    sendData((y >> 8) & 0xFF);
+    waitUntilIdle();
+}
+
+void Waveshare_EPD::writeMemory() {
+    // Set frame emory
+    setMemoryArea(0, 0, 200, 200);
+    setMemoryPointer(0, 0);
+    sendCommand(CMD_WRITE_BW_RAM);
+    for (int y = 0; y < 200; y++) {
+        for (int x = 0; x < 200 / 8; x++) {
+            sendData(image[x + y * (200 / 8)]);
+        }
+    }
+}
+
+void Waveshare_EPD::display() {
+    sendCommand(CMD_DISPLAY_UPDATE_CTRL_2);
+    // 0xF7
+    // - Enable clock signal
+    // - Enable Analog
+    // - Load temperature value
+    // - DISPLAY with DISPLAY Mode 1
+    // - Disable Analog
+    // - Disable OSC
+    sendData(0xF7);
+    sendCommand(CMD_MASTER_ACTIVATION);
+    waitUntilIdle();
 }
