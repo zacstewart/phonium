@@ -4,13 +4,7 @@
 #include "Waveshare_EPD.h"
 
 Waveshare_EPD::Waveshare_EPD(int16_t width, int16_t height)
-    : Adafruit_GFX(width, height)
-    , width(width)
-    , height(height)
 {
-    this->image = (unsigned char *) malloc(200 * 200 / 8 * sizeof(unsigned char));
-    // Start out with a pure white image
-    memset(this->image, 0xFF, 200 * 200 / 8);
 }
 
 Waveshare_EPD::~Waveshare_EPD() {
@@ -135,18 +129,6 @@ void Waveshare_EPD::spiTransfer(unsigned char data) {
     digitalWrite(CS_PIN, HIGH);
 }
 
-
-void Waveshare_EPD::drawPixel(int16_t x, int16_t y, uint16_t color) {
-    if (x < 0 || x >= this->width || y < 0 || y >= this->height) {
-        return;
-    }
-    if (color) {
-        image[(x + y * this->width) / 8] |= 0x80 >> (x % 8);
-    } else {
-        image[(x + y * this->width) / 8] &= ~(0x80 >> (x % 8));
-    }
-}
-
 void Waveshare_EPD::setMemoryArea(int xStart, int yStart, int xEnd, int yEnd) {
     // Set RAM-X address start/end position
     sendCommand(CMD_SET_RAM_X_POSITIONS);
@@ -171,7 +153,7 @@ void Waveshare_EPD::setMemoryPointer(int x, int y) {
     waitUntilIdle();
 }
 
-void Waveshare_EPD::writeMemory() {
+void Waveshare_EPD::writeMemory(unsigned char *image) {
     // Set frame emory
     setMemoryArea(0, 0, 200, 200);
     setMemoryPointer(0, 0);

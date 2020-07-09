@@ -1,8 +1,10 @@
 #include <Arduino.h>
 
 #include "Waveshare_EPD.h"
+#include "Waveshare_GFX.h"
 
 Waveshare_EPD epd = Waveshare_EPD(200, 200);
+Waveshare_GFX gfx = Waveshare_GFX(&epd, 200, 200);
 
 extern "C" int main(void) {
 #ifdef USING_MAKEFILE
@@ -22,27 +24,19 @@ extern "C" int main(void) {
     Serial.println("Clearing");
     epd.clear();
 
-    Serial.println("Sleeping");
-    epd.sleep();
-
-    Serial.println("Trying to clear after waking");
-    epd.wake();
-    epd.clear();
-
     Serial.println("Writing Hello epd");
 
-    epd.fillRect(50, 50, 100, 100, EPD_WHITE);
-    epd.writeMemory();
-    epd.display();
+    gfx.fillRect(50, 50, 100, 100, EPD_BLACK);
+    gfx.writeMemory();
 
-    epd.fillRect(25, 25, 100, 100, EPD_BLACK);
-    epd.writeMemory();
-    epd.display();
+    gfx.fillRect(25, 25, 100, 100, EPD_WHITE);
+    gfx.writeMemory();
 
-    epd.setCursor(50, 50);
-    epd.setTextColor(EPD_WHITE);
-    epd.print("Hello EPD");
-    epd.writeMemory();
+    gfx.setCursor(50, 50);
+    gfx.setTextColor(EPD_BLACK);
+    gfx.print("Hello EPD");
+    gfx.writeMemory();
+
     epd.display();
 
     Serial.println("Sleeping");
