@@ -26,17 +26,27 @@ extern "C" int main(void) {
 
     Serial.println("Writing Hello epd");
 
-    gfx.fillRect(50, 50, 100, 100, EPD_BLACK);
+    gfx.fillRect(65, 65, 100, 100, EPD_BLACK);
     gfx.writeMemory();
 
-    gfx.fillRect(25, 25, 100, 100, EPD_WHITE);
+    gfx.fillRect(40, 40, 100, 100, EPD_WHITE);
+    gfx.writeMemory();
+
+    gfx.fillRect(35, 35, 100, 100, EPD_BLACK);
     gfx.writeMemory();
 
     gfx.setCursor(50, 50);
-    gfx.setTextColor(EPD_BLACK);
+    gfx.setTextColor(EPD_WHITE);
     gfx.print("Hello EPD");
     gfx.writeMemory();
 
+    epd.display();
+
+    gfx.fillRect(0, 0, 5, 5, EPD_BLACK);
+    gfx.fillRect(195, 0, 5, 5, EPD_BLACK);
+    gfx.fillRect(195, 195, 5, 5, EPD_BLACK);
+    gfx.fillRect(0, 195, 5, 5, EPD_BLACK);
+    gfx.writeMemory();
     epd.display();
 
     Serial.println("Sleeping");

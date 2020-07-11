@@ -5,9 +5,12 @@
 #include "Waveshare_EPD.h"
 
 class Waveshare_GFX : public Adafruit_GFX {
-    int16_t width, height;
-    unsigned char *image;
     Waveshare_EPD *epd;
+    // Display dimensions
+    int16_t width, height;
+    // Memory area to writeMemory to
+    int16_t xStart, yStart, xEnd, yEnd;
+    unsigned char *image;
 
     public:
         Waveshare_GFX(Waveshare_EPD *, int16_t, int16_t);

@@ -4,6 +4,8 @@
 #include "Waveshare_EPD.h"
 
 Waveshare_EPD::Waveshare_EPD(int16_t width, int16_t height)
+    : width(width)
+    , height(height)
 {
 }
 
@@ -153,14 +155,39 @@ void Waveshare_EPD::setMemoryPointer(int x, int y) {
     waitUntilIdle();
 }
 
-void Waveshare_EPD::writeMemory(unsigned char *image) {
-    // Set frame emory
-    setMemoryArea(0, 0, 200, 200);
-    setMemoryPointer(0, 0);
+void Waveshare_EPD::writeMemory(
+    unsigned char *image,
+    int16_t xStart,
+    int16_t yStart,
+    int16_t xEnd,
+    int16_t yEnd
+) {
+    if (
+        xStart < 0 ||
+        yStart < 0 ||
+        xEnd >= width ||
+        yEnd >= height
+    ) {
+        return;
+    }
+
+    // X coordinate must be multiple of 8 or we drop the last 3 bits
+    xStart &= 0xF8;
+    xEnd &= 0xF8;
+
+    setMemoryArea(xStart, yStart, xEnd, yEnd);
+    setMemoryPointer(xStart, yStart);
     sendCommand(CMD_WRITE_BW_RAM);
-    for (int y = 0; y < 200; y++) {
-        for (int x = 0; x < 200 / 8; x++) {
-            sendData(image[x + y * (200 / 8)]);
+
+    // Recalculate x coordinates for indexing into the image array The compiler
+    // might optimize these divisions away if I left them inline in the loop,
+    // but I'm not sure.
+    xStart /= 8;
+    xEnd /= 8;
+    int stride = width / 8;
+    for (int y = yStart; y <= yEnd; y++) {
+        for (int x = xStart; x <= xEnd; x++) {
+            sendData(image[x + y * stride]);
         }
     }
 }

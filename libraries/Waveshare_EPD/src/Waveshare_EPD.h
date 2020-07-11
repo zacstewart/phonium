@@ -25,6 +25,8 @@
 #define CMD_SET_RAM_Y_ADDRESS_COUNTER   0x4F
 
 class Waveshare_EPD {
+    int16_t width, height;
+
     public:
         Waveshare_EPD(int16_t, int16_t);
         ~Waveshare_EPD(void);
@@ -35,7 +37,7 @@ class Waveshare_EPD {
         void sleep(void);
         void waitUntilIdle(void);
         void wake(void);
-        void writeMemory(unsigned char *);
+        void writeMemory(unsigned char *, int16_t, int16_t, int16_t, int16_t);
 
     private:
         void sendCommand(unsigned char);
