@@ -6,6 +6,7 @@
 Waveshare_EPD::Waveshare_EPD(int16_t width, int16_t height)
     : width(width)
     , height(height)
+    , displayMode(DisplayMode1)
 {
 }
 
@@ -54,13 +55,7 @@ void Waveshare_EPD::wake() {
 
     // Load temperature and waveform setting?
     sendCommand(CMD_DISPLAY_UPDATE_CTRL_2);
-    // 0xB1
-    // - Enable clock signal
-    // - Load temperature value
-    // - Load LUT with DISPLAY Mode 1
-    // - Disable clock signal
-    sendData(0xB1);
-
+    sendData(DisplayMode1);
     sendCommand(CMD_MASTER_ACTIVATION);
     waitUntilIdle();
 }
@@ -192,16 +187,25 @@ void Waveshare_EPD::writeMemory(
     }
 }
 
+void Waveshare_EPD::displayModeFull() {
+    sendCommand(CMD_DISPLAY_UPDATE_CTRL_2);
+    sendData(LUT_DISPLAY_MODE_1);
+    sendCommand(CMD_MASTER_ACTIVATION);
+    waitUntilIdle();
+    displayMode = DisplayMode1;
+}
+
+void Waveshare_EPD::displayModePartial() {
+    sendCommand(CMD_DISPLAY_UPDATE_CTRL_2);
+    sendData(LUT_DISPLAY_MODE_2);
+    sendCommand(CMD_MASTER_ACTIVATION);
+    waitUntilIdle();
+    displayMode = DisplayMode2;
+}
+
 void Waveshare_EPD::display() {
     sendCommand(CMD_DISPLAY_UPDATE_CTRL_2);
-    // 0xF7
-    // - Enable clock signal
-    // - Enable Analog
-    // - Load temperature value
-    // - DISPLAY with DISPLAY Mode 1
-    // - Disable Analog
-    // - Disable OSC
-    sendData(0xF7);
+    sendData(displayMode);
     sendCommand(CMD_MASTER_ACTIVATION);
     waitUntilIdle();
 }

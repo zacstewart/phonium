@@ -42,12 +42,16 @@ extern "C" int main(void) {
 
     epd.display();
 
-    gfx.fillRect(0, 0, 5, 5, EPD_BLACK);
-    gfx.fillRect(195, 0, 5, 5, EPD_BLACK);
-    gfx.fillRect(195, 195, 5, 5, EPD_BLACK);
-    gfx.fillRect(0, 195, 5, 5, EPD_BLACK);
-    gfx.writeMemory();
-    epd.display();
+    Serial.println("Partial refresh");
+    epd.displayModePartial();
+
+    gfx.setCursor(0, 0);
+    gfx.setTextColor(EPD_BLACK);
+    for (char i = 'A'; i <= 'z'; i++) {
+        gfx.print(i);
+        gfx.writeMemory();
+        epd.display();
+    }
 
     Serial.println("Sleeping");
     epd.sleep();

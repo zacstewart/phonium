@@ -16,12 +16,31 @@ Waveshare_GFX::Waveshare_GFX(Waveshare_EPD *epd, int16_t width, int16_t height)
     memset(this->image, 0xFF, imageSize);
 }
 
+/**
+ * Writes the canvas image into the memory of the EPD.
+ */
+void Waveshare_GFX::writeMemory() {
+    epd->writeMemory(image, 0, 0, width - 1, height - 1);
+}
+
+/*******************************************************************************
+ *
+ * Adafruit_GFX implementation
+ *
+ ******************************************************************************/
+
+/**
+ * Draws a single pixel onto the canvas area. It does not interact with the
+ * EPD immediately; you will need to call `writeMemory` to transfer memory
+ * and then call `display` on the EPD driver.
+ */
 void Waveshare_GFX::drawPixel(int16_t x, int16_t y, uint16_t color) {
     if (x < 0 || x >= width || y < 0 || y >= height) {
         return;
     }
 
-    // Keep track of the memory area that we need to copy into frame memory
+    // Keep track of the canvas area that has changed. This will help us
+    // determine if it would be optimal to do a partial or full refresh
     if (xStart == -1 || x < xStart) {
         xStart = x;
     }
@@ -41,14 +60,4 @@ void Waveshare_GFX::drawPixel(int16_t x, int16_t y, uint16_t color) {
     } else {
         image[(x + y * width) / 8] &= ~(0x80 >> (x % 8));
     }
-}
-
-// TODO: optimize only writing the portion of memory that has changed since
-// last write
-void Waveshare_GFX::writeMemory() {
-    epd->writeMemory(image, xStart, yStart, xEnd, yEnd);
-    xStart = -1;
-    yStart = -1;
-    xEnd = -1;
-    yEnd = -1;
 }
