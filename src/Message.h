@@ -9,12 +9,7 @@
 #include "Navigator.h"
 #include "Controller.h"
 
-typedef struct SmsMessage {
-  uint8_t index;
-  char message[MESSAGE_LENGTH + 1];
-  // +1 for null terminator
-  char sender[NUMBER_LENGTH + 1];
-} SmsMessage;
+#include "Messaging.h"
 
 class Message : public Controller {
   using Controller::Controller;

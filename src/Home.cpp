@@ -28,8 +28,6 @@ void Home::handleKeyInput(KeyState state, KeypadEvent key) {
     case PRESSED:
       switch (key) {
         case 'A':
-          ((Messages *) navigator->getController(MESSAGES))
-            ->loadMessages();
           navigator->pushController(MESSAGES);
           return;
         case 'B':

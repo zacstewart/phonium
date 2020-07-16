@@ -4,6 +4,8 @@
 #include <HardwareSerial.h>
 #include <Keypad.h>
 
+#include "Messaging.h"
+
 #include "Common.h"
 #include "Navigator.h"
 #include "Controller.h"
@@ -43,6 +45,12 @@ Adafruit_SharpMem display(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_HEIGHT, DISPL
 
 HardwareSerial *fonaSerial = &Serial1;
 Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
+
+/**
+ * Services
+ */
+
+Messaging messaging = Messaging(&fona);
 
 /**
  * Controllers
@@ -106,6 +114,11 @@ void setup() {
   fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
   fona.setAudio(FONA_EXTAUDIO);
   fona.setMicVolume(FONA_EXTAUDIO, 10);
+
+  messaging.loadMessages();
+
+  // TODO: replace this with a constructor of some kind
+  messages.setMessaging(&messaging);
 
   navigator.setController(CALL, &call);
   navigator.setController(COMPOSE_MESSAGE, &composeMessage);

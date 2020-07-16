@@ -3,7 +3,7 @@
 
 Message::Message(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona)
 : Controller(navigator, display, keypad, fona)
-, message(SmsMessage { 0 })
+, message(SmsMessage { 0, NULL })
 {
 }
 
@@ -52,6 +52,8 @@ void Message::update() {
 void Message::setMessage(uint8_t index) {
   message.index = index;
   uint16_t messageLen;
+  message.message = (char *) malloc(sizeof(char) * MESSAGE_LENGTH + 1);
   fona->readSMS(index, message.message, MESSAGE_LENGTH, &messageLen);
+  realloc(message.message, sizeof(char) * messageLen);
   fona->getSMSSender(index, message.sender, NUMBER_LENGTH);
 }
