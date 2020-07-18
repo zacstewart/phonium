@@ -3,8 +3,8 @@
 #include "Call.h"
 #include "IncomingCall.h"
 
-IncomingCall::IncomingCall(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(navigator, display, keypad, fona), number("")
+IncomingCall::IncomingCall(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, display, keypad, fona), number("")
 {
 }
 

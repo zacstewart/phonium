@@ -6,12 +6,14 @@
 #include <Keypad.h>
 
 #include "Common.h"
+#include "Services.h"
 
 // Forward declaration
 class Navigator;
 
 class Controller {
     protected:
+        Services *services;
         Navigator *navigator;
         Adafruit_SharpMem *display;
         Keypad *keypad;
@@ -21,7 +23,7 @@ class Controller {
         void setRightNavigationLabel(char *);
 
     public:
-        Controller(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        Controller(Services *, Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
 
         /**
          * When this controller takes control

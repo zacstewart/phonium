@@ -6,8 +6,8 @@
 // TODO: this needs to be based on how wide the screen is
 #define MESSAGE_PREVIEW_LENGTH 12
 
-Messages::Messages(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(navigator, display, keypad, fona),
+Messages::Messages(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, display, keypad, fona),
     numMessages(0),
     curMessage(0)
 {

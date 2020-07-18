@@ -14,7 +14,7 @@ class Messages : public Controller {
     public:
         using Controller::Controller;
 
-        Messages(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        Messages(Services *, Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
         /**
          * TODO: replace this with constructor
          */

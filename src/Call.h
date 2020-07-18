@@ -16,7 +16,7 @@ class Call : public Controller {
     public:
         using Controller::Controller;
 
-        Call(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        Call(Services *, Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();

@@ -26,8 +26,8 @@ const CharSet KEY_TO_CHARS[12] = {
     {1, "#", "#"}
 };
 
-ComposeMessage::ComposeMessage(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(navigator, display, keypad, fona),
+ComposeMessage::ComposeMessage(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, display, keypad, fona),
     lastKey(NO_KEY),
     lastCharSet(NO_CHAR_SET),
     lastInputAt(0),

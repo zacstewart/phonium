@@ -1,8 +1,8 @@
 #include "ComposeMessage.h"
 #include "Message.h"
 
-Message::Message(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(navigator, display, keypad, fona),
+Message::Message(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, display, keypad, fona),
     message(SmsMessage { 0, NULL })
 {
 }

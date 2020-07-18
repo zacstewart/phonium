@@ -58,14 +58,14 @@ Services services = Services(messaging);
  */
 Navigator navigator = Navigator();
 
-Call call = Call(&navigator, &display, &keypad, &fona);
-ComposeMessage composeMessage = ComposeMessage(&navigator, &display, &keypad, &fona);
-Dialer dialer = Dialer(&navigator, &display, &keypad, &fona);
-Home home = Home(&navigator, &display, &keypad, &fona);
-IncomingCall incomingCall = IncomingCall(&navigator, &display, &keypad, &fona);
-Message message = Message(&navigator, &display, &keypad, &fona);
-Messages messages = Messages(&navigator, &display, &keypad, &fona);
-Menu menu = Menu(&navigator, &display, &keypad, &fona);
+Call call = Call(&services, &navigator, &display, &keypad, &fona);
+ComposeMessage composeMessage = ComposeMessage(&services, &navigator, &display, &keypad, &fona);
+Dialer dialer = Dialer(&services, &navigator, &display, &keypad, &fona);
+Home home = Home(&services, &navigator, &display, &keypad, &fona);
+IncomingCall incomingCall = IncomingCall(&services, &navigator, &display, &keypad, &fona);
+Message message = Message(&services, &navigator, &display, &keypad, &fona);
+Messages messages = Messages(&services, &navigator, &display, &keypad, &fona);
+Menu menu = Menu(&services, &navigator, &display, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {

@@ -1,6 +1,7 @@
 #include "Controller.h"
 
-Controller::Controller(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
+Controller::Controller(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
+    services(services),
     navigator(navigator),
     display(display),
     keypad(keypad),

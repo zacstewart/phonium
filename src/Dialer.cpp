@@ -6,8 +6,8 @@
 #define CHAR_WIDTH 5 * FONT_SIZE
 #define CHAR_HEIGHT 8 * FONT_SIZE
 
-Dialer::Dialer(Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(navigator, display, keypad, fona),
+Dialer::Dialer(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, display, keypad, fona),
     lastKey(NO_KEY),
     number(""),
     cur(0)
