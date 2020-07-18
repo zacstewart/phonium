@@ -17,4 +17,11 @@
  */
 char * formatTime(unsigned long, bool = true);
 
+/**
+ * Copies `num` bytes from `source` to `destination` and terminates
+ * `destination` with a null byte at `num`. `destination` must have
+ * room for `num` bytes.
+ **/
+void *substr(char *, const char *, int);
+
 #endif

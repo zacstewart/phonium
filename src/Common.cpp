@@ -1,3 +1,4 @@
+#include <string.h>
 #include "Arduino.h"
 
 char * formatTime(unsigned long t, bool includeSec = true) {
@@ -11,4 +12,14 @@ char * formatTime(unsigned long t, bool includeSec = true) {
 
     sprintf(str, "%02d:%02d:%02d", h, m, s);
     return str;
+}
+
+void *substr(char *destination, const char *source, int num) {
+    size_t len = strlen(source);
+    if (len < num) {
+        num = len;
+    }
+    memcpy(destination, source, num);
+    destination[num] = '\0';
+    return destination;
 }
