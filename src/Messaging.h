@@ -6,59 +6,53 @@
 #include "Common.h"
 
 typedef struct SmsMessage {
-  uint8_t index;
-  char *message;
-  // +1 for null terminator
-  char sender[NUMBER_LENGTH + 1];
+    uint8_t index;
+    char *message;
+    // +1 for null terminator
+    char sender[NUMBER_LENGTH + 1];
 } SmsMessage;
 
 class Element {
-  public:
-    SmsMessage *value;
-    Element *next;
+    public:
+        SmsMessage *value;
+        Element *next;
 
-    Element(SmsMessage *);
-
-  private:
+        Element(SmsMessage *);
 };
 
 class List {
-  public:
-    Element *head;
-    size_t length;
+    public:
+        Element *head;
+        size_t length;
 
-    List();
+        List();
 
-    void pushLeft(SmsMessage *);
-
-  private:
+        void pushLeft(SmsMessage *);
 };
 
 /**
  * Service to encapsulate SMS messaging
  */
 class Messaging {
+    public:
+        List *messages;
 
-  public:
-    List *messages;
+        Messaging(Adafruit_FONA *);
 
-    Messaging(Adafruit_FONA *);
+        /**
+         * Loads all messages out of the SIM into memory
+         */
+        void loadMessages();
 
-    /**
-     * Loads all messages out of the SIM into memory
-     */
-    void loadMessages();
+    private:
+        Adafruit_FONA *fona;
 
-  private:
-    Adafruit_FONA *fona;
+        /**
+         * Reads SMS message from the SIM and loads it onto the provided struct
+         */
+        void readSms(uint8_t, SmsMessage *);
 
-    /**
-     * Reads SMS message from the SIM and loads it onto the provided struct
-     */
-    void readSms(uint8_t, SmsMessage *);
-
-    int8_t numSms();
-
+        int8_t numSms();
 };
 
 #endif

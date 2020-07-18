@@ -10,26 +10,26 @@
 #include "Controller.h"
 
 class Dialer : public Controller {
-  using Controller::Controller;
+    public:
+        using Controller::Controller;
 
-  char lastKey;
-  char number[NUMBER_LENGTH + 1];
-  uint8_t cur;
+        Dialer(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        void begin();
+        void handleKeyInput(KeyState state, KeypadEvent key);
+        void update();
 
-  public:
-    Dialer(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
-    void begin();
-    void handleKeyInput(KeyState state, KeypadEvent key);
-    void update();
+        void setNumber(char *);
 
-    void setNumber(char *);
+    private:
+        char lastKey;
+        char number[NUMBER_LENGTH + 1];
+        uint8_t cur;
 
-  private:
-    void backspace();
-    void callNumber();
-    void draw();
-    void reset();
-    void textNumber();
+        void backspace();
+        void callNumber();
+        void draw();
+        void reset();
+        void textNumber();
 };
 
 #endif

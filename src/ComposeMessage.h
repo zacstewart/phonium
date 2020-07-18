@@ -10,30 +10,30 @@
 #include "Controller.h"
 
 class ComposeMessage : public Controller {
-  using Controller::Controller;
+    public:
+        using Controller::Controller;
 
-  char lastKey;
-  uint8_t lastCharSet;
-  unsigned long lastInputAt;
-  uint8_t curChar;
-  char number[NUMBER_LENGTH + 1];
-  char message[MESSAGE_LENGTH + 1];
-  uint8_t cur;
+        ComposeMessage(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        void begin();
+        void handleKeyInput(KeyState state, KeypadEvent key);
+        void update();
 
-  public:
-    ComposeMessage(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
-    void begin();
-    void handleKeyInput(KeyState state, KeypadEvent key);
-    void update();
+        void setNumber(char *);
 
-    void setNumber(char *);
+    private:
+        char lastKey;
+        uint8_t lastCharSet;
+        unsigned long lastInputAt;
+        uint8_t curChar;
+        char number[NUMBER_LENGTH + 1];
+        char message[MESSAGE_LENGTH + 1];
+        uint8_t cur;
 
-  private:
-    void backspace();
-    void draw();
-    void handleTextEntry(uint8_t);
-    void reset();
-    void sendMessage();
+        void backspace();
+        void draw();
+        void handleTextEntry(uint8_t);
+        void reset();
+        void sendMessage();
 };
 
 #endif

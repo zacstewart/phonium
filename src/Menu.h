@@ -6,12 +6,12 @@
 #include "Controller.h"
 
 class Menu : public Controller {
-  using Controller::Controller;
+    public:
+        using Controller::Controller;
 
-  public:
-    void begin();
-    void handleKeyInput(KeyState state, KeypadEvent key);
-    void update();
+        void begin();
+        void handleKeyInput(KeyState state, KeypadEvent key);
+        void update();
 };
 
 #endif

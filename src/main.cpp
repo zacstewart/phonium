@@ -32,10 +32,10 @@
 #define FONA_BAUD_RATE 115200
 
 byte keys[KEYPAD_ROWS][KEYPAD_COLS] = {
-  {'1', '2', '3', 'A'},
-  {'4', '5', '6', 'B'},
-  {'7', '8', '9', 'C'},
-  {'*', '0', '#', 'D'}
+    {'1', '2', '3', 'A'},
+    {'4', '5', '6', 'B'},
+    {'7', '8', '9', 'C'},
+    {'*', '0', '#', 'D'}
 };
 byte rowPins[KEYPAD_ROWS] = {18, 19, 20, 21};
 byte colPins[KEYPAD_COLS] = {17, 16, 15, 14};
@@ -68,75 +68,75 @@ Menu menu = Menu(&navigator, &display, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {
-  setup();
-  while (1) {
-    loop();
-    yield();
-  }
+    setup();
+    while (1) {
+        loop();
+        yield();
+    }
 }
 #endif
 
 void handleKeyInput(KeypadEvent key) {
-  navigator.currentController()->handleKeyInput(keypad.getState(), key);
+    navigator.currentController()->handleKeyInput(keypad.getState(), key);
 }
 
 void setup() {
 #ifdef DEBUG
-  while (!Serial);
+    while (!Serial);
 #endif
 
-  Serial.begin(115200);
+    Serial.begin(115200);
 
 #ifdef DEBUG
-  Serial.print("Build date: ");
-  Serial.println(BUILD_DATE);
+    Serial.print("Build date: ");
+    Serial.println(BUILD_DATE);
 #endif
 
-  Serial.println(F("Phonium starting"));
+    Serial.println(F("Phonium starting"));
 
-  keypad.addEventListener(handleKeyInput);
+    keypad.addEventListener(handleKeyInput);
 
-  Serial.println(F("Starting display"));
-  display.begin();
-  display.setRotation(DISPLAY_ROTATION);
-  display.clearDisplay();
-  display.setCursor(0, 0);
-  display.setTextColor(COLOR_BLACK);
-  display.setTextSize(2);
-  display.print("Starting");
-  display.refresh();
+    Serial.println(F("Starting display"));
+    display.begin();
+    display.setRotation(DISPLAY_ROTATION);
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.setTextColor(COLOR_BLACK);
+    display.setTextSize(2);
+    display.print("Starting");
+    display.refresh();
 
-  Serial.println(F("Starting cellular"));
-  fonaSerial->begin(FONA_BAUD_RATE);
-  if (!fona.begin(*fonaSerial)) {
-    Serial.println(F("Couldn't find FONA"));
-  }
-  fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
-  fona.setAudio(FONA_EXTAUDIO);
-  fona.setMicVolume(FONA_EXTAUDIO, 10);
+    Serial.println(F("Starting cellular"));
+    fonaSerial->begin(FONA_BAUD_RATE);
+    if (!fona.begin(*fonaSerial)) {
+        Serial.println(F("Couldn't find FONA"));
+    }
+    fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
+    fona.setAudio(FONA_EXTAUDIO);
+    fona.setMicVolume(FONA_EXTAUDIO, 10);
 
-  messaging.loadMessages();
+    messaging.loadMessages();
 
-  // TODO: replace this with a constructor of some kind
-  messages.setMessaging(&messaging);
+    // TODO: replace this with a constructor of some kind
+    messages.setMessaging(&messaging);
 
-  navigator.setController(CALL, &call);
-  navigator.setController(COMPOSE_MESSAGE, &composeMessage);
-  navigator.setController(DIALER, &dialer);
-  navigator.setController(INCOMING_CALL, &incomingCall);
-  navigator.setController(HOME, &home);
-  navigator.setController(MESSAGES, &messages);
-  navigator.setController(MESSAGE, &message);
-  navigator.setController(MENU, &menu);
+    navigator.setController(CALL, &call);
+    navigator.setController(COMPOSE_MESSAGE, &composeMessage);
+    navigator.setController(DIALER, &dialer);
+    navigator.setController(INCOMING_CALL, &incomingCall);
+    navigator.setController(HOME, &home);
+    navigator.setController(MESSAGES, &messages);
+    navigator.setController(MESSAGE, &message);
+    navigator.setController(MENU, &menu);
 
-  Serial.println(F("Phonium ready"));
-  navigator.replaceController(HOME);
+    Serial.println(F("Phonium ready"));
+    navigator.replaceController(HOME);
 }
 
 void loop() {
-  if (fona.incomingCallNumber(incomingCall.number)) {
-    navigator.pushController(INCOMING_CALL);
-  }
-  keypad.getKeys();
-  navigator.currentController()->update();
+    if (fona.incomingCallNumber(incomingCall.number)) {
+        navigator.pushController(INCOMING_CALL);
+    }
+    keypad.getKeys();
+    navigator.currentController()->update();
 }

@@ -13,25 +13,25 @@
  * This controller is for ongoing calls, incoming or outgoing.
  */
 class Call : public Controller {
-  using Controller::Controller;
+    public:
+        using Controller::Controller;
 
-  char lastKey;
-  char number[NUMBER_LENGTH + 1];
-  unsigned long callStart;
+        Call(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        void begin();
+        void handleKeyInput(KeyState state, KeypadEvent key);
+        void update();
 
-  public:
-    Call(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
-    void begin();
-    void handleKeyInput(KeyState state, KeypadEvent key);
-    void update();
+        Call *setNumber(char *);
+        Call *answerCall();
+        Call *initiateCall();
+        void hangUp();
 
-    Call *setNumber(char *);
-    Call *answerCall();
-    Call *initiateCall();
-    void hangUp();
+    private:
+        char lastKey;
+        char number[NUMBER_LENGTH + 1];
+        unsigned long callStart;
 
-  private:
-    void callEnded();
+        void callEnded();
 };
 
 #endif

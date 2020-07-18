@@ -12,19 +12,18 @@
 #include "Messaging.h"
 
 class Message : public Controller {
-  using Controller::Controller;
+    public:
+        using Controller::Controller;
 
-  SmsMessage message;
+        Message(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        void begin();
+        void handleKeyInput(KeyState state, KeypadEvent key);
+        void update();
 
-  public:
-    Message(Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
-    void begin();
-    void handleKeyInput(KeyState state, KeypadEvent key);
-    void update();
+        void setMessage(uint8_t);
 
-    void setMessage(uint8_t);
-
-  private:
+    private:
+        SmsMessage message;
 };
 
 #endif
