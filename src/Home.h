@@ -2,7 +2,6 @@
 #define HOME 0
 
 #include "Common.h"
-#include "Navigator.h"
 #include "Controller.h"
 
 class Home : public Controller {

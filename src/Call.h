@@ -5,7 +5,6 @@
 #include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 
-#include "Common.h"
 #include "Controller.h"
 #include "Dialer.h"
 

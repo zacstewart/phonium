@@ -6,8 +6,8 @@
 #include <Adafruit_FONA.h>
 
 #include "Common.h"
-#include "Navigator.h"
 #include "Controller.h"
+#include "Navigator.h"
 
 class IncomingCall : public Controller {
     public:
