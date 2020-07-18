@@ -13,11 +13,12 @@ Messages::Messages(Navigator *navigator, Adafruit_SharpMem *display, Keypad *key
 {
 }
 
-void Messages::setMessaging(Messaging *messaging) {
-    this->messaging = messaging;
+void Messages::setServices(Services *services) {
+    this->services = services;
 }
 
 void Messages::begin() {
+    Messaging *messaging = services->getMessaging();
     numMessages = messaging->messages->length;
     curMessage = messaging->messages->head->value->index;
     draw();
@@ -66,7 +67,7 @@ void Messages::draw() {
 
     char preview[MESSAGE_PREVIEW_LENGTH + 1];
 
-
+    Messaging *messaging = services->getMessaging();
     Element *it = messaging->messages->head;
     while(it) {
         if (it->value->index == curMessage) {

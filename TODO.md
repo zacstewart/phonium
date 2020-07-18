@@ -1,8 +1,10 @@
+# TODO
+
 - [x] Write display driver for EPD
 - [x] Normalize C++ formatting
 - [x] Move Helper into Common
 - [ ] Create Services container
-  - [ ] Put Messaging service into Services
+  - [x] Put Messaging service into Services
   - [ ] Construct all Controllers with Services
   - [ ] Put all peripheral interfaces into Services
     - [ ] Display

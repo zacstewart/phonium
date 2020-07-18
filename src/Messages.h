@@ -8,7 +8,7 @@
 #include "Common.h"
 #include "Navigator.h"
 #include "Controller.h"
-#include "Messaging.h"
+#include "Services.h"
 
 class Messages : public Controller {
     public:
@@ -18,13 +18,13 @@ class Messages : public Controller {
         /**
          * TODO: replace this with constructor
          */
-        void setMessaging(Messaging *);
+        void setServices(Services *);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();
 
     private:
-        Messaging *messaging;
+        Services *services;
         int8_t numMessages;
         uint8_t curMessage;
 

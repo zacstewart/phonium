@@ -5,10 +5,11 @@
 #include <Keypad.h>
 
 #include "Messaging.h"
+#include "Services.h"
 
 #include "Common.h"
-#include "Navigator.h"
 #include "Controller.h"
+#include "Navigator.h"
 
 #include "Call.h"
 #include "ComposeMessage.h"
@@ -49,8 +50,8 @@ Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
 /**
  * Services
  */
-
 Messaging messaging = Messaging(&fona);
+Services services = Services(messaging);
 
 /**
  * Controllers
@@ -115,10 +116,10 @@ void setup() {
     fona.setAudio(FONA_EXTAUDIO);
     fona.setMicVolume(FONA_EXTAUDIO, 10);
 
-    messaging.loadMessages();
+    services.getMessaging()->loadMessages();
 
     // TODO: replace this with a constructor of some kind
-    messages.setMessaging(&messaging);
+    messages.setServices(&services);
 
     navigator.setController(CALL, &call);
     navigator.setController(COMPOSE_MESSAGE, &composeMessage);

@@ -37,6 +37,7 @@ class Messaging {
     public:
         List *messages;
 
+        // TODO: this should take ownership of FONA and loan it out
         Messaging(Adafruit_FONA *);
 
         /**
