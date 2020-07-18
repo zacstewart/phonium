@@ -51,7 +51,7 @@ Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
  * Services
  */
 Messaging messaging = Messaging(&fona);
-Services services = Services(messaging);
+Services services = Services(display, messaging);
 
 /**
  * Controllers

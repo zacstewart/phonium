@@ -1,6 +1,6 @@
 #include "Services.h"
 
-Services::Services(Messaging messaging):
+Services::Services(Adafruit_SharpMem display, Messaging messaging):
     messaging(messaging)
 {
 }
