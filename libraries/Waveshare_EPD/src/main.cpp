@@ -6,6 +6,37 @@
 Waveshare_EPD epd = Waveshare_EPD(200, 200);
 Waveshare_GFX gfx = Waveshare_GFX(&epd, 200, 200);
 
+void testOptimizedWriteMemory() {
+    Serial.println("Writing entire memory in one block");
+    int start = millis();
+    for (int i = 0; i < 10; i++) {
+        gfx.fillRect(0, 0, 5, 5, EPD_BLACK);
+        gfx.fillRect(195, 0, 5, 5, EPD_BLACK);
+        gfx.fillRect(195, 195, 5, 5, EPD_BLACK);
+        gfx.fillRect(0, 195, 5, 5, EPD_BLACK);
+        gfx.writeMemory();
+    }
+    int duration = millis() - start;
+    Serial.print("Took ");
+    Serial.println(duration);
+
+    Serial.println("Writing minimal amounts of memory necessary");
+    start = millis();
+    for (int i = 0; i < 10; i++) {
+        gfx.fillRect(0, 0, 5, 5, EPD_BLACK);
+        gfx.writeMemory();
+        gfx.fillRect(195, 0, 5, 5, EPD_BLACK);
+        gfx.writeMemory();
+        gfx.fillRect(195, 195, 5, 5, EPD_BLACK);
+        gfx.writeMemory();
+        gfx.fillRect(0, 195, 5, 5, EPD_BLACK);
+        gfx.writeMemory();
+    }
+    duration = millis() - start;
+    Serial.print("Took ");
+    Serial.println(duration);
+}
+
 extern "C" int main(void) {
 #ifdef USING_MAKEFILE
 #ifdef DEBUG
