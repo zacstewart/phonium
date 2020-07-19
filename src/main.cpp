@@ -1,5 +1,4 @@
 #include <Adafruit_FONA.h>
-#include <Adafruit_GFX.h>
 #include <Adafruit_SharpMem.h>
 #include <HardwareSerial.h>
 #include <Keypad.h>
