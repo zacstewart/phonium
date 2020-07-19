@@ -4,7 +4,7 @@
 #include "Call.h"
 #include "IncomingCall.h"
 
-IncomingCall::IncomingCall(Services &services, Navigator *navigator):
+IncomingCall::IncomingCall(Services &services, Navigator &navigator):
     Controller(services, navigator),
     number("")
 {
@@ -46,7 +46,7 @@ void IncomingCall::handleKeyInput(KeyState state, KeypadEvent key) {
 void IncomingCall::update() {
     switch (services.getFona().getCallStatus()) {
         case FONA_CALL_READY: // Stopped ringing
-            navigator->popController();
+            navigator.popController();
             break;
         case FONA_CALL_FAILED:
         case FONA_CALL_UNKNOWN:
@@ -58,9 +58,9 @@ void IncomingCall::update() {
 }
 
 void IncomingCall::answerCall() {
-    Call *call = (Call *) navigator->getController(CALL);
+    Call *call = (Call *) navigator.getController(CALL);
     call->setNumber(number)->answerCall();
-    navigator->replaceController(CALL);
+    navigator.replaceController(CALL);
 }
 
 void IncomingCall::hangUp() {

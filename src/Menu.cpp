@@ -22,7 +22,7 @@ void Menu::handleKeyInput(KeyState state, KeypadEvent key) {
         case PRESSED:
             switch (key) {
                 case 'A':
-                    navigator->popController();
+                    navigator.popController();
                     return;
                 case 'B':
                 case 'C':

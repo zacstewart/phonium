@@ -11,7 +11,7 @@ class Dialer : public Controller {
     public:
         using Controller::Controller;
 
-        Dialer(Services &, Navigator *);
+        Dialer(Services &, Navigator &);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();

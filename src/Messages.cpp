@@ -8,7 +8,7 @@
 // TODO: this needs to be based on how wide the screen is
 #define MESSAGE_PREVIEW_LENGTH 12
 
-Messages::Messages(Services &services, Navigator *navigator):
+Messages::Messages(Services &services, Navigator &navigator):
     Controller(services, navigator),
     numMessages(0),
     curMessage(0)
@@ -26,15 +26,15 @@ void Messages::handleKeyInput(KeyState state, KeypadEvent key) {
         case PRESSED:
             switch (key) {
                 case 'A':
-                    navigator->popController();
+                    navigator.popController();
                     return;
                 case 'B':
                 case 'C':
                     break;
                 case 'D':
-                    ((Message *) navigator->getController(MESSAGE))
+                    ((Message *) navigator.getController(MESSAGE))
                         ->setMessage(curMessage);
-                    navigator->pushController(MESSAGE);
+                    navigator.pushController(MESSAGE);
                     return;
                 case '2':
                     cursorUp();

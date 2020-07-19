@@ -3,7 +3,7 @@
 
 #include "Call.h"
 
-Call::Call(Services &services, Navigator *navigator):
+Call::Call(Services &services, Navigator &navigator):
     Controller(services, navigator),
     lastKey(NO_KEY),
     number(""),
@@ -96,5 +96,5 @@ void Call::callEnded() {
 
     delay(2500);
 
-    navigator->popController();
+    navigator.popController();
 }

@@ -13,7 +13,7 @@ class Message : public Controller {
     public:
         using Controller::Controller;
 
-        Message(Services &, Navigator *);
+        Message(Services &, Navigator &);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();

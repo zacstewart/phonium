@@ -13,7 +13,7 @@ class IncomingCall : public Controller {
 
         char number[NUMBER_LENGTH + 1];
 
-        IncomingCall(Services &, Navigator *);
+        IncomingCall(Services &, Navigator &);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();

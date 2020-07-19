@@ -8,7 +8,7 @@
 #define CHAR_WIDTH 5 * FONT_SIZE
 #define CHAR_HEIGHT 8 * FONT_SIZE
 
-Dialer::Dialer(Services &services, Navigator *navigator):
+Dialer::Dialer(Services &services, Navigator &navigator):
     Controller(services, navigator),
     lastKey(NO_KEY),
     number(""),
@@ -32,7 +32,7 @@ void Dialer::handleKeyInput(KeyState state, KeypadEvent key) {
                     }
 
                     if (cur == 0) {
-                        navigator->popController();
+                        navigator.popController();
                     }
                     break;
                 case 'B':
@@ -70,9 +70,9 @@ void Dialer::callNumber() {
     Serial.print(F("Caling "));
     Serial.print(number);
     Serial.println(F("..."));
-    Call *call = (Call *) navigator->getController(CALL);
+    Call *call = (Call *) navigator.getController(CALL);
     call->setNumber(number)->initiateCall();
-    navigator->replaceController(CALL);
+    navigator.replaceController(CALL);
 
     reset();
 }
@@ -98,9 +98,9 @@ void Dialer::reset() {
 }
 
 void Dialer::textNumber() {
-    ComposeMessage *compose = (ComposeMessage *) navigator->getController(COMPOSE_MESSAGE);
+    ComposeMessage *compose = (ComposeMessage *) navigator.getController(COMPOSE_MESSAGE);
     compose->setNumber(number);
-    navigator->replaceController(COMPOSE_MESSAGE);
+    navigator.replaceController(COMPOSE_MESSAGE);
 
     reset();
 }

@@ -27,7 +27,7 @@ const CharSet KEY_TO_CHARS[12] = {
     {1, "#", "#"}
 };
 
-ComposeMessage::ComposeMessage(Services &services, Navigator *navigator):
+ComposeMessage::ComposeMessage(Services &services, Navigator &navigator):
     Controller(services, navigator),
     lastKey(NO_KEY),
     lastCharSet(NO_CHAR_SET),
@@ -55,7 +55,7 @@ void ComposeMessage::handleKeyInput(KeyState state, KeypadEvent key) {
                     break;
                 case 'A':
                     if (cur == 0 && message[cur] == '\0') {
-                        navigator->popController();
+                        navigator.popController();
                     } else {
                         backspace();
                     }
@@ -195,7 +195,7 @@ void ComposeMessage::sendMessage() {
         display.refresh();
         delay(2500);
         reset();
-        navigator->popController();
+        navigator.popController();
     } else {
         display.setCursor(0, 0);
         display.clearDisplay();

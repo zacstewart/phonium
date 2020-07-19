@@ -31,13 +31,13 @@ void Home::handleKeyInput(KeyState state, KeypadEvent key) {
         case PRESSED:
             switch (key) {
                 case 'A':
-                    navigator->pushController(MESSAGES);
+                    navigator.pushController(MESSAGES);
                     return;
                 case 'B':
                 case 'C':
                     break;
                 case 'D':
-                    navigator->pushController(MENU);
+                    navigator.pushController(MENU);
                     return;
                 default:
                     startDialing(key);
@@ -55,6 +55,6 @@ void Home::update() {
 void Home::startDialing(char key) {
     Serial.print(F("Dialing ")); Serial.println(key);
     char number[2] = {key, '\0'};
-    ((Dialer *) navigator->getController(DIALER))->setNumber(number);
-    navigator->pushController(DIALER);
+    ((Dialer *) navigator.getController(DIALER))->setNumber(number);
+    navigator.pushController(DIALER);
 }

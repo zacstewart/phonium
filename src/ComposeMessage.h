@@ -11,7 +11,7 @@ class ComposeMessage : public Controller {
     public:
         using Controller::Controller;
 
-        ComposeMessage(Services &, Navigator *);
+        ComposeMessage(Services &, Navigator &);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();

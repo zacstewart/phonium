@@ -2,7 +2,7 @@
 
 #include "Controller.h"
 
-Controller::Controller(Services &services, Navigator *navigator):
+Controller::Controller(Services &services, Navigator &navigator):
     services(services),
     navigator(navigator)
 {

@@ -13,13 +13,13 @@ class Navigator;
 class Controller {
     protected:
         Services &services;
-        Navigator *navigator;
+        Navigator &navigator;
 
         void setLeftNavigationLabel(const char *);
         void setRightNavigationLabel(const char *);
 
     public:
-        Controller(Services &, Navigator *);
+        Controller(Services &, Navigator &);
 
         /**
          * When this controller takes control

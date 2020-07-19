@@ -3,7 +3,7 @@
 #include "ComposeMessage.h"
 #include "Message.h"
 
-Message::Message(Services &services, Navigator *navigator):
+Message::Message(Services &services, Navigator &navigator):
     Controller(services, navigator),
     message(SmsMessage { 0, NULL })
 {
@@ -30,15 +30,15 @@ void Message::handleKeyInput(KeyState state, KeypadEvent key) {
         case PRESSED:
             switch (key) {
                 case 'A':
-                    navigator->popController();
+                    navigator.popController();
                     return;
                 case 'B':
                 case 'C':
                     break;
                 case 'D':
-                    ((ComposeMessage *) navigator->getController(COMPOSE_MESSAGE))
+                    ((ComposeMessage *) navigator.getController(COMPOSE_MESSAGE))
                         ->setNumber(message.sender);
-                    navigator->pushController(COMPOSE_MESSAGE);
+                    navigator.pushController(COMPOSE_MESSAGE);
                     return;
                 default:
                     break;
