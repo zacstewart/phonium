@@ -160,8 +160,6 @@ $(TARGET).elf: $(OBJS) $(LDSCRIPT)
 	$(SIZE) "$<"
 	$(OBJCOPY) -O ihex -R .eeprom "$<" "$@"
 
--include $(OBJS:.o=.d)
-
 clean:
 	@echo Cleaning...
 	rm -rf "$(BUILDDIR)"
