@@ -137,33 +137,33 @@ reboot:
 upload: post_compile reboot
 
 $(BUILDDIR)/%.o: %.c
-	echo -e "[CC]\t$<"
+	@echo -e "[CC]\t$<"
 	mkdir -p "$(dir $@)"
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(L_INC) -o "$@" -c "$<"
 
 $(BUILDDIR)/%.o: %.cpp
-	echo -e "[CXX]\t$<"
+	@echo -e "[CXX]\t$<"
 	mkdir -p "$(dir $@)"
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(L_INC) -o "$@" -c "$<"
 
 $(BUILDDIR)/%.o: %.ino
-	echo -e "[CXX]\t$<"
+	@echo -e "[CXX]\t$<"
 	mkdir -p "$(dir $@)"
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(L_INC) -o "$@" -x c++ -include Arduino.h -include -c "$<"
 
 $(TARGET).elf: $(OBJS) $(LDSCRIPT)
-	echo -e "[LD]\t$@"
+	@echo -e "[LD]\t$@"
 	$(CC) $(LDFLAGS) -o "$@" $(OBJS) $(LIBS)
 
 %.hex: %.elf
-	echo -e "[HEX]\t$@"
+	@echo -e "[HEX]\t$@"
 	$(SIZE) "$<"
 	$(OBJCOPY) -O ihex -R .eeprom "$<" "$@"
 
 -include $(OBJS:.o=.d)
 
 clean:
-	echo Cleaning...
+	@echo Cleaning...
 	rm -rf "$(BUILDDIR)"
 	rm -f "$(TARGET).elf" "$(TARGET).hex"
 
