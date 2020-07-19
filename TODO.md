@@ -8,7 +8,7 @@
   - [x] Construct all Controllers with Services
   - [ ] Put all peripheral interfaces into Services
     - [x] Display
-    - [ ] Keypad (no controllers currently need KP. They receive key events)
+    - [x] Keypad (no controllers currently need KP. They receive key events)
     - [ ] FONA
 - [x] Mark long-lived things (controllers, resources) as static
 - [ ] Replace SHARP display with EPD

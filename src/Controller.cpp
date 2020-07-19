@@ -2,10 +2,9 @@
 
 #include "Controller.h"
 
-Controller::Controller(Services &services, Navigator *navigator, Keypad *keypad, Adafruit_FONA *fona):
+Controller::Controller(Services &services, Navigator *navigator, Adafruit_FONA *fona):
     services(services),
     navigator(navigator),
-    keypad(keypad),
     fona(fona)
 {
 }

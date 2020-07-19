@@ -3,8 +3,8 @@
 
 #include "Call.h"
 
-Call::Call(Services &services, Navigator *navigator, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(services, navigator, keypad, fona),
+Call::Call(Services &services, Navigator *navigator, Adafruit_FONA *fona):
+    Controller(services, navigator, fona),
     lastKey(NO_KEY),
     number(""),
     callStart(0)

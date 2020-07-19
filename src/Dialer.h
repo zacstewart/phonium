@@ -2,7 +2,6 @@
 #define DIALER 1
 
 #include <Adafruit_FONA.h>
-#include <Keypad.h>
 
 #include "Common.h"
 #include "Controller.h"
@@ -12,7 +11,7 @@ class Dialer : public Controller {
     public:
         using Controller::Controller;
 
-        Dialer(Services &, Navigator *, Keypad *, Adafruit_FONA *);
+        Dialer(Services &, Navigator *, Adafruit_FONA *);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();

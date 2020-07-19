@@ -3,8 +3,8 @@
 #include "ComposeMessage.h"
 #include "Message.h"
 
-Message::Message(Services &services, Navigator *navigator, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(services, navigator, keypad, fona),
+Message::Message(Services &services, Navigator *navigator, Adafruit_FONA *fona):
+    Controller(services, navigator, fona),
     message(SmsMessage { 0, NULL })
 {
 }

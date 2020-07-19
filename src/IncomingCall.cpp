@@ -4,8 +4,9 @@
 #include "Call.h"
 #include "IncomingCall.h"
 
-IncomingCall::IncomingCall(Services &services, Navigator *navigator, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(services, navigator, keypad, fona), number("")
+IncomingCall::IncomingCall(Services &services, Navigator *navigator, Adafruit_FONA *fona):
+    Controller(services, navigator, fona),
+    number("")
 {
 }
 
