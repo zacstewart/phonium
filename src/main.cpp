@@ -31,38 +31,38 @@
 #define FONA_RST 2
 #define FONA_BAUD_RATE 115200
 
-byte keys[KEYPAD_ROWS][KEYPAD_COLS] = {
+static byte keys[KEYPAD_ROWS][KEYPAD_COLS] = {
     {'1', '2', '3', 'A'},
     {'4', '5', '6', 'B'},
     {'7', '8', '9', 'C'},
     {'*', '0', '#', 'D'}
 };
-byte rowPins[KEYPAD_ROWS] = {18, 19, 20, 21};
-byte colPins[KEYPAD_COLS] = {17, 16, 15, 14};
-Keypad keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
+static byte rowPins[KEYPAD_ROWS] = {18, 19, 20, 21};
+static byte colPins[KEYPAD_COLS] = {17, 16, 15, 14};
+static Keypad keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-Adafruit_SharpMem display(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_HEIGHT, DISPLAY_WIDTH);
+static Adafruit_SharpMem display(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_HEIGHT, DISPLAY_WIDTH);
 
-Adafruit_FONA fona(FONA_RST);
+static Adafruit_FONA fona(FONA_RST);
 
 /**
  * Services
  */
-Messaging messaging(&fona);
-Services services(display, messaging);
+static Messaging messaging(&fona);
+static Services services(display, messaging);
 
 /**
  * Controllers
  */
-Navigator navigator;
-Call call(services, &navigator, &keypad, &fona);
-ComposeMessage composeMessage(services, &navigator, &keypad, &fona);
-Dialer dialer(services, &navigator, &keypad, &fona);
-Home home(services, &navigator, &keypad, &fona);
-IncomingCall incomingCall(services, &navigator, &keypad, &fona);
-Menu menu(services, &navigator, &keypad, &fona);
-Message message(services, &navigator, &keypad, &fona);
-Messages messages(services, &navigator, &keypad, &fona);
+static Navigator navigator;
+static Call call(services, &navigator, &keypad, &fona);
+static ComposeMessage composeMessage(services, &navigator, &keypad, &fona);
+static Dialer dialer(services, &navigator, &keypad, &fona);
+static Home home(services, &navigator, &keypad, &fona);
+static IncomingCall incomingCall(services, &navigator, &keypad, &fona);
+static Menu menu(services, &navigator, &keypad, &fona);
+static Message message(services, &navigator, &keypad, &fona);
+static Messages messages(services, &navigator, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {
