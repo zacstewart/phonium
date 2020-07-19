@@ -43,7 +43,6 @@ Keypad keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
 Adafruit_SharpMem display(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_HEIGHT, DISPLAY_WIDTH);
 
-HardwareSerial *fonaSerial = &Serial1;
 Adafruit_FONA fona(FONA_RST);
 
 /**
@@ -107,8 +106,8 @@ void setup() {
     display.refresh();
 
     Serial.println(F("Starting cellular"));
-    fonaSerial->begin(FONA_BAUD_RATE);
-    if (!fona.begin(*fonaSerial)) {
+    Serial1.begin(FONA_BAUD_RATE);
+    if (!fona.begin(Serial1)) {
         Serial.println(F("Couldn't find FONA"));
     }
     fona.callerIdNotification(true, digitalPinToInterrupt(FONA_RI));
