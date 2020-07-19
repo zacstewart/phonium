@@ -48,7 +48,7 @@ static Adafruit_FONA fona(FONA_RST);
 /**
  * Services
  */
-static Messaging messaging(&fona);
+static Messaging messaging(fona);
 static Services services(display, messaging);
 
 /**

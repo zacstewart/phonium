@@ -37,8 +37,7 @@ class Messaging {
     public:
         List *messages;
 
-        // TODO: this should take ownership of FONA and loan it out
-        Messaging(Adafruit_FONA *);
+        Messaging(Adafruit_FONA &);
 
         /**
          * Loads all messages out of the SIM into memory
@@ -46,7 +45,7 @@ class Messaging {
         void loadMessages();
 
     private:
-        Adafruit_FONA *fona;
+        Adafruit_FONA &fona;
 
         /**
          * Reads SMS message from the SIM and loads it onto the provided struct

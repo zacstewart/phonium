@@ -19,7 +19,7 @@ void List::pushLeft(SmsMessage *sms) {
     length++;
 }
 
-Messaging::Messaging(Adafruit_FONA *fona):
+Messaging::Messaging(Adafruit_FONA &fona):
     messages(new List()),
     fona(fona)
 {
@@ -34,16 +34,16 @@ void Messaging::loadMessages() {
         sms->index = i + 1;
 
         sms->message = (char *) malloc(sizeof(char) * MESSAGE_LENGTH + 1);
-        fona->readSMS(i + 1, sms->message, MESSAGE_LENGTH, &messageLen);
+        fona.readSMS(i + 1, sms->message, MESSAGE_LENGTH, &messageLen);
         sms->message[messageLen] = '\0';
         realloc(sms->message, sizeof(char) * messageLen);
 
-        fona->getSMSSender(i + 1, sms->sender, NUMBER_LENGTH);
+        fona.getSMSSender(i + 1, sms->sender, NUMBER_LENGTH);
 
         messages->pushLeft(sms);
     }
 }
 
 int8_t Messaging::numSms() {
-    return fona->getNumSMS();
+    return fona.getNumSMS();
 }
