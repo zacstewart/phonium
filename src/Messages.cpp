@@ -57,23 +57,26 @@ void Messages::update() {
 }
 
 void Messages::draw() {
+    Adafruit_GFX &canvas = services.getCanvas();
     Adafruit_SharpMem &display = services.getDisplay();
+
     display.clearDisplay();
-    display.setCursor(0, 0);
-    display.setTextColor(COLOR_BLACK);
-    display.setTextSize(2);
+
+    canvas.setCursor(0, 0);
+    canvas.setTextColor(COLOR_BLACK);
+    canvas.setTextSize(2);
 
     char preview[MESSAGE_PREVIEW_LENGTH + 1];
 
     Element *it = services.getMessaging().messages->head;
     while(it) {
         if (it->value->index == curMessage) {
-            display.print(">");
+            canvas.print(">");
         } else {
-            display.print(" ");
+            canvas.print(" ");
         }
         substr(preview, it->value->message, MESSAGE_PREVIEW_LENGTH);
-        display.println(preview);
+        canvas.println(preview);
         it = it->next;
     }
 

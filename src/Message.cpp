@@ -10,14 +10,17 @@ Message::Message(Services &services, Navigator &navigator):
 }
 
 void Message::begin() {
+    Adafruit_GFX &canvas = services.getCanvas();
     Adafruit_SharpMem &display = services.getDisplay();
+
     display.clearDisplay();
-    display.setCursor(0, 0);
-    display.setTextColor(COLOR_BLACK);
-    display.setTextSize(2);
-    display.println(message.sender);
-    display.setTextSize(1);
-    display.println(message.message);
+
+    canvas.setCursor(0, 0);
+    canvas.setTextColor(COLOR_BLACK);
+    canvas.setTextSize(2);
+    canvas.println(message.sender);
+    canvas.setTextSize(1);
+    canvas.println(message.message);
 
     setLeftNavigationLabel("Back");
     setRightNavigationLabel("Reply");

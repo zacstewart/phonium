@@ -122,12 +122,15 @@ void ComposeMessage::backspace() {
 
 void ComposeMessage::draw() {
     Serial.print(F("Message: '")); Serial.print(message); Serial.println(F("'"));
+    Adafruit_GFX &canvas = services.getCanvas();
     Adafruit_SharpMem &display = services.getDisplay();
+
     display.clearDisplay();
-    display.setCursor(0, 0);
-    display.setTextColor(COLOR_BLACK);
-    display.setTextSize(2);
-    display.print(message);
+
+    canvas.setCursor(0, 0);
+    canvas.setTextColor(COLOR_BLACK);
+    canvas.setTextSize(2);
+    canvas.print(message);
 
     if (cur == 0 && message[cur] == '\0') {
         setLeftNavigationLabel("Back");
@@ -181,25 +184,29 @@ void ComposeMessage::reset() {
 }
 
 void ComposeMessage::sendMessage() {
+    Adafruit_GFX &canvas = services.getCanvas();
     Adafruit_SharpMem &display = services.getDisplay();
-    display.setCursor(0, 0);
-    display.setTextSize(3);
+
     display.clearDisplay();
-    display.print("Sending...");
+
+    canvas.setCursor(0, 0);
+    canvas.setTextSize(3);
+    canvas.print("Sending...");
+
     display.refresh();
 
     if (services.getFona().sendSMS(number, message)) {
-        display.setCursor(0, 0);
         display.clearDisplay();
-        display.print("Message sent.");
+        canvas.setCursor(0, 0);
+        canvas.print("Message sent.");
         display.refresh();
         delay(2500);
         reset();
         navigator.popController();
     } else {
-        display.setCursor(0, 0);
         display.clearDisplay();
-        display.print("Couldn't send.\nTry again");
+        canvas.setCursor(0, 0);
+        canvas.print("Couldn't send.\nTry again");
         display.refresh();
         delay(2500);
         draw();

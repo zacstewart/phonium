@@ -11,14 +11,17 @@ void Home::begin() {
     Serial.print(numSms);
     Serial.println(F(" unread SMSs"));
 
+    Adafruit_GFX &canvas = services.getCanvas();
     Adafruit_SharpMem &display = services.getDisplay();
+
     display.clearDisplay();
-    display.setCursor(0, 0);
-    display.setTextColor(COLOR_BLACK);
-    display.setTextSize(2);
-    display.println(numSms);
-    display.setTextSize(1);
-    display.print("unread messages");
+
+    canvas.setCursor(0, 0);
+    canvas.setTextColor(COLOR_BLACK);
+    canvas.setTextSize(2);
+    canvas.println(numSms);
+    canvas.setTextSize(1);
+    canvas.print("unread messages");
 
     setLeftNavigationLabel("Messages");
     setRightNavigationLabel("Menu");

@@ -12,16 +12,20 @@ Call::Call(Services &services, Navigator &navigator):
 }
 
 void Call::begin() {
+    Adafruit_GFX &canvas = services.getCanvas();
     Adafruit_SharpMem &display = services.getDisplay();
-    display.clearDisplay();
-    display.setTextWrap(true);
-    display.setTextColor(COLOR_BLACK);
 
-    display.setCursor(0, 0);
-    display.setTextSize(1);
-    display.println("Ongoing call...");
-    display.setTextSize(3);
-    display.print(number);
+    display.clearDisplay();
+
+    canvas.setTextWrap(true);
+    canvas.setTextColor(COLOR_BLACK);
+
+    canvas.setCursor(0, 0);
+    canvas.setTextSize(1);
+    canvas.println("Ongoing call...");
+    canvas.setTextSize(3);
+    canvas.print(number);
+
     display.refresh();
 }
 

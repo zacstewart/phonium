@@ -3,13 +3,15 @@
 #include "Menu.h"
 
 void Menu::begin() {
+    Adafruit_GFX &canvas = services.getCanvas();
     Adafruit_SharpMem &display = services.getDisplay();
-    display.clearDisplay();
-    display.setTextColor(COLOR_BLACK);
 
-    display.setCursor(0, 0);
-    display.setTextSize(3);
-    display.println("Menu");
+    display.clearDisplay();
+
+    canvas.setTextColor(COLOR_BLACK);
+    canvas.setCursor(0, 0);
+    canvas.setTextSize(3);
+    canvas.println("Menu");
 
     setLeftNavigationLabel("Back");
     setRightNavigationLabel("Select");

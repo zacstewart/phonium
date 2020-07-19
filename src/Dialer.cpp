@@ -78,12 +78,15 @@ void Dialer::callNumber() {
 }
 
 void Dialer::draw() {
+    Adafruit_GFX &canvas = services.getCanvas();
     Adafruit_SharpMem &display = services.getDisplay();
+
     display.clearDisplay();
-    display.setTextColor(COLOR_BLACK);
-    display.setTextSize(3);
-    display.setCursor(0, 0);
-    display.print(number);
+
+    canvas.setTextColor(COLOR_BLACK);
+    canvas.setTextSize(3);
+    canvas.setCursor(0, 0);
+    canvas.print(number);
 
     setLeftNavigationLabel("Delete");
     setRightNavigationLabel("Message");
