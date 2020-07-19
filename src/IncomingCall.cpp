@@ -4,8 +4,8 @@
 #include "Call.h"
 #include "IncomingCall.h"
 
-IncomingCall::IncomingCall(Services &services, Navigator *navigator, Adafruit_FONA *fona):
-    Controller(services, navigator, fona),
+IncomingCall::IncomingCall(Services &services, Navigator *navigator):
+    Controller(services, navigator),
     number("")
 {
 }
@@ -44,7 +44,7 @@ void IncomingCall::handleKeyInput(KeyState state, KeypadEvent key) {
 }
 
 void IncomingCall::update() {
-    switch (fona->getCallStatus()) {
+    switch (services.getFona().getCallStatus()) {
         case FONA_CALL_READY: // Stopped ringing
             navigator->popController();
             break;
@@ -64,5 +64,5 @@ void IncomingCall::answerCall() {
 }
 
 void IncomingCall::hangUp() {
-    fona->hangUp();
+    services.getFona().hangUp();
 }

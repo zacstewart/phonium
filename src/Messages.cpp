@@ -8,8 +8,8 @@
 // TODO: this needs to be based on how wide the screen is
 #define MESSAGE_PREVIEW_LENGTH 12
 
-Messages::Messages(Services &services, Navigator *navigator, Adafruit_FONA *fona):
-    Controller(services, navigator, fona),
+Messages::Messages(Services &services, Navigator *navigator):
+    Controller(services, navigator),
     numMessages(0),
     curMessage(0)
 {

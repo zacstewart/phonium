@@ -3,8 +3,8 @@
 #include "ComposeMessage.h"
 #include "Message.h"
 
-Message::Message(Services &services, Navigator *navigator, Adafruit_FONA *fona):
-    Controller(services, navigator, fona),
+Message::Message(Services &services, Navigator *navigator):
+    Controller(services, navigator),
     message(SmsMessage { 0, NULL })
 {
 }
@@ -56,7 +56,7 @@ void Message::setMessage(uint8_t index) {
     message.index = index;
     uint16_t messageLen;
     message.message = (char *) malloc(sizeof(char) * MESSAGE_LENGTH + 1);
-    fona->readSMS(index, message.message, MESSAGE_LENGTH, &messageLen);
+    services.getFona().readSMS(index, message.message, MESSAGE_LENGTH, &messageLen);
     realloc(message.message, sizeof(char) * messageLen);
-    fona->getSMSSender(index, message.sender, NUMBER_LENGTH);
+    services.getFona().getSMSSender(index, message.sender, NUMBER_LENGTH);
 }

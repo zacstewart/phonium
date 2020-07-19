@@ -13,7 +13,7 @@ class Call : public Controller {
     public:
         using Controller::Controller;
 
-        Call(Services &, Navigator *, Adafruit_FONA *);
+        Call(Services &, Navigator *);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();

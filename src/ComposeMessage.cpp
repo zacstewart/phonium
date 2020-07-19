@@ -27,8 +27,8 @@ const CharSet KEY_TO_CHARS[12] = {
     {1, "#", "#"}
 };
 
-ComposeMessage::ComposeMessage(Services &services, Navigator *navigator, Adafruit_FONA *fona):
-    Controller(services, navigator, fona),
+ComposeMessage::ComposeMessage(Services &services, Navigator *navigator):
+    Controller(services, navigator),
     lastKey(NO_KEY),
     lastCharSet(NO_CHAR_SET),
     lastInputAt(0),
@@ -188,7 +188,7 @@ void ComposeMessage::sendMessage() {
     display.print("Sending...");
     display.refresh();
 
-    if (fona->sendSMS(number, message)) {
+    if (services.getFona().sendSMS(number, message)) {
         display.setCursor(0, 0);
         display.clearDisplay();
         display.print("Message sent.");

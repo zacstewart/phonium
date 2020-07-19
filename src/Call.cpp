@@ -3,8 +3,8 @@
 
 #include "Call.h"
 
-Call::Call(Services &services, Navigator *navigator, Adafruit_FONA *fona):
-    Controller(services, navigator, fona),
+Call::Call(Services &services, Navigator *navigator):
+    Controller(services, navigator),
     lastKey(NO_KEY),
     number(""),
     callStart(0)
@@ -61,7 +61,7 @@ Call *Call::answerCall() {
     callStart = millis();
     Serial.print(F("Answreing call from "));
     Serial.println(number);
-    fona->pickUp();
+    services.getFona().pickUp();
     return this;
 }
 
@@ -69,13 +69,13 @@ Call *Call::initiateCall() {
     callStart = millis();
     Serial.print("Initiating call to ");
     Serial.println(number);
-    fona->callPhone(number);
+    services.getFona().callPhone(number);
     return this;
 }
 
 void Call::hangUp() {
     Serial.println(F("Hanging up"));
-    fona->hangUp();
+    services.getFona().hangUp();
     callEnded(); // TODO: this would actually happen as a result of callStatus
 }
 

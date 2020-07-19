@@ -14,13 +14,12 @@ class Controller {
     protected:
         Services &services;
         Navigator *navigator;
-        Adafruit_FONA *fona;
 
         void setLeftNavigationLabel(const char *);
         void setRightNavigationLabel(const char *);
 
     public:
-        Controller(Services &, Navigator *, Adafruit_FONA *);
+        Controller(Services &, Navigator *);
 
         /**
          * When this controller takes control

@@ -6,7 +6,7 @@
 #include "Messages.h"
 
 void Home::begin() {
-    int8_t numSms = fona->getNumSMS();
+    int8_t numSms = services.getFona().getNumSMS();
 
     Serial.print(numSms);
     Serial.println(F(" unread SMSs"));

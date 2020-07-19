@@ -8,8 +8,8 @@
 #define CHAR_WIDTH 5 * FONT_SIZE
 #define CHAR_HEIGHT 8 * FONT_SIZE
 
-Dialer::Dialer(Services &services, Navigator *navigator, Adafruit_FONA *fona):
-    Controller(services, navigator, fona),
+Dialer::Dialer(Services &services, Navigator *navigator):
+    Controller(services, navigator),
     lastKey(NO_KEY),
     number(""),
     cur(0)

@@ -55,14 +55,14 @@ static Services services(fona, display, messaging);
  * Controllers
  */
 static Navigator navigator;
-static Call call(services, &navigator, &fona);
-static ComposeMessage composeMessage(services, &navigator, &fona);
-static Dialer dialer(services, &navigator, &fona);
-static Home home(services, &navigator, &fona);
-static IncomingCall incomingCall(services, &navigator, &fona);
-static Menu menu(services, &navigator, &fona);
-static Message message(services, &navigator, &fona);
-static Messages messages(services, &navigator, &fona);
+static Call call(services, &navigator);
+static ComposeMessage composeMessage(services, &navigator);
+static Dialer dialer(services, &navigator);
+static Home home(services, &navigator);
+static IncomingCall incomingCall(services, &navigator);
+static Menu menu(services, &navigator);
+static Message message(services, &navigator);
+static Messages messages(services, &navigator);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {
