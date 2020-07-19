@@ -49,7 +49,7 @@ static Adafruit_FONA fona(FONA_RST);
  * Services
  */
 static Messaging messaging(fona);
-static Services services(display, messaging);
+static Services services(fona, display, messaging);
 
 /**
  * Controllers
