@@ -1,3 +1,5 @@
+#include <Adafruit_SharpMem.h>
+
 #include "Dialer.h"
 #include "Call.h"
 #include "ComposeMessage.h"
@@ -6,8 +8,8 @@
 #define CHAR_WIDTH 5 * FONT_SIZE
 #define CHAR_HEIGHT 8 * FONT_SIZE
 
-Dialer::Dialer(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(services, navigator, display, keypad, fona),
+Dialer::Dialer(Services &services, Navigator *navigator, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, keypad, fona),
     lastKey(NO_KEY),
     number(""),
     cur(0)
@@ -76,16 +78,17 @@ void Dialer::callNumber() {
 }
 
 void Dialer::draw() {
-    display->clearDisplay();
-    display->setTextColor(COLOR_BLACK);
-    display->setTextSize(3);
-    display->setCursor(0, 0);
-    display->print(number);
+    Adafruit_SharpMem &display = services.getDisplay();
+    display.clearDisplay();
+    display.setTextColor(COLOR_BLACK);
+    display.setTextSize(3);
+    display.setCursor(0, 0);
+    display.print(number);
 
     setLeftNavigationLabel("Delete");
     setRightNavigationLabel("Message");
 
-    display->refresh();
+    display.refresh();
 }
 
 void Dialer::reset() {

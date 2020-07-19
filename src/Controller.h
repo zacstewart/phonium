@@ -2,7 +2,6 @@
 #define CONTROLLER
 
 #include <Adafruit_FONA.h>
-#include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 
 #include "Common.h"
@@ -13,17 +12,16 @@ class Navigator;
 
 class Controller {
     protected:
-        Services *services;
+        Services &services;
         Navigator *navigator;
-        Adafruit_SharpMem *display;
         Keypad *keypad;
         Adafruit_FONA *fona;
 
-        void setLeftNavigationLabel(char *);
-        void setRightNavigationLabel(char *);
+        void setLeftNavigationLabel(const char *);
+        void setRightNavigationLabel(const char *);
 
     public:
-        Controller(Services *, Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        Controller(Services &, Navigator *, Keypad *, Adafruit_FONA *);
 
         /**
          * When this controller takes control

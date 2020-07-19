@@ -57,15 +57,14 @@ Services services = Services(display, messaging);
  * Controllers
  */
 Navigator navigator = Navigator();
-
-Call call = Call(&services, &navigator, &display, &keypad, &fona);
-ComposeMessage composeMessage = ComposeMessage(&services, &navigator, &display, &keypad, &fona);
-Dialer dialer = Dialer(&services, &navigator, &display, &keypad, &fona);
-Home home = Home(&services, &navigator, &display, &keypad, &fona);
-IncomingCall incomingCall = IncomingCall(&services, &navigator, &display, &keypad, &fona);
-Message message = Message(&services, &navigator, &display, &keypad, &fona);
-Messages messages = Messages(&services, &navigator, &display, &keypad, &fona);
-Menu menu = Menu(&services, &navigator, &display, &keypad, &fona);
+Call call = Call(services, &navigator, &keypad, &fona);
+ComposeMessage composeMessage = ComposeMessage(services, &navigator, &keypad, &fona);
+Dialer dialer = Dialer(services, &navigator, &keypad, &fona);
+Home home = Home(services, &navigator, &keypad, &fona);
+IncomingCall incomingCall = IncomingCall(services, &navigator, &keypad, &fona);
+Menu menu = Menu(services, &navigator, &keypad, &fona);
+Message message = Message(services, &navigator, &keypad, &fona);
+Messages messages = Messages(services, &navigator, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {
@@ -98,6 +97,7 @@ void setup() {
     keypad.addEventListener(handleKeyInput);
 
     Serial.println(F("Starting display"));
+    Adafruit_SharpMem &display = services.getDisplay();
     display.begin();
     display.setRotation(DISPLAY_ROTATION);
     display.clearDisplay();
@@ -116,19 +116,16 @@ void setup() {
     fona.setAudio(FONA_EXTAUDIO);
     fona.setMicVolume(FONA_EXTAUDIO, 10);
 
-    services.getMessaging()->loadMessages();
-
-    // TODO: replace this with a constructor of some kind
-    messages.setServices(&services);
+    services.getMessaging().loadMessages();
 
     navigator.setController(CALL, &call);
     navigator.setController(COMPOSE_MESSAGE, &composeMessage);
     navigator.setController(DIALER, &dialer);
-    navigator.setController(INCOMING_CALL, &incomingCall);
     navigator.setController(HOME, &home);
-    navigator.setController(MESSAGES, &messages);
-    navigator.setController(MESSAGE, &message);
+    navigator.setController(INCOMING_CALL, &incomingCall);
     navigator.setController(MENU, &menu);
+    navigator.setController(MESSAGE, &message);
+    navigator.setController(MESSAGES, &messages);
 
     Serial.println(F("Phonium ready"));
     navigator.replaceController(HOME);

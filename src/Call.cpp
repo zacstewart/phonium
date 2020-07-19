@@ -1,9 +1,10 @@
 #include "string.h"
+#include <Adafruit_SharpMem.h>
 
 #include "Call.h"
 
-Call::Call(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(services, navigator, display, keypad, fona),
+Call::Call(Services &services, Navigator *navigator, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, keypad, fona),
     lastKey(NO_KEY),
     number(""),
     callStart(0)
@@ -11,16 +12,17 @@ Call::Call(Services *services, Navigator *navigator, Adafruit_SharpMem *display,
 }
 
 void Call::begin() {
-    display->clearDisplay();
-    display->setTextWrap(true);
-    display->setTextColor(COLOR_BLACK);
+    Adafruit_SharpMem &display = services.getDisplay();
+    display.clearDisplay();
+    display.setTextWrap(true);
+    display.setTextColor(COLOR_BLACK);
 
-    display->setCursor(0, 0);
-    display->setTextSize(1);
-    display->println("Ongoing call...");
-    display->setTextSize(3);
-    display->print(number);
-    display->refresh();
+    display.setCursor(0, 0);
+    display.setTextSize(1);
+    display.println("Ongoing call...");
+    display.setTextSize(3);
+    display.print(number);
+    display.refresh();
 }
 
 void Call::handleKeyInput(KeyState state, KeypadEvent key) {
@@ -83,13 +85,14 @@ void Call::callEnded() {
     Serial.print("Call lasted ");
     Serial.println(duration);
 
-    display->clearDisplay();
-    display->setCursor(0, 0);
-    display->setTextSize(1);
-    display->println(F("Call ended"));
-    display->setTextSize(3);
-    display->print(duration);
-    display->refresh();
+    Adafruit_SharpMem &display = services.getDisplay();
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.setTextSize(1);
+    display.println(F("Call ended"));
+    display.setTextSize(3);
+    display.print(duration);
+    display.refresh();
 
     delay(2500);
 

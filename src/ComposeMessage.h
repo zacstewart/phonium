@@ -2,7 +2,6 @@
 #define COMPOSE_MESSAGE 4
 
 #include <Adafruit_FONA.h>
-#include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 
 #include "Common.h"
@@ -13,7 +12,7 @@ class ComposeMessage : public Controller {
     public:
         using Controller::Controller;
 
-        ComposeMessage(Services *, Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        ComposeMessage(Services &, Navigator *, Keypad *, Adafruit_FONA *);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();

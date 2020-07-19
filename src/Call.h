@@ -2,7 +2,6 @@
 #define CALL 2
 
 #include <Adafruit_FONA.h>
-#include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 
 #include "Controller.h"
@@ -15,7 +14,7 @@ class Call : public Controller {
     public:
         using Controller::Controller;
 
-        Call(Services *, Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
+        Call(Services &, Navigator *, Keypad *, Adafruit_FONA *);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();

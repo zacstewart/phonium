@@ -1,25 +1,28 @@
+#include <Adafruit_SharpMem.h>
+
 #include "ComposeMessage.h"
 #include "Message.h"
 
-Message::Message(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(services, navigator, display, keypad, fona),
+Message::Message(Services &services, Navigator *navigator, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, keypad, fona),
     message(SmsMessage { 0, NULL })
 {
 }
 
 void Message::begin() {
-    display->clearDisplay();
-    display->setCursor(0, 0);
-    display->setTextColor(COLOR_BLACK);
-    display->setTextSize(2);
-    display->println(message.sender);
-    display->setTextSize(1);
-    display->println(message.message);
+    Adafruit_SharpMem &display = services.getDisplay();
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.setTextColor(COLOR_BLACK);
+    display.setTextSize(2);
+    display.println(message.sender);
+    display.setTextSize(1);
+    display.println(message.message);
 
     setLeftNavigationLabel("Back");
     setRightNavigationLabel("Reply");
 
-    display->refresh();
+    display.refresh();
 }
 
 void Message::handleKeyInput(KeyState state, KeypadEvent key) {

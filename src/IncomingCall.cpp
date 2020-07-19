@@ -1,24 +1,26 @@
 #include <Adafruit_FONA.h>
+#include <Adafruit_SharpMem.h>
 
 #include "Call.h"
 #include "IncomingCall.h"
 
-IncomingCall::IncomingCall(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(services, navigator, display, keypad, fona), number("")
+IncomingCall::IncomingCall(Services &services, Navigator *navigator, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, keypad, fona), number("")
 {
 }
 
 void IncomingCall::begin() {
-    display->clearDisplay();
-    display->setTextWrap(true);
-    display->setTextColor(COLOR_BLACK);
+    Adafruit_SharpMem &display = services.getDisplay();
+    display.clearDisplay();
+    display.setTextWrap(true);
+    display.setTextColor(COLOR_BLACK);
 
-    display->setCursor(0, 0);
-    display->setTextSize(1);
-    display->println(F("Incoming call..."));
-    display->setTextSize(3);
-    display->print(number);
-    display->refresh();
+    display.setCursor(0, 0);
+    display.setTextSize(1);
+    display.println(F("Incoming call..."));
+    display.setTextSize(3);
+    display.print(number);
+    display.refresh();
 }
 
 void IncomingCall::handleKeyInput(KeyState state, KeypadEvent key) {

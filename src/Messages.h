@@ -2,7 +2,6 @@
 #define MESSAGES 5
 
 #include <Adafruit_FONA.h>
-#include <Adafruit_SharpMem.h>
 #include <Keypad.h>
 
 #include "Common.h"
@@ -14,17 +13,12 @@ class Messages : public Controller {
     public:
         using Controller::Controller;
 
-        Messages(Services *, Navigator *, Adafruit_SharpMem *, Keypad *, Adafruit_FONA *);
-        /**
-         * TODO: replace this with constructor
-         */
-        void setServices(Services *);
+        Messages(Services &, Navigator *, Keypad *, Adafruit_FONA *);
         void begin();
         void handleKeyInput(KeyState state, KeypadEvent key);
         void update();
 
     private:
-        Services *services;
         int8_t numMessages;
         uint8_t curMessage;
 

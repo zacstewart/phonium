@@ -1,3 +1,5 @@
+#include <Adafruit_SharpMem.h>
+
 #include "Dialer.h"
 #include "Home.h"
 #include "Menu.h"
@@ -9,18 +11,19 @@ void Home::begin() {
     Serial.print(numSms);
     Serial.println(F(" unread SMSs"));
 
-    display->clearDisplay();
-    display->setCursor(0, 0);
-    display->setTextColor(COLOR_BLACK);
-    display->setTextSize(2);
-    display->println(numSms);
-    display->setTextSize(1);
-    display->print("unread messages");
+    Adafruit_SharpMem &display = services.getDisplay();
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.setTextColor(COLOR_BLACK);
+    display.setTextSize(2);
+    display.println(numSms);
+    display.setTextSize(1);
+    display.print("unread messages");
 
     setLeftNavigationLabel("Messages");
     setRightNavigationLabel("Menu");
 
-    display->refresh();
+    display.refresh();
 }
 
 void Home::handleKeyInput(KeyState state, KeypadEvent key) {

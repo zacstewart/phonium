@@ -1,4 +1,5 @@
 #include "string.h"
+#include <Adafruit_SharpMem.h>
 
 #include "ComposeMessage.h"
 
@@ -26,8 +27,8 @@ const CharSet KEY_TO_CHARS[12] = {
     {1, "#", "#"}
 };
 
-ComposeMessage::ComposeMessage(Services *services, Navigator *navigator, Adafruit_SharpMem *display, Keypad *keypad, Adafruit_FONA *fona):
-    Controller(services, navigator, display, keypad, fona),
+ComposeMessage::ComposeMessage(Services &services, Navigator *navigator, Keypad *keypad, Adafruit_FONA *fona):
+    Controller(services, navigator, keypad, fona),
     lastKey(NO_KEY),
     lastCharSet(NO_CHAR_SET),
     lastInputAt(0),
@@ -121,11 +122,12 @@ void ComposeMessage::backspace() {
 
 void ComposeMessage::draw() {
     Serial.print(F("Message: '")); Serial.print(message); Serial.println(F("'"));
-    display->clearDisplay();
-    display->setCursor(0, 0);
-    display->setTextColor(COLOR_BLACK);
-    display->setTextSize(2);
-    display->print(message);
+    Adafruit_SharpMem &display = services.getDisplay();
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.setTextColor(COLOR_BLACK);
+    display.setTextSize(2);
+    display.print(message);
 
     if (cur == 0 && message[cur] == '\0') {
         setLeftNavigationLabel("Back");
@@ -134,7 +136,7 @@ void ComposeMessage::draw() {
     }
     setRightNavigationLabel("Send");
 
-    display->refresh();
+    display.refresh();
 }
 
 /**
@@ -179,25 +181,26 @@ void ComposeMessage::reset() {
 }
 
 void ComposeMessage::sendMessage() {
-    display->setCursor(0, 0);
-    display->setTextSize(3);
-    display->clearDisplay();
-    display->print("Sending...");
-    display->refresh();
+    Adafruit_SharpMem &display = services.getDisplay();
+    display.setCursor(0, 0);
+    display.setTextSize(3);
+    display.clearDisplay();
+    display.print("Sending...");
+    display.refresh();
 
     if (fona->sendSMS(number, message)) {
-        display->setCursor(0, 0);
-        display->clearDisplay();
-        display->print("Message sent.");
-        display->refresh();
+        display.setCursor(0, 0);
+        display.clearDisplay();
+        display.print("Message sent.");
+        display.refresh();
         delay(2500);
         reset();
         navigator->popController();
     } else {
-        display->setCursor(0, 0);
-        display->clearDisplay();
-        display->print("Couldn't send.\nTry again");
-        display->refresh();
+        display.setCursor(0, 0);
+        display.clearDisplay();
+        display.print("Couldn't send.\nTry again");
+        display.refresh();
         delay(2500);
         draw();
     }

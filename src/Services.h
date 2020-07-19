@@ -7,13 +7,14 @@
 
 class Services {
     public:
-        Services(Adafruit_SharpMem, Messaging);
+        Services(Adafruit_SharpMem &, Messaging &);
 
-        Adafruit_SharpMem *getDisplay();
-        Messaging *getMessaging();
+        Adafruit_SharpMem &getDisplay();
+        Messaging &getMessaging();
 
     private:
-        Messaging messaging;
+        Adafruit_SharpMem &display;
+        Messaging &messaging;
 };
 
 #endif
