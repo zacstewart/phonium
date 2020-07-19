@@ -39,31 +39,31 @@ byte keys[KEYPAD_ROWS][KEYPAD_COLS] = {
 };
 byte rowPins[KEYPAD_ROWS] = {18, 19, 20, 21};
 byte colPins[KEYPAD_COLS] = {17, 16, 15, 14};
-Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
+Keypad keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
 Adafruit_SharpMem display(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_HEIGHT, DISPLAY_WIDTH);
 
 HardwareSerial *fonaSerial = &Serial1;
-Adafruit_FONA fona = Adafruit_FONA(FONA_RST);
+Adafruit_FONA fona(FONA_RST);
 
 /**
  * Services
  */
-Messaging messaging = Messaging(&fona);
-Services services = Services(display, messaging);
+Messaging messaging(&fona);
+Services services(display, messaging);
 
 /**
  * Controllers
  */
-Navigator navigator = Navigator();
-Call call = Call(services, &navigator, &keypad, &fona);
-ComposeMessage composeMessage = ComposeMessage(services, &navigator, &keypad, &fona);
-Dialer dialer = Dialer(services, &navigator, &keypad, &fona);
-Home home = Home(services, &navigator, &keypad, &fona);
-IncomingCall incomingCall = IncomingCall(services, &navigator, &keypad, &fona);
-Menu menu = Menu(services, &navigator, &keypad, &fona);
-Message message = Message(services, &navigator, &keypad, &fona);
-Messages messages = Messages(services, &navigator, &keypad, &fona);
+Navigator navigator;
+Call call(services, &navigator, &keypad, &fona);
+ComposeMessage composeMessage(services, &navigator, &keypad, &fona);
+Dialer dialer(services, &navigator, &keypad, &fona);
+Home home(services, &navigator, &keypad, &fona);
+IncomingCall incomingCall(services, &navigator, &keypad, &fona);
+Menu menu(services, &navigator, &keypad, &fona);
+Message message(services, &navigator, &keypad, &fona);
+Messages messages(services, &navigator, &keypad, &fona);
 
 #ifdef USING_MAKEFILE
 extern "C" int main(void) {
