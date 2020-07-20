@@ -11,7 +11,7 @@
     - [x] Keypad (no controllers currently need KP. They receive key events)
     - [x] FONA
 - [x] Mark long-lived things (controllers, resources) as static
-- [ ] Organize and namespace Controllers
+- [x] Organize and namespace Controllers
 - [ ] Replace SHARP display with EPD
   - [ ] Separate GFX and display driver in all controllers
   - [ ] Write thin Display abstraction around Waveshare_EPD
