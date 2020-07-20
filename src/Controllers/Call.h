@@ -6,29 +6,31 @@
 #include "Controller.h"
 #include "Dialer.h"
 
-/**
- * This controller is for ongoing calls, incoming or outgoing.
- */
-class Call : public Controller {
-    public:
-        using Controller::Controller;
+namespace Controllers {
+    /**
+     * This controller is for ongoing calls, incoming or outgoing.
+     */
+    class Call : public Controller {
+        public:
+            using Controller::Controller;
 
-        Call(Services &, Navigator &);
-        void begin();
-        void handleKeyInput(KeyState state, KeypadEvent key);
-        void update();
+            Call(Services &, Navigator &);
+            void begin();
+            void handleKeyInput(KeyState state, KeypadEvent key);
+            void update();
 
-        Call *setNumber(char *);
-        Call *answerCall();
-        Call *initiateCall();
-        void hangUp();
+            Call *setNumber(char *);
+            Call *answerCall();
+            Call *initiateCall();
+            void hangUp();
 
-    private:
-        char lastKey;
-        char number[NUMBER_LENGTH + 1];
-        unsigned long callStart;
+        private:
+            char lastKey;
+            char number[NUMBER_LENGTH + 1];
+            unsigned long callStart;
 
-        void callEnded();
-};
+            void callEnded();
+    };
+}
 
 #endif

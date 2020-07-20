@@ -7,19 +7,21 @@
 #include "Controller.h"
 #include "Navigator.h"
 
-class IncomingCall : public Controller {
-    public:
-        using Controller::Controller;
+namespace Controllers {
+    class IncomingCall : public Controller {
+        public:
+            using Controller::Controller;
 
-        char number[NUMBER_LENGTH + 1];
+            char number[NUMBER_LENGTH + 1];
 
-        IncomingCall(Services &, Navigator &);
-        void begin();
-        void handleKeyInput(KeyState state, KeypadEvent key);
-        void update();
+            IncomingCall(Services &, Navigator &);
+            void begin();
+            void handleKeyInput(KeyState state, KeypadEvent key);
+            void update();
 
-        void answerCall();
-        void hangUp();
-};
+            void answerCall();
+            void hangUp();
+    };
+}
 
 #endif

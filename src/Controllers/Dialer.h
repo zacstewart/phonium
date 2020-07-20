@@ -7,27 +7,29 @@
 #include "Controller.h"
 #include "Navigator.h"
 
-class Dialer : public Controller {
-    public:
-        using Controller::Controller;
+namespace Controllers {
+    class Dialer : public Controller {
+        public:
+            using Controller::Controller;
 
-        Dialer(Services &, Navigator &);
-        void begin();
-        void handleKeyInput(KeyState state, KeypadEvent key);
-        void update();
+            Dialer(Services &, Navigator &);
+            void begin();
+            void handleKeyInput(KeyState state, KeypadEvent key);
+            void update();
 
-        void setNumber(char *);
+            void setNumber(char *);
 
-    private:
-        char lastKey;
-        char number[NUMBER_LENGTH + 1];
-        uint8_t cur;
+        private:
+            char lastKey;
+            char number[NUMBER_LENGTH + 1];
+            uint8_t cur;
 
-        void backspace();
-        void callNumber();
-        void draw();
-        void reset();
-        void textNumber();
-};
+            void backspace();
+            void callNumber();
+            void draw();
+            void reset();
+            void textNumber();
+    };
+}
 
 #endif

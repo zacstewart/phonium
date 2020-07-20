@@ -9,19 +9,21 @@
 
 #include "Messaging.h"
 
-class Message : public Controller {
-    public:
-        using Controller::Controller;
+namespace Controllers {
+    class Message : public Controller {
+        public:
+            using Controller::Controller;
 
-        Message(Services &, Navigator &);
-        void begin();
-        void handleKeyInput(KeyState state, KeypadEvent key);
-        void update();
+            Message(Services &, Navigator &);
+            void begin();
+            void handleKeyInput(KeyState state, KeypadEvent key);
+            void update();
 
-        void setMessage(uint8_t);
+            void setMessage(uint8_t);
 
-    private:
-        SmsMessage message;
-};
+        private:
+            SmsMessage message;
+    };
+}
 
 #endif

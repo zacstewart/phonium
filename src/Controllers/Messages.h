@@ -8,22 +8,24 @@
 #include "Controller.h"
 #include "Services.h"
 
-class Messages : public Controller {
-    public:
-        using Controller::Controller;
+namespace Controllers {
+    class Messages : public Controller {
+        public:
+            using Controller::Controller;
 
-        Messages(Services &, Navigator &);
-        void begin();
-        void handleKeyInput(KeyState state, KeypadEvent key);
-        void update();
+            Messages(Services &, Navigator &);
+            void begin();
+            void handleKeyInput(KeyState state, KeypadEvent key);
+            void update();
 
-    private:
-        int8_t numMessages;
-        uint8_t curMessage;
+        private:
+            int8_t numMessages;
+            uint8_t curMessage;
 
-        void draw();
-        void cursorDown();
-        void cursorUp();
-};
+            void draw();
+            void cursorDown();
+            void cursorUp();
+    };
+}
 
 #endif

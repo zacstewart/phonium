@@ -5,13 +5,15 @@
 #include "Navigator.h"
 #include "Controller.h"
 
-class Menu : public Controller {
-    public:
-        using Controller::Controller;
+namespace Controllers {
+    class Menu : public Controller {
+        public:
+            using Controller::Controller;
 
-        void begin();
-        void handleKeyInput(KeyState state, KeypadEvent key);
-        void update();
-};
+            void begin();
+            void handleKeyInput(KeyState state, KeypadEvent key);
+            void update();
+    };
+}
 
 #endif
