@@ -133,6 +133,7 @@ hex: $(TARGET).hex
 post_compile: $(TARGET).hex
 	$(abspath $(TOOLSPATH))/teensy_post_compile -file="$(basename $<)" -path=$(CURDIR) -tools="$(abspath $(TOOLSPATH))"
 
+.PHONY: reboot
 reboot:
 	-$(abspath $(TOOLSPATH))/teensy_reboot
 
@@ -162,6 +163,7 @@ $(TARGET).elf: $(OBJS) $(LDSCRIPT)
 	$(SIZE) "$<"
 	$(OBJCOPY) -O ihex -R .eeprom "$<" "$@"
 
+.PHONY: clean
 clean:
 	@echo Cleaning...
 	rm -rf "$(BUILDDIR)"
