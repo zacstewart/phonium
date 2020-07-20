@@ -121,21 +121,35 @@ L_INC := $(foreach lib,$(filter %/, $(wildcard $(LIBRARYPATH)/*/)), -I$(lib))
 SOURCES := $(C_FILES:.c=.o) $(CPP_FILES:.cpp=.o) $(TC_FILES:.c=.o) $(TCPP_FILES:.cpp=.o) $(LC_FILES:.c=.o) $(LCPP_FILES:.cpp=.o)
 OBJS := $(foreach src,$(SOURCES), $(BUILDDIR)/$(src))
 
+.PHONY: clean monitor reboot
+
 all: hex
 
 build: $(TARGET).elf
+
+clean:
+	@echo Cleaning...
+	rm -rf "$(BUILDDIR)"
+	rm -f "$(TARGET).elf" "$(TARGET).hex"
 
 debug: CPPFLAGS += -DDEBUG -DBUILD_DATE="\"$(shell date)\""
 debug: build
 
 hex: $(TARGET).hex
 
+monitor:
+	$(abspath $(TOOLSPATH))/teensy_serialmon "$(TEENSY_DEVICE_ID)"
+
 post_compile: $(TARGET).hex
 	$(abspath $(TOOLSPATH))/teensy_post_compile -file="$(basename $<)" -path=$(CURDIR) -tools="$(abspath $(TOOLSPATH))"
 
-.PHONY: reboot
 reboot:
 	-$(abspath $(TOOLSPATH))/teensy_reboot
+
+syntastic: .syntastic_cpp_config
+	@rm -f .syntastic_cpp_config
+	@echo "-I${COREPATH}" >> .syntastic_cpp_config
+	@$(foreach stmt,$(L_INC), echo $(stmt) >> .syntastic_cpp_config;)
 
 upload: post_compile reboot
 
@@ -162,18 +176,3 @@ $(TARGET).elf: $(OBJS) $(LDSCRIPT)
 	@echo -e "[HEX]\t$@"
 	$(SIZE) "$<"
 	$(OBJCOPY) -O ihex -R .eeprom "$<" "$@"
-
-.PHONY: clean
-clean:
-	@echo Cleaning...
-	rm -rf "$(BUILDDIR)"
-	rm -f "$(TARGET).elf" "$(TARGET).hex"
-
-.PHONY: monitor
-monitor:
-	$(abspath $(TOOLSPATH))/teensy_serialmon "$(TEENSY_DEVICE_ID)"
-
-syntastic:
-	@rm -f .syntastic_cpp_config
-	@echo "-I${COREPATH}" >> .syntastic_cpp_config
-	@$(foreach stmt,$(L_INC), echo $(stmt) >> .syntastic_cpp_config;)
