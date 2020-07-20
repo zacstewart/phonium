@@ -10,14 +10,14 @@
 #include "Controller.h"
 #include "Navigator.h"
 
-#include "Call.h"
-#include "ComposeMessage.h"
-#include "Dialer.h"
-#include "Home.h"
-#include "IncomingCall.h"
-#include "Message.h"
-#include "Messages.h"
-#include "Menu.h"
+#include "Controllers/Call.h"
+#include "Controllers/ComposeMessage.h"
+#include "Controllers/Dialer.h"
+#include "Controllers/Home.h"
+#include "Controllers/IncomingCall.h"
+#include "Controllers/Menu.h"
+#include "Controllers/Message.h"
+#include "Controllers/Messages.h"
 
 #define KEYPAD_ROWS 4
 #define KEYPAD_COLS 4

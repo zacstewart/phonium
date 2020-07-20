@@ -110,8 +110,8 @@ LCPP_FILES := $(wildcard $(LIBRARYPATH)/*/*.cpp)
 CORE_MAINS := $(wildcard $(COREPATH)/main.*)
 TC_FILES := $(filter-out $(CORE_MAINS), $(wildcard $(COREPATH)/*.c))
 TCPP_FILES := $(filter-out $(CORE_MAINS), $(wildcard $(COREPATH)/*.cpp))
-C_FILES := $(wildcard src/*.c)
-CPP_FILES := $(wildcard src/*.cpp)
+C_FILES := $(shell find src -type f -name '*.c')
+CPP_FILES := $(shell find src -type f -name '*.cpp')
 
 # include paths for libraries
 L_INC := $(foreach lib,$(filter %/, $(wildcard $(LIBRARYPATH)/*/)), -I$(lib))
