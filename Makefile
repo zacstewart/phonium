@@ -44,6 +44,8 @@ LIBRARYPATH = libraries
 # path location for the arm-none-eabi compiler
 COMPILERPATH = $(TOOLSPATH)/arm/bin
 
+TEENSY_DEVICE_ID := $(shell $(abspath $(TOOLSPATH))/teensy_ports -L | cut -d' ' -f1)
+
 #************************************************************************
 # Settings below this point usually do not need to be edited
 #************************************************************************
@@ -164,6 +166,10 @@ clean:
 	@echo Cleaning...
 	rm -rf "$(BUILDDIR)"
 	rm -f "$(TARGET).elf" "$(TARGET).hex"
+
+.PHONY: monitor
+monitor:
+	$(abspath $(TOOLSPATH))/teensy_serialmon "$(TEENSY_DEVICE_ID)"
 
 syntastic:
 	@rm -f .syntastic_cpp_config
