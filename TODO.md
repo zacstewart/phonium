@@ -13,5 +13,6 @@
 - [x] Mark long-lived things (controllers, resources) as static
 - [x] Organize and namespace Controllers
 - [ ] Replace SHARP display with EPD
-  - [ ] Separate GFX and display driver in all controllers
-  - [ ] Write thin Display abstraction around Waveshare_EPD
+  - [x] Separate GFX and display driver in all controllers
+  - [x] Write thin Display abstraction around Waveshare_EPD
+  - [ ] Swap out SHARP with EPD in Display abstraction
