@@ -3,13 +3,13 @@
 
 #include <Adafruit_FONA.h>
 #include <Adafruit_GFX.h>
-#include <Adafruit_SharpMem.h>
 
+#include "Display.h"
 #include "Messaging.h"
 
 class Services {
     public:
-        Services(Adafruit_FONA &, Adafruit_SharpMem &, Messaging &);
+        Services(Adafruit_FONA &, Display &, Messaging &);
 
         Adafruit_FONA &getFona();
         /**
@@ -18,13 +18,12 @@ class Services {
          * invoked in order to transfer the canvas image into the display
          * device and render it.
          */
-        Adafruit_GFX &getCanvas();
-        Adafruit_SharpMem &getDisplay();
+        Display &getDisplay();
         Messaging &getMessaging();
 
     private:
         Adafruit_FONA &fona;
-        Adafruit_SharpMem &display;
+        Display &display;
         Messaging &messaging;
 };
 

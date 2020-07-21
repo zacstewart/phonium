@@ -1,13 +1,11 @@
-#include <Adafruit_SharpMem.h>
-
 #include "Menu.h"
 
 namespace Controllers {
     void Menu::begin() {
-        Adafruit_GFX &canvas = services.getCanvas();
-        Adafruit_SharpMem &display = services.getDisplay();
+        Display &display = services.getDisplay();
+        Adafruit_GFX &canvas = display.getCanvas();
 
-        display.clearDisplay();
+        display.clear();
 
         canvas.setTextColor(COLOR_BLACK);
         canvas.setCursor(0, 0);

@@ -3,6 +3,7 @@
 #include <HardwareSerial.h>
 #include <Keypad.h>
 
+#include "Display.h"
 #include "Messaging.h"
 #include "Services.h"
 
@@ -41,13 +42,15 @@ static byte rowPins[KEYPAD_ROWS] = {18, 19, 20, 21};
 static byte colPins[KEYPAD_COLS] = {17, 16, 15, 14};
 static Keypad keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-static Adafruit_SharpMem display(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_HEIGHT, DISPLAY_WIDTH);
+static Adafruit_SharpMem displayDevice(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_HEIGHT, DISPLAY_WIDTH);
 
 static Adafruit_FONA fona(FONA_RST);
 
 /**
  * Services
  */
+//TODO: Once switching to EPD, one of these will be the GFX canvas
+static Display display(displayDevice, displayDevice);
 static Messaging messaging(fona);
 static Services services(fona, display, messaging);
 
@@ -95,14 +98,16 @@ void setup() {
     keypad.addEventListener(handleKeyInput);
 
     Serial.println(F("Starting display"));
-    Adafruit_SharpMem &display = services.getDisplay();
-    display.begin();
-    display.setRotation(DISPLAY_ROTATION);
-    display.clearDisplay();
-    display.setCursor(0, 0);
-    display.setTextColor(COLOR_BLACK);
-    display.setTextSize(2);
-    display.print("Starting");
+    displayDevice.begin();
+    displayDevice.setRotation(DISPLAY_ROTATION);
+
+    Display &display = services.getDisplay();
+    Adafruit_GFX &canvas = display.getCanvas();
+    display.clear();
+    canvas.setCursor(0, 0);
+    canvas.setTextColor(COLOR_BLACK);
+    canvas.setTextSize(2);
+    canvas.print("Starting");
     display.refresh();
 
     Serial.println(F("Starting cellular"));

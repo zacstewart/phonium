@@ -1,5 +1,3 @@
-#include <Adafruit_SharpMem.h>
-
 #include "ComposeMessage.h"
 #include "Message.h"
 
@@ -11,10 +9,10 @@ namespace Controllers {
     }
 
     void Message::begin() {
-        Adafruit_GFX &canvas = services.getCanvas();
-        Adafruit_SharpMem &display = services.getDisplay();
+        Display &display = services.getDisplay();
+        Adafruit_GFX &canvas = display.getCanvas();
 
-        display.clearDisplay();
+        display.clear();
 
         canvas.setCursor(0, 0);
         canvas.setTextColor(COLOR_BLACK);

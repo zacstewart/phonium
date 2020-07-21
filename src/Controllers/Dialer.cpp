@@ -1,4 +1,3 @@
-#include <Adafruit_SharpMem.h>
 
 #include "Dialer.h"
 #include "Call.h"
@@ -79,10 +78,10 @@ namespace Controllers {
     }
 
     void Dialer::draw() {
-        Adafruit_GFX &canvas = services.getCanvas();
-        Adafruit_SharpMem &display = services.getDisplay();
+        Display &display = services.getDisplay();
+        Adafruit_GFX &canvas = display.getCanvas();
 
-        display.clearDisplay();
+        display.clear();
 
         canvas.setTextColor(COLOR_BLACK);
         canvas.setTextSize(3);

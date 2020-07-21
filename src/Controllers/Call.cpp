@@ -1,5 +1,4 @@
 #include "string.h"
-#include <Adafruit_SharpMem.h>
 
 #include "Call.h"
 
@@ -13,10 +12,10 @@ namespace Controllers {
     }
 
     void Call::begin() {
-        Adafruit_GFX &canvas = services.getCanvas();
-        Adafruit_SharpMem &display = services.getDisplay();
+        Display &display = services.getDisplay();
+        Adafruit_GFX &canvas = display.getCanvas();
 
-        display.clearDisplay();
+        display.clear();
 
         canvas.setTextWrap(true);
         canvas.setTextColor(COLOR_BLACK);
@@ -90,13 +89,14 @@ namespace Controllers {
         Serial.print("Call lasted ");
         Serial.println(duration);
 
-        Adafruit_SharpMem &display = services.getDisplay();
-        display.clearDisplay();
-        display.setCursor(0, 0);
-        display.setTextSize(1);
-        display.println(F("Call ended"));
-        display.setTextSize(3);
-        display.print(duration);
+        Display &display = services.getDisplay();
+        Adafruit_GFX &canvas = display.getCanvas();
+        display.clear();
+        canvas.setCursor(0, 0);
+        canvas.setTextSize(1);
+        canvas.println(F("Call ended"));
+        canvas.setTextSize(3);
+        canvas.print(duration);
         display.refresh();
 
         delay(2500);

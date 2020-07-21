@@ -1,5 +1,4 @@
 #include <Adafruit_FONA.h>
-#include <Adafruit_SharpMem.h>
 
 #include "Call.h"
 #include "IncomingCall.h"
@@ -12,10 +11,10 @@ namespace Controllers {
     }
 
     void IncomingCall::begin() {
-        Adafruit_GFX &canvas = services.getCanvas();
-        Adafruit_SharpMem &display = services.getDisplay();
+        Display &display = services.getDisplay();
+        Adafruit_GFX &canvas = display.getCanvas();
 
-        display.clearDisplay();
+        display.clear();
 
         canvas.setTextWrap(true);
         canvas.setTextColor(COLOR_BLACK);

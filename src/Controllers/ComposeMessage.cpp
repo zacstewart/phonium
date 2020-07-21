@@ -1,5 +1,4 @@
 #include "string.h"
-#include <Adafruit_SharpMem.h>
 
 #include "ComposeMessage.h"
 
@@ -123,10 +122,10 @@ namespace Controllers {
 
     void ComposeMessage::draw() {
         Serial.print(F("Message: '")); Serial.print(message); Serial.println(F("'"));
-        Adafruit_GFX &canvas = services.getCanvas();
-        Adafruit_SharpMem &display = services.getDisplay();
+        Display &display = services.getDisplay();
+        Adafruit_GFX &canvas = display.getCanvas();
 
-        display.clearDisplay();
+        display.clear();
 
         canvas.setCursor(0, 0);
         canvas.setTextColor(COLOR_BLACK);
@@ -185,10 +184,10 @@ namespace Controllers {
     }
 
     void ComposeMessage::sendMessage() {
-        Adafruit_GFX &canvas = services.getCanvas();
-        Adafruit_SharpMem &display = services.getDisplay();
+        Display &display = services.getDisplay();
+        Adafruit_GFX &canvas = display.getCanvas();
 
-        display.clearDisplay();
+        display.clear();
 
         canvas.setCursor(0, 0);
         canvas.setTextSize(3);
@@ -197,7 +196,7 @@ namespace Controllers {
         display.refresh();
 
         if (services.getFona().sendSMS(number, message)) {
-            display.clearDisplay();
+            display.clear();
             canvas.setCursor(0, 0);
             canvas.print("Message sent.");
             display.refresh();
@@ -205,7 +204,7 @@ namespace Controllers {
             reset();
             navigator.popController();
         } else {
-            display.clearDisplay();
+            display.clear();
             canvas.setCursor(0, 0);
             canvas.print("Couldn't send.\nTry again");
             display.refresh();
