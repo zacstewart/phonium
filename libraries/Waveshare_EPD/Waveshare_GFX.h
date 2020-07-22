@@ -20,6 +20,7 @@ class Waveshare_GFX : public Adafruit_GFX {
 
     public:
         Waveshare_GFX(Waveshare_EPD *, int16_t, int16_t);
+        void clear(void);
         void setRotation(uint8_t);
         void writeMemory(void);
 

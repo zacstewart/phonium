@@ -13,10 +13,12 @@ Waveshare_GFX::Waveshare_GFX(Waveshare_EPD *epd, int16_t width, int16_t height)
     , yEnd(-1)
     , rotation(EPD_ROTATION_0)
 {
-    int16_t imageSize = width * height / 8;
-    image = (unsigned char *) malloc(imageSize * sizeof(unsigned char));
-    // Start out with a pure white image
-    memset(this->image, 0xFF, imageSize);
+    image = (unsigned char *) malloc(width * height / 8 * sizeof(unsigned char));
+    clear();
+}
+
+void Waveshare_GFX::clear() {
+    memset(this->image, 0xFF, width * height / 8);
 }
 
 void Waveshare_GFX::setRotation(uint8_t rot) {

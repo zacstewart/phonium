@@ -49,7 +49,7 @@ COMPILERPATH = $(TOOLSPATH)/arm/bin
 #************************************************************************
 
 # CPPFLAGS = compiler options for C and C++
-CPPFLAGS = -Wall -g -Os -mthumb -ffunction-sections -fdata-sections -nostdlib -MMD $(OPTIONS) -DTEENSYDUINO=124 -DF_CPU=$(TEENSY_CORE_SPEED) -DUSING_MAKEFILE=1 -Isrc -I$(COREPATH)
+CPPFLAGS = -Wall -g -Os -mthumb -ffunction-sections -fdata-sections -nostdlib -MMD $(OPTIONS) -DTEENSYDUINO=124 -DF_CPU=$(TEENSY_CORE_SPEED) -DUSING_MAKEFILE=1 -I$(CURDIR) -I$(COREPATH)
 
 # compiler options for C++ only
 CXXFLAGS = -std=gnu++0x -felide-constructors -fno-exceptions -fno-rtti
@@ -110,8 +110,8 @@ LCPP_FILES := $(wildcard $(LIBRARYPATH)/*/*.cpp)
 CORE_MAINS := $(wildcard $(COREPATH)/main.*)
 TC_FILES := $(filter-out $(CORE_MAINS), $(wildcard $(COREPATH)/*.c))
 TCPP_FILES := $(filter-out $(CORE_MAINS), $(wildcard $(COREPATH)/*.cpp))
-C_FILES := $(wildcard src/*.c)
-CPP_FILES := $(wildcard src/*.cpp)
+C_FILES := $(wildcard *.c)
+CPP_FILES := $(wildcard *.cpp)
 
 # include paths for libraries
 L_INC := $(foreach lib,$(filter %/, $(wildcard $(LIBRARYPATH)/*/)), -I$(lib))

@@ -1,12 +1,12 @@
 #ifndef SERVICE_DISPLAY
 #define SERVICE_DISPLAY
 
-#include <Adafruit_GFX.h>
-#include <Adafruit_SharpMem.h>
+#include <Waveshare_GFX.h>
+#include <Waveshare_EPD.h>
 
 class Display {
     public:
-        Display(Adafruit_GFX &, Adafruit_SharpMem &);
+        Display(Waveshare_GFX &, Waveshare_EPD &);
 
         /**
          * Writes a blank canvas into the device's memory. Does NOT refresh the
@@ -35,8 +35,8 @@ class Display {
         void writeCanvasMemory(void);
 
     private:
-        Adafruit_GFX &canvas;
-        Adafruit_SharpMem &device;
+        Waveshare_GFX &canvas;
+        Waveshare_EPD &device;
 };
 
 #endif

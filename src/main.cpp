@@ -1,7 +1,8 @@
 #include <Adafruit_FONA.h>
-#include <Adafruit_SharpMem.h>
 #include <HardwareSerial.h>
 #include <Keypad.h>
+#include <Waveshare_EPD.h>
+#include <Waveshare_GFX.h>
 
 #include "Display.h"
 #include "Messaging.h"
@@ -26,7 +27,6 @@
 #define SHARP_SCK  13
 #define SHARP_MOSI 11
 #define SHARP_SS   4
-#define DISPLAY_ROTATION 3 // Headers to the left
 
 #define FONA_RI  3
 #define FONA_RST 2
@@ -42,7 +42,8 @@ static byte rowPins[KEYPAD_ROWS] = {18, 19, 20, 21};
 static byte colPins[KEYPAD_COLS] = {17, 16, 15, 14};
 static Keypad keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-static Adafruit_SharpMem displayDevice(SHARP_SCK, SHARP_MOSI, SHARP_SS, DISPLAY_HEIGHT, DISPLAY_WIDTH);
+static Waveshare_EPD displayDevice(DISPLAY_HEIGHT, DISPLAY_WIDTH);
+static Waveshare_GFX canvas(&displayDevice, DISPLAY_HEIGHT, DISPLAY_WIDTH);
 
 static Adafruit_FONA fona(FONA_RST);
 
@@ -50,7 +51,7 @@ static Adafruit_FONA fona(FONA_RST);
  * Services
  */
 //TODO: Once switching to EPD, one of these will be the GFX canvas
-static Display display(displayDevice, displayDevice);
+static Display display(canvas, displayDevice);
 static Messaging messaging(fona);
 static Services services(fona, display, messaging);
 
@@ -99,10 +100,10 @@ void setup() {
 
     Serial.println(F("Starting display"));
     displayDevice.begin();
-    displayDevice.setRotation(DISPLAY_ROTATION);
 
     Display &display = services.getDisplay();
     Adafruit_GFX &canvas = display.getCanvas();
+    canvas.setRotation(EPD_ROTATION_90);
     display.clear();
     canvas.setCursor(0, 0);
     canvas.setTextColor(COLOR_BLACK);
