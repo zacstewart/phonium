@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "Waveshare_GFX.h"
 
 Waveshare_GFX::Waveshare_GFX(Waveshare_EPD *epd, int16_t width, int16_t height)
@@ -9,11 +11,19 @@ Waveshare_GFX::Waveshare_GFX(Waveshare_EPD *epd, int16_t width, int16_t height)
     , yStart(-1)
     , xEnd(-1)
     , yEnd(-1)
+    , rotation(EPD_ROTATION_0)
 {
     int16_t imageSize = width * height / 8;
     image = (unsigned char *) malloc(imageSize * sizeof(unsigned char));
     // Start out with a pure white image
     memset(this->image, 0xFF, imageSize);
+}
+
+void Waveshare_GFX::setRotation(uint8_t rot) {
+    if (rot > EPD_ROTATION_270) {
+        return;
+    }
+    rotation = rot;
 }
 
 /**
@@ -35,6 +45,25 @@ void Waveshare_GFX::writeMemory() {
  * and then call `display` on the EPD driver.
  */
 void Waveshare_GFX::drawPixel(int16_t x, int16_t y, uint16_t color) {
+    switch(rotation) {
+        case EPD_ROTATION_0:
+            break;
+        case EPD_ROTATION_90:
+            std::swap(x, y);
+            x = width - x - 1;
+            break;
+        case EPD_ROTATION_180:
+            y = height - y - 1;
+            x = width - x - 1;
+            break;
+        case EPD_ROTATION_270:
+            std::swap(x, y);
+            y = height - y - 1;
+            break;
+        default:
+            break;
+    }
+
     if (x < 0 || x >= width || y < 0 || y >= height) {
         return;
     }
@@ -53,7 +82,6 @@ void Waveshare_GFX::drawPixel(int16_t x, int16_t y, uint16_t color) {
     if (yEnd < y) {
         yEnd = y;
     }
-
 
     if (color) {
         image[(x + y * width) / 8] |= 0x80 >> (x % 8);

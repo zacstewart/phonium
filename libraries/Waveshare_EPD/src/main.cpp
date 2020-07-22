@@ -52,6 +52,8 @@ extern "C" int main(void) {
     Serial.println("Initializing");
     epd.begin();
 
+    gfx.setRotation(EPD_ROTATION_270);
+
     Serial.println("Clearing");
     epd.clear();
 
