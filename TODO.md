@@ -15,4 +15,5 @@
 - [ ] Replace SHARP display with EPD
   - [x] Separate GFX and display driver in all controllers
   - [x] Write thin Display abstraction around Waveshare_EPD
+  - [x] Wire up the EPD and confirm it works
   - [ ] Swap out SHARP with EPD in Display abstraction
